@@ -1,5 +1,6 @@
 package com.jorypestorious.windowmasterv2;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class WindowMasterV2 {
@@ -21,10 +22,12 @@ public class WindowMasterV2 {
         Double costOfTrim = perimeterOfWindow * trimCost;
         Double totalCost = costOfGlass + costOfTrim;
         
-        System.out.println("Window height is " + height + " and width is " + width);
-        System.out.println("Window area is " + areaOfWindow + " and perimeter is " + perimeterOfWindow);
-        System.out.println("The glass cost is $" + glassCost + " per square foot, making the total glass cost $" + costOfGlass);
-        System.out.println("The trim cost is $" + trimCost + " per linear foot, making the total trim cost $" + costOfTrim);
-        System.out.println("The total overall cost is $" + totalCost);       
+        DecimalFormat df = new DecimalFormat("0.00");
+        
+        System.out.println("Window height is " + height + " ft and width is " + width + " ft");
+        System.out.println("Window area is " + areaOfWindow + " ft² and perimeter is " + perimeterOfWindow + " ft");
+        System.out.println("The glass cost is $" + df.format(glassCost) + " per square foot, making the total glass cost $" + df.format(costOfGlass));
+        System.out.println("The trim cost is $" + df.format(trimCost) + " per linear foot, making the total trim cost $" + df.format(costOfTrim));
+        System.out.println("The total overall cost is $" + df.format(totalCost));       
     }
 }
