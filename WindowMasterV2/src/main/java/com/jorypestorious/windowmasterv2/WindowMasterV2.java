@@ -11,18 +11,28 @@ public class WindowMasterV2 {
         return scan.nextDouble();
     }
     
+    public static double rangeCheck(double input) {
+        if (input >= 0.5 && input <=50) {
+            return input;
+        } else {
+            System.out.print("Input out of range.. try again: ");
+            Scanner s = new Scanner(System.in);
+            return rangeCheck(s.nextDouble());
+        }
+    }
+    
     public static void main(String[] args) {
-        double height = getInput("Enter window height (in feet):");
-        double width = getInput("Enter window width (in feet):");
+        double height = rangeCheck(getInput("Enter window height (in feet):"));
+        double width = rangeCheck(getInput("Enter window width (in feet):"));
         double glassCost = getInput("Cost of the glass per square foot:");
         double trimCost = getInput("Cost of trim per linear foot:");
 
-        Double areaOfWindow = height * width;
-        Double perimeterOfWindow = 2 * (height + width);
+        double areaOfWindow = height * width;
+        double perimeterOfWindow = 2 * (height + width);
         
-        Double costOfGlass = areaOfWindow * glassCost;
-        Double costOfTrim = perimeterOfWindow * trimCost;
-        Double totalCost = costOfGlass + costOfTrim;
+        double costOfGlass = areaOfWindow * glassCost;
+        double costOfTrim = perimeterOfWindow * trimCost;
+        double totalCost = costOfGlass + costOfTrim;
         
         DecimalFormat df = new DecimalFormat("0.00");
         
