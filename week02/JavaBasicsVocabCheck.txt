@@ -1,0 +1,45 @@
+Java Basics Vocabulary Check
+Jory Pestorious
+
+1. What is a variable?
+   It stores information and can be of different data types.
+2. What is a variable declaration?
+   It's when you assign a data type to a word and it becomes a variable.
+3. What is a variable assignment?
+   It's when you assign an actual value or object reference to a variable of the corresponding data type.
+4. Can I declare and assign a variable on the same line?
+   Yes.
+5. Can a method return more than one value?
+   No. But you can return something that holds multiple values, like an array or object.
+6. What return type must be declared for methods that do not return a value?
+   void
+7. How are code blocks marked in Java?
+   Curly braces
+8. What makes up a method's signature?
+   Method name and parameters
+9. What is a method parameter?
+   A method's parameters declare what you pass to the method as arguments.
+10. How many parameters can a method have?
+    "The number of method parameters is limited to 255."
+11. Do all of the parameters for a method have to be of the same type?
+    No.
+12. What does the import keyword do?
+    It makes it so you don't have to type as much.
+13. What is the naming convention for Java classes?
+    CamelCase, nouns, descriptive
+14. What is the naming convention for Java variables?
+    CamelCase starting with lowercase, and for static final variables you use all uppercase and use an underscore between words
+15. What is the naming convention for Java methods?
+    CamelCase starting with lowercase, verbs
+16. What is a method body?
+    Everything between the curly braces in a method
+17. What is an array?
+    "An array is a container object that holds a fixed number of values of a single type."
+18. When is it better to use a for loop over a while loop?
+    When you know how many times you want to loop over something or you need to use variable that is being incremented/decremented to access or modify something
+19. What is the difference between a while loop and a do/while loop?
+    A do/while loop will always loop at least once even if the test condition is false.
+20. What is a switch statement?
+    It takes in a variable/value and matches it with a case that it will then start executing from until something is returned, there is a break, or it hits the default.
+21. What is scope?
+    "The scope refers to the section of code where a variable can be accessed."
