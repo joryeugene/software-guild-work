@@ -9,9 +9,9 @@ public class InterestCalculator {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("=========================\n" +
-                           "   INTEREST CALCULATOR\n" +
-                           "=========================\n");
+        System.out.println("\n            =========================\n" +
+                             "               INTEREST CALCULATOR   \n" +
+                             "            =========================\n");
         
         System.out.print("Annual interest rate: ");
         double interestRate = scanCurrencyAndPercentage();
@@ -35,21 +35,21 @@ public class InterestCalculator {
         System.out.print("Number of years money will stay in fund: ");
         int years = scan.nextInt();
         
-        Calendar now = Calendar.getInstance();   // Gets the current date and time
+        Calendar now = Calendar.getInstance();
         int currentYear = now.get(Calendar.YEAR);
         int targetYear = currentYear + years;
         
         DecimalFormat df = new DecimalFormat("###,##0.00");
         
         System.out.println("\nYear\tStarting\tInterest\tYear-end\n" +
-                           "-------------------------------------------------------");
+                           "-----------------------------------------------------");
         
         while (currentYear != targetYear) {
             System.out.print(currentYear + "\t");
             currentYear++;
             
             System.out.print("$" + df.format(principal) + "\t");
-            if ( principal < 1000) System.out.print("\t");
+            if (principal < 1000) System.out.print("\t");
             
             double oldPrincipal = principal;
             
@@ -64,7 +64,7 @@ public class InterestCalculator {
             System.out.println("$" + df.format(principal));
         }
         
-        System.out.println("-------------------------------------------------------");
+        System.out.println("-----------------------------------------------------\n");
     }
     
     static double scanCurrencyAndPercentage() {
