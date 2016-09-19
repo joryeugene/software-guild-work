@@ -25,7 +25,10 @@ public class InterestCalculator {
             compoundPeriodCode = getCompoundPeriodCode(compoundPeriod);
             
             invalidInput = false;
-            if (compoundPeriodCode == 0) invalidInput = true;
+            if (compoundPeriodCode == 0) {
+                invalidInput = true;
+                System.out.println("INVALID INPUT");
+            }
             
         } while (invalidInput);
         
@@ -44,7 +47,7 @@ public class InterestCalculator {
         System.out.println("\nYear\tStarting\tInterest\tYear-end\n" +
                            "-----------------------------------------------------");
         
-        while (currentYear != targetYear) {
+        while (currentYear < targetYear) {
             System.out.print(currentYear + "\t");
             currentYear++;
             
@@ -82,7 +85,6 @@ public class InterestCalculator {
                 case "daily":
                     return 365;
                 default:
-                    System.out.println("INVALID INPUT");
                     return 0;
             }
     }
