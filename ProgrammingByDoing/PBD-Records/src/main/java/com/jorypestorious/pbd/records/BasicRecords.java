@@ -2,11 +2,11 @@ package com.jorypestorious.pbd.records;
 
 import java.util.Scanner;
 
-class Student {
-    String name;
-    int grade;
-    double average;
-}
+//class Student {
+//    String name;
+//    int grade;
+//    double average;
+//}
 
 public class BasicRecords {
     
