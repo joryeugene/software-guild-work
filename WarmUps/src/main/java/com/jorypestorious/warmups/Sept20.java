@@ -15,7 +15,10 @@ public class Sept20 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        String[] myStrArr = new String[4];
+        System.out.print("How big of an array would you like? ");
+        int size = scan.nextInt();
+        
+        String[] myStrArr = new String[size];
         
         boolean keepRunning = true;
         int position;
