@@ -1,17 +1,28 @@
 package com.jorypestorious.simplecalculator;
 
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 public class CalculatorTest {
     
+    private Calculator c;
+    private double expected,
+                   result;
+
+    @Before
+    public void setUp() {
+        c = new Calculator();
+    }
+
+    @After
+    public void tearDown() {
+        c = null;
+    }
+    
     @Test 
-    public void testMultipy() {
-        Calculator c = new Calculator();
-        
-        double expected,
-               result;
-        
+    public void testMultipy() {  
         expected = -20.0;
         result = c.multiply(5.0, -4.0);
         
@@ -25,11 +36,6 @@ public class CalculatorTest {
     
     @Test 
     public void testDivide() {
-        Calculator c = new Calculator();
-        
-        double expected,
-               result;
-        
         expected = 5.0;
         result = c.divide(15.0, 3.0);
         
@@ -43,11 +49,6 @@ public class CalculatorTest {
     
     @Test 
     public void testAdd() {
-        Calculator c = new Calculator();
-        
-        double expected,
-               result;
-        
         expected = 18.0;
         result = c.add(15.0, 3.0);
         
@@ -61,11 +62,6 @@ public class CalculatorTest {
     
     @Test 
     public void testSubtract() {
-        Calculator c = new Calculator();
-        
-        double expected,
-               result;
-        
         expected = 12.0;
         result = c.subtract(15.0, 3.0);
         
