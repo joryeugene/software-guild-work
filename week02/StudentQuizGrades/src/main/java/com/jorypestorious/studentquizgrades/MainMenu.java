@@ -10,9 +10,12 @@ public class MainMenu {
     public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException {
         ReadSaveFile rs = new ReadSaveFile();
         ConsoleIO io = new ConsoleIO();
+        QuizScoresMenu quizScoresMenu = new QuizScoresMenu();
+        
+        String filename = "quizGrades.txt";
         
         HashMap<String, ArrayList<Integer>> studentQuizGrades = new HashMap<>();
-        studentQuizGrades = rs.readFileToHashMap("quizGrades.txt");
+        studentQuizGrades = rs.readFileToHashMap(filename);
         
         String mainMenuPrompt = "\n      MAIN MENU      \n" +
                                   "=====================\n" +
@@ -24,50 +27,57 @@ public class MainMenu {
                                   "> Selection: ";
         
         boolean keepRunning = true;
+        boolean scoresMenu = false;
         int selection;
         
         do {    
             selection = io.promptInt(mainMenuPrompt, 1, 5);
             io.display(""); // line break
             
-            if (selection == 5) {
-                keepRunning = false;
-                io.display("       EXITING       \n" +
-                           "---------------------");
-            } else {
-                
-                switch(selection) {
-                    case 1:
-                        io.displayAllStudents(studentQuizGrades);
-                        break;
-                    case 2:
-                        addStudent(studentQuizGrades, io);
-                        break;
-                    case 3:
-                        removeStudent(studentQuizGrades, io);
-                        break;
-                }
-                
-                Thread.sleep(1500);
+            switch(selection) {
+                case 1:
+                    io.displayAllStudents(studentQuizGrades);
+                    break;
+                case 2:
+                    addStudent(studentQuizGrades, io);
+                    break;
+                case 3:
+                    removeStudent(studentQuizGrades, io);
+                    break;
+                case 4:
+                    scoresMenu = true;
+                    break;
+                case 5: 
+                    keepRunning = false;
+            }
+
+            Thread.sleep(1000);
+            
+            while(scoresMenu) {
+                scoresMenu = quizScoresMenu.run(studentQuizGrades, io);
             }
             
         } while (keepRunning);
         
+        io.display("       EXITING       \n" +
+                   "---------------------");
+        
         io.display("* SAVING");
-        //io.saveStudentsQuizGrades(studentQuizGrades);
+        rs.saveHashMapToFile(studentQuizGrades, filename);
         
-        Thread.sleep(3000);
+        Thread.sleep(1111);
         io.display("\n      Goodbye!");
-        
-        
-        //io.displayStudentsQuizGrades(studentQuizGrades);
-        
-        
     }
     
     private static void addStudent(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {
-        String student = io.promptStringWithResult("> Student's Name: ", "* Successfully Added: ");
-        studentQuizGrades.put(student, new ArrayList<Integer>());
+        String student = io.promptString("> Student's Name: ");
+        
+        if (studentQuizGrades.containsKey(student)) {
+            io.display("! Student Already Exists");
+        } else {
+            studentQuizGrades.put(student, new ArrayList<Integer>());
+            io.display("* Successfully Added: " + student);
+        }
     }
     
     private static void removeStudent(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {

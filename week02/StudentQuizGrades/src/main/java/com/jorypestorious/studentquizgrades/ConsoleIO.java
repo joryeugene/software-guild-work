@@ -10,32 +10,69 @@ public class ConsoleIO {
         System.out.println(str);
     }
     
+    public void displayAllStudents(HashMap<String, ArrayList<Integer>> studentQuizGrades) {
+        System.out.println("      Students       \n" +
+                           "---------------------");
+        for (String name : studentQuizGrades.keySet()) {
+            System.out.println("   " + name);
+        }
+        
+        System.out.println("---------------------");
+    }
+    
     public void displayAllStudentsQuizGrades(HashMap<String, ArrayList<Integer>> studentQuizGrades) {
+        System.out.println("                          Student Quiz Scores                            \n" +
+                           "-------------------------------------------------------------------------");
+        
         int currentGrade;
         for (String name : studentQuizGrades.keySet()) {
             
             System.out.print(name + ":\t");
-            if (name.length() < 13) System.out.print("\t");
+            if (name.length() < 15) System.out.print("\t");
             
             for (int i = 0; i < studentQuizGrades.get(name).size(); i++) {
                 System.out.print("Q" + (i+1) + ": ");
                 currentGrade = studentQuizGrades.get(name).get(i);
                 System.out.print(currentGrade);
+                
                 if (currentGrade < 10) System.out.print("  ");
                 else if (currentGrade < 100) System.out.print(" ");
                 System.out.print(" | ");
             }
             
-            System.out.println(""); // line break
+            if (studentQuizGrades.get(name).size() == 0) {
+                System.out.print("No Quiz Scores Recorded");
+            }
+            
+            System.out.println(""); // line break;
         }
+        
+        System.out.println("-------------------------------------------------------------------------");
     }
     
-    public void displayAllStudents(HashMap<String, ArrayList<Integer>> studentQuizGrades) {
-        System.out.print("      Students       \n" +
-                           "---------------------");
-        for (String name : studentQuizGrades.keySet()) {
-            System.out.println("   " + name);
+    public void displaySpecificStudentsQuizGrades(HashMap<String, ArrayList<Integer>> studentQuizGrades, String name) {
+        int currentGrade;
+        
+        System.out.println("\n-------------------------------------------------------------------------");
+        System.out.print(name + ":\t");
+        
+        if (name.length() < 15) System.out.print("\t");
+        
+        for (int i = 0; i < studentQuizGrades.get(name).size(); i++) {
+            System.out.print("Q" + (i+1) + ": ");
+            currentGrade = studentQuizGrades.get(name).get(i);
+            System.out.print(currentGrade);
+            
+            if (currentGrade < 10) System.out.print("  ");
+            else if (currentGrade < 100) System.out.print(" ");
+            System.out.print(" | ");
         }
+        
+        if (studentQuizGrades.get(name).size() == 0) {
+            System.out.print("No Quiz Scores Recorded");
+        }
+        
+        System.out.println("\n-------------------------------------------------------------------------");
     }
     
     //////////////////// Input //////////////////////
@@ -49,32 +86,49 @@ public class ConsoleIO {
         return input;
     }
     
-    public String promptStringWithResult(String prompt, String result) {
-        System.out.print(prompt);
-        String input = scan.nextLine();
-        input = toTitleCase(input);
-        System.out.println(result + input);
-        return input;
-    }
-    
     public int promptInt(String prompt, int min, int max) {
+        String errorMsg = "Enter a number between " + min + " and " + max + ": ";
         int input;
         System.out.print(prompt);
         
         do {
             while (!scan.hasNextInt()) {
-                System.out.print("Enter a number between " + min + " and " + max);
+                System.out.print(errorMsg);
                 scan.next();
             }
             
             input = scan.nextInt();
             
             if (input > max || input < min) {
-                System.out.print("Enter a selection between " + min + " and " + max);
+                System.out.print(errorMsg);
             }
 
         } while (input > max || input < min);
         
+        clearBuffer();
+        return input;
+    }
+    
+    public int promptIntWithResult(String prompt, int min, int max, String result) {
+        String errorMsg = "Enter a number between " + min + " and " + max + ": ";
+        int input;
+        System.out.print(prompt);
+        
+        do {
+            while (!scan.hasNextInt()) {
+                System.out.print(errorMsg);
+                scan.next();
+            }
+            
+            input = scan.nextInt();
+            
+            if (input > max || input < min) {
+                System.out.print(errorMsg);
+            }
+
+        } while (input > max || input < min);
+        
+        System.out.println(result + input);
         clearBuffer();
         return input;
     }
@@ -84,13 +138,17 @@ public class ConsoleIO {
     }
     
     public static String toTitleCase(String str) {
-        str = str.toLowerCase();
+        str = str.toLowerCase().trim();
         String[] arr = str.split(" ");
         StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < arr.length; i++) {
-            sb.append(Character.toUpperCase(arr[i].charAt(0)))
-                    .append(arr[i].substring(1)).append(" ");
+            arr[i] = arr[i].trim();
+            
+            if (arr[i].length() > 0) {
+                sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                  .append(arr[i].substring(1)).append(" ");
+            }
         }
         return sb.toString().trim();
     }
