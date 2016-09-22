@@ -29,6 +29,7 @@ public class ConsoleIO {
             
             System.out.print(name + ":\t");
             if (name.length() < 15) System.out.print("\t");
+            if (name.length() < 7) System.out.print("\t");
             
             for (int i = 0; i < studentQuizGrades.get(name).size(); i++) {
                 System.out.print("Q" + (i+1) + ": ");
@@ -57,6 +58,7 @@ public class ConsoleIO {
         System.out.print(name + ":\t");
         
         if (name.length() < 15) System.out.print("\t");
+        if (name.length() < 7) System.out.print("\t");
         
         for (int i = 0; i < studentQuizGrades.get(name).size(); i++) {
             System.out.print("Q" + (i+1) + ": ");
@@ -73,6 +75,24 @@ public class ConsoleIO {
         }
         
         System.out.println("\n-------------------------------------------------------------------------");
+    }
+    
+    public void displayStudentAverages(HashMap<String, String> students, String note, int count) {
+        System.out.println("\n                   " + note + "                      \n" +
+                           "-------------------------------------------------------------------------");
+        
+        int currentGrade;
+        for (String name : students.keySet()) {
+            System.out.print(name + ":\t");
+            if (name.length() < 15) System.out.print("\t");
+            if (name.length() < 7) System.out.print("\t");
+            
+            System.out.println("Avg: " + students.get(name));
+        }
+        
+        System.out.println("\nNumber of Students: " + count);
+        
+        System.out.println("-------------------------------------------------------------------------");
     }
     
     //////////////////// Input //////////////////////
