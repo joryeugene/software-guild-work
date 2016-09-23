@@ -1,5 +1,5 @@
 Brad Pitt
-77 88 99 100 
+100 88 99 100 
 George Michael
 78 83 91 
 Barney
@@ -9,4 +9,4 @@ Paris Hilton
 Spock
 100 100 100 99 100 
 Jory Pestorious
-100 73 80 99 90 
+100 81 80 99 90 

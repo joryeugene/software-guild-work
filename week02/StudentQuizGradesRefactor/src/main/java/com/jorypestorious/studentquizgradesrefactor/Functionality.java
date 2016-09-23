@@ -39,12 +39,9 @@ public class Functionality {
         }
     }
     
-    public void shortPause(int n) {
-        try {
-            Thread.sleep(n); // short pause
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt(); 
-        }
+    public void shortPause(int n) throws InterruptedException {
+        Thread.sleep(n); // short pause
+       
     }
     
     //////////////////////// Quiz Scores Menu ////////////////////////

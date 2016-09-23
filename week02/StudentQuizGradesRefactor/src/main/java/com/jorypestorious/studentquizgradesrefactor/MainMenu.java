@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class MainMenu {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
         String filename = "quizGrades.txt";
         

@@ -15,7 +15,7 @@ public class StudentMenu {
         this.f = f;
     }
     
-    public boolean run() {
+    public boolean run() throws InterruptedException {
 
         String student = io.promptString("> Student's Name: ");
         
