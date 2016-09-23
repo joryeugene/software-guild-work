@@ -4,13 +4,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Functionality {
+public class DatabaseManipulation {
     
     private final ConsoleIO io;
     private final DecimalFormat df;
     private final HashMap<String, ArrayList<Integer>> studentQuizGrades;
 
-    Functionality(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {
+    DatabaseManipulation(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {
         this.studentQuizGrades = studentQuizGrades;
         this.df = new DecimalFormat("0.00");
         this.io = io;

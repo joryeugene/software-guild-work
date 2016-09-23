@@ -6,13 +6,13 @@ import java.util.HashMap;
 public class StudentMenu {
     
     private final ConsoleIO io;
-    private final Functionality f;
+    private final DatabaseManipulation dm;
     private final HashMap<String, ArrayList<Integer>> studentQuizGrades;
     
-    StudentMenu(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io, Functionality f) {
+    StudentMenu(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io, DatabaseManipulation dm) {
         this.studentQuizGrades = studentQuizGrades;
         this.io = io;
-        this.f = f;
+        this.dm = dm;
     }
     
     public boolean run() throws InterruptedException {
@@ -40,22 +40,22 @@ public class StudentMenu {
                 
                 switch(selection) {
                     case 1: 
-                        f.addQuizGrade(student);
+                        dm.addQuizGrade(student);
                         break;
                     case 2:
-                        f.changeQuizGrade(student);
+                        dm.changeQuizGrade(student);
                         break;
                     case 3:
-                        f.removeQuizGrade(student);
+                        dm.removeQuizGrade(student);
                         break;
                     case 4:
-                        f.findAverage(student);
+                        dm.findAverage(student);
                         break;
                     case 5:
                         stayOnMenu = false;
                 }
                 
-                f.shortPause(1000);
+                dm.shortPause(1000);
                 
             } while (stayOnMenu);
         }

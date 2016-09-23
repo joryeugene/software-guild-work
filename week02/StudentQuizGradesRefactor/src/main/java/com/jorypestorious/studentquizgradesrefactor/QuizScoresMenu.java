@@ -6,18 +6,18 @@ import java.util.HashMap;
 public class QuizScoresMenu {
     
     private final ConsoleIO io;
-    private final Functionality f;
+    private final DatabaseManipulation dm;
     private final HashMap<String, ArrayList<Integer>> studentQuizGrades;
     
-    QuizScoresMenu(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io, Functionality f) {
+    QuizScoresMenu(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io, DatabaseManipulation dm) {
         this.studentQuizGrades = studentQuizGrades;
         this.io = io;
-        this.f = f;
+        this.dm = dm;
     }
     
     public boolean run() throws InterruptedException {
         
-        StudentMenu viewEditSpecficStudentsQuizGrades = new StudentMenu(studentQuizGrades, io, f);
+        StudentMenu viewEditSpecficStudentsQuizGrades = new StudentMenu(studentQuizGrades, io, dm);
         
         String menuPrompt = "\n      Quiz Scores    \n" +
                               "=====================\n" +
@@ -47,26 +47,26 @@ public class QuizScoresMenu {
                     studentMenu = true;
                     break;
                 case 3:
-                    f.findHighestQuiz();
+                    dm.findHighestQuiz();
                     break;
                 case 4:
-                    f.findLowestQuiz();
+                    dm.findLowestQuiz();
                     break;
                 case 5:
                     //f.findClassAverage();
-                    f.findQuizAverage();
+                    dm.findQuizAverage();
                     break;
                 case 6:
-                    f.findStudentsAbove();
+                    dm.findStudentsAbove();
                     break;
                 case 7:
-                    f.findStudentsBelow();
+                    dm.findStudentsBelow();
                     break;
                 case 8: 
                     keepRunning = false;
             }
 
-            f.shortPause(1000);
+            dm.shortPause(1000);
             
             while (studentMenu) {
                 studentMenu = viewEditSpecficStudentsQuizGrades.run();

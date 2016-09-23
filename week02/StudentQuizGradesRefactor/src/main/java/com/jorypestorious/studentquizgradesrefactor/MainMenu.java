@@ -14,8 +14,8 @@ public class MainMenu {
         studentQuizGrades = rs.readFileToHashMap(filename);
         
         ConsoleIO io = new ConsoleIO();
-        Functionality f = new Functionality(studentQuizGrades, io);
-        QuizScoresMenu quizScoresMenu = new QuizScoresMenu(studentQuizGrades, io, f);
+        DatabaseManipulation dm = new DatabaseManipulation(studentQuizGrades, io);
+        QuizScoresMenu quizScoresMenu = new QuizScoresMenu(studentQuizGrades, io, dm);
         
         String mainMenuPrompt = "\n      MAIN MENU      \n" +
                                   "=====================\n" +
@@ -39,10 +39,10 @@ public class MainMenu {
                     io.displayAllStudents(studentQuizGrades);
                     break;
                 case 2:
-                    f.addStudent();
+                    dm.addStudent();
                     break;
                 case 3:
-                    f.removeStudent();
+                    dm.removeStudent();
                     break;
                 case 4:
                     scoresMenu = true;
@@ -51,7 +51,7 @@ public class MainMenu {
                     keepRunning = false;
             }
             
-            f.shortPause(1000);
+            dm.shortPause(1000);
             
             while(scoresMenu) {
                 scoresMenu = quizScoresMenu.run();
@@ -65,7 +65,7 @@ public class MainMenu {
         io.display("* SAVING");
         rs.saveHashMapToFile(studentQuizGrades, filename);
         
-        f.shortPause(1111);
+        dm.shortPause(1111);
         io.display("\n      Goodbye!");
     }
 
