@@ -1,4 +1,4 @@
-package com.jorypestorious.studentquizgrades;
+package com.jorypestorious.studentquizgradesrefactor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,13 @@ import java.util.Scanner;
 
 public class ConsoleIO {
     
+    private final Scanner scan;
+    
+    ConsoleIO() {
+        this.scan = new Scanner(System.in);
+    }
+    
+    //////////////////// Output ////////////////////// 
     public void display(String str) {
         System.out.println(str);
     }
@@ -41,7 +48,7 @@ public class ConsoleIO {
                 System.out.print(" | ");
             }
             
-            if (studentQuizGrades.get(name).size() == 0) {
+            if (studentQuizGrades.get(name).size() < 1) {
                 System.out.print("No Quiz Scores Recorded");
             }
             
@@ -70,7 +77,7 @@ public class ConsoleIO {
             System.out.print(" | ");
         }
         
-        if (studentQuizGrades.get(name).size() == 0) {
+        if (studentQuizGrades.get(name).size() < 1) {
             System.out.print("No Quiz Scores Recorded");
         }
         
@@ -95,10 +102,7 @@ public class ConsoleIO {
         System.out.println("-------------------------------------------------------------------------");
     }
     
-    //////////////////// Input //////////////////////
-    
-    Scanner scan = new Scanner(System.in);
-    
+    //////////////////// Input //////////////////////    
     public String promptString(String prompt) {
         System.out.print(prompt);
         String input = scan.nextLine();
@@ -170,6 +174,7 @@ public class ConsoleIO {
                   .append(arr[i].substring(1)).append(" ");
             }
         }
+        
         return sb.toString().trim();
     }
 

@@ -36,6 +36,7 @@ public class QuizScoresMenu {
                     break;
                 case 3:
                     findClassAverage(studentQuizGrades, io);
+                    findQuizAverage(studentQuizGrades, io);
                     break;
                 case 4:
                     findStudentsAbove(studentQuizGrades, io);
@@ -149,15 +150,30 @@ public class QuizScoresMenu {
             avgSum += findAverage(studentQuizGrades, student);
         }
         
-        io.display("Class Average: " + DF.format(avgSum / numOfStudents));
+        io.display("Class Grade Average: " + DF.format(avgSum / numOfStudents));
+    }
+    
+    private static void findQuizAverage(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {
+        int numOfQuizzes = 0;
+        double sumOfQuizzes = 0.0;
+        
+        for (String student : studentQuizGrades.keySet()) {
+            if (studentQuizGrades.get(student).size() < 1) continue;
+            numOfQuizzes += studentQuizGrades.get(student).size();
+            
+            for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
+                sumOfQuizzes += studentQuizGrades.get(student).get(i);
+            }
+        }
+        
+        io.display("Average Quiz Score: " + DF.format(sumOfQuizzes / numOfQuizzes));
     }
     
     private static void findStudentsAbove(HashMap<String, ArrayList<Integer>> studentQuizGrades, ConsoleIO io) {
         HashMap<String, String> highAvgStudents = new HashMap<>();
         int count = 0;
         double avg;
-        
-        double aboveThisScore = (double)io.promptInt("Above Score of: ", 0, 100);
+        int aboveThisScore = io.promptInt("Above Score of: ", 0, 100);
 
         for (String student : studentQuizGrades.keySet()) {
             avg = findAverage(studentQuizGrades, student);
@@ -170,7 +186,7 @@ public class QuizScoresMenu {
         if (highAvgStudents.size() < 1) {
             io.display("! No Students Found");
         } else {
-            io.displayStudentAverages(highAvgStudents, "Students with an Average Above " + aboveThisScore, count);
+            io.displayStudentAverages(highAvgStudents, "Students with an Average Above " + aboveThisScore, count, studentQuizGrades.size());
         }
     }
     
@@ -178,8 +194,7 @@ public class QuizScoresMenu {
         HashMap<String, String> lowAvgStudents = new HashMap<>();
         int count = 0;
         double avg;
-        
-        double belowThisScore = (double)io.promptInt("Below Score of: ", 0, 100);
+        int belowThisScore = io.promptInt("Below Score of: ", 0, 100);
 
         for (String student : studentQuizGrades.keySet()) {
             avg = findAverage(studentQuizGrades, student);
@@ -192,7 +207,7 @@ public class QuizScoresMenu {
         if (lowAvgStudents.size() < 1) {
             io.display("! No Students Found");
         } else {
-            io.displayStudentAverages(lowAvgStudents, "Students with an Average Below " + belowThisScore, count);
+            io.displayStudentAverages(lowAvgStudents, "Students with an Average Below " + belowThisScore, count, studentQuizGrades.size());
         }
     }
 
