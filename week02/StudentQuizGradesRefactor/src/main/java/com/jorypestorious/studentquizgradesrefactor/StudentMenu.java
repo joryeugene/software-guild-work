@@ -15,7 +15,7 @@ public class StudentMenu {
         this.f = f;
     }
     
-    public boolean run() throws InterruptedException {
+    public boolean run() {
 
         String student = io.promptString("> Student's Name: ");
         
@@ -55,7 +55,7 @@ public class StudentMenu {
                         stayOnMenu = false;
                 }
                 
-                Thread.sleep(1000);
+                f.shortPause(1000);
                 
             } while (stayOnMenu);
         }

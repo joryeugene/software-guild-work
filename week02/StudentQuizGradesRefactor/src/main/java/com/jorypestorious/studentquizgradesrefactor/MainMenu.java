@@ -1,13 +1,11 @@
 package com.jorypestorious.studentquizgradesrefactor;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainMenu {
     
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException {
+    public static void main(String[] args) {
         
         String filename = "quizGrades.txt";
         
@@ -52,8 +50,8 @@ public class MainMenu {
                 case 5: 
                     keepRunning = false;
             }
-
-            Thread.sleep(1000); // short pause
+            
+            f.shortPause(1000);
             
             while(scoresMenu) {
                 scoresMenu = quizScoresMenu.run();
@@ -67,7 +65,7 @@ public class MainMenu {
         io.display("* SAVING");
         rs.saveHashMapToFile(studentQuizGrades, filename);
         
-        Thread.sleep(1111);
+        f.shortPause(1111);
         io.display("\n      Goodbye!");
     }
 

@@ -39,6 +39,14 @@ public class Functionality {
         }
     }
     
+    public void shortPause(int n) {
+        try {
+            Thread.sleep(n); // short pause
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt(); 
+        }
+    }
+    
     //////////////////////// Quiz Scores Menu ////////////////////////
     public void findHighestQuiz() {
         HashMap<String, ArrayList<String>> highScores = new HashMap<>();

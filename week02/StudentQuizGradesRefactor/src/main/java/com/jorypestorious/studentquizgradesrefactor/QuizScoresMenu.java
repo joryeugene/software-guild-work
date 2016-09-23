@@ -15,7 +15,7 @@ public class QuizScoresMenu {
         this.f = f;
     }
     
-    public boolean run() throws InterruptedException {
+    public boolean run() {
         
         StudentMenu viewEditSpecficStudentsQuizGrades = new StudentMenu(studentQuizGrades, io, f);
         
@@ -66,7 +66,7 @@ public class QuizScoresMenu {
                     keepRunning = false;
             }
 
-            Thread.sleep(1000);
+            f.shortPause(1000);
             
             while (studentMenu) {
                 studentMenu = viewEditSpecficStudentsQuizGrades.run();
