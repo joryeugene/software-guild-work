@@ -12,22 +12,35 @@ import java.util.Scanner;
 
 public class ReadSaveFile {
     
-    public HashMap readFileToHashMap(String filename) throws FileNotFoundException {
+    public HashMap readFileToHashMap(String filename) {
         
         HashMap<String, ArrayList<Integer>> studentQuizGrades = new HashMap<>();
         
-        Scanner scanFile = new Scanner(new BufferedReader(new FileReader(filename)));
-        String currentStudent;
-        
-        while (scanFile.hasNext()) {
-            currentStudent = scanFile.nextLine();
-            studentQuizGrades.put(currentStudent, new ArrayList());
-        
-            while (scanFile.hasNextInt()) {
-                studentQuizGrades.get(currentStudent).add(scanFile.nextInt());
+        try {
+            Scanner scanFile = new Scanner(new BufferedReader(new FileReader(filename)));
+            String currentStudent;
+            
+            while (scanFile.hasNext()) {
+                currentStudent = scanFile.nextLine();
+                studentQuizGrades.put(currentStudent, new ArrayList());
+                
+                while (scanFile.hasNextInt()) {
+                    studentQuizGrades.get(currentStudent).add(scanFile.nextInt());
+                }
+                
+                if (scanFile.hasNext()) scanFile.nextLine(); // clear \n
             }
             
-            if (scanFile.hasNext()) scanFile.nextLine(); // clear \n
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage() + "\n~ Loading Sample Data");
+            
+            // if file not found - add one test student with sample quiz scores
+            studentQuizGrades.put("Sample Student", new ArrayList());
+            int[] temp = {0, 25, 50, 75, 100};
+            
+            for (int i = 0; i < temp.length; i++) {
+                studentQuizGrades.get("Sample Student").add(i);
+            }
         }
         
         return studentQuizGrades;

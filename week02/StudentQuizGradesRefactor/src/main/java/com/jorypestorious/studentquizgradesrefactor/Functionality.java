@@ -40,6 +40,70 @@ public class Functionality {
     }
     
     //////////////////////// Quiz Scores Menu ////////////////////////
+    public void findHighestQuiz() {
+        HashMap<String, ArrayList<String>> highScores = new HashMap<>();
+        int highestQuiz = 0;
+        int currentQuiz;
+        String formattedStr;
+        
+        for (String student : studentQuizGrades.keySet()) {
+            if (studentQuizGrades.get(student).size() < 1) continue;
+            
+            for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
+                currentQuiz = studentQuizGrades.get(student).get(i);
+                if (currentQuiz > highestQuiz) highestQuiz = currentQuiz;
+            }
+        }
+        
+        for (String student : studentQuizGrades.keySet()) {
+            if (studentQuizGrades.get(student).size() < 1) continue;
+            
+            for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
+                currentQuiz = studentQuizGrades.get(student).get(i);
+                
+                if (currentQuiz == highestQuiz) {
+                    formattedStr = "Q" + (i+1) + ": " + highestQuiz;
+                    if (!highScores.containsKey(student)) highScores.put(student, new ArrayList<>());
+                    highScores.get(student).add(formattedStr);
+                }
+            }
+        }
+        
+        io.findHighestLowestQuizzes(highScores, "Highest Quiz");
+    }
+    
+    public void findLowestQuiz() {
+        HashMap<String, ArrayList<String>> lowScores = new HashMap<>();
+        int lowestQuiz = 0;
+        int currentQuiz;
+        String formattedStr;
+        
+        for (String student : studentQuizGrades.keySet()) {
+            if (studentQuizGrades.get(student).size() < 1) continue;
+            
+            for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
+                currentQuiz = studentQuizGrades.get(student).get(i);
+                if (currentQuiz < lowestQuiz) lowestQuiz = currentQuiz;
+            }
+        }
+        
+        for (String student : studentQuizGrades.keySet()) {
+            if (studentQuizGrades.get(student).size() < 1) continue;
+            
+            for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
+                currentQuiz = studentQuizGrades.get(student).get(i);
+                
+                if (currentQuiz == lowestQuiz) {
+                    formattedStr = "Q" + (i+1) + ": " + lowestQuiz;
+                    if (!lowScores.containsKey(student)) lowScores.put(student, new ArrayList<>());
+                    lowScores.get(student).add(formattedStr);
+                }
+            }
+        }
+        
+        io.findHighestLowestQuizzes(lowScores, "Lowest Quiz");
+    }
+    
     public void findClassAverage() { // not including quizzes not done yet
         int numOfStudents = 0;
         double avgSum = 0.0;

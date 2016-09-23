@@ -23,21 +23,20 @@ public class QuizScoresMenu {
                               "=====================\n" +
                               "1. View All Students' Quiz Scores\n" +
                               "2. View/Edit Specific Student's Quiz Scores\n" +
-                              "3. Find Average Quiz Score\n" +
-                              "4. Find Students with Average Above Certain Score\n" +
-                              "5. Find Students with Average Below Certain Score\n" +
-                              "6. Exit to Main Menu\n\n" +
+                              "3. Find Student(s) with Highest Quiz Score \n" +
+                              "4. Find Student(s) with Lowest Quiz Score \n" +
+                              "5. Find Average Quiz Score\n" +
+                              "6. Find Students with Average Above Certain Score\n" +
+                              "7. Find Students with Average Below Certain Score\n" +
+                              "8. Exit to Main Menu\n\n" +
                               "> Selection: ";
-        
-        //2. Find and list the student(s) with the highest quiz score. 
-        //3. Find and list the student(s) with the lowest quiz score. 
         
         boolean keepRunning = true;
         boolean studentMenu = false;
         int selection;
         
         do {    
-            selection = io.promptInt(menuPrompt, 1, 6);
+            selection = io.promptInt(menuPrompt, 1, 8);
             io.display(""); // line break
             
             switch(selection) {
@@ -48,16 +47,22 @@ public class QuizScoresMenu {
                     studentMenu = true;
                     break;
                 case 3:
+                    f.findHighestQuiz();
+                    break;
+                case 4:
+                    f.findLowestQuiz();
+                    break;
+                case 5:
                     //f.findClassAverage();
                     f.findQuizAverage();
                     break;
-                case 4:
+                case 6:
                     f.findStudentsAbove();
                     break;
-                case 5:
+                case 7:
                     f.findStudentsBelow();
                     break;
-                case 6: 
+                case 8: 
                     keepRunning = false;
             }
 

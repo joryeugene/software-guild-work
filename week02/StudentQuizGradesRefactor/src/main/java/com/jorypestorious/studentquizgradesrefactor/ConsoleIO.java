@@ -6,11 +6,7 @@ import java.util.Scanner;
 
 public class ConsoleIO {
     
-    private final Scanner scan;
-    
-    ConsoleIO() {
-        this.scan = new Scanner(System.in);
-    }
+    private final Scanner scan = new Scanner(System.in);
     
     //////////////////// Output ////////////////////// 
     public void display(String str) {
@@ -98,6 +94,32 @@ public class ConsoleIO {
         }
         
         System.out.println("\nNumber of Students: " + count + " out of " + total);
+        
+        System.out.println("-------------------------------------------------------------------------");
+    }
+    
+    public void findHighestLowestQuizzes(HashMap<String, ArrayList<String>> highScores, String note) {
+        System.out.println("\n                              " + note + "                      \n" +
+                           "-------------------------------------------------------------------------");
+        
+        String currentGrade;
+        
+        for (String name : highScores.keySet()) {
+            System.out.print(name + ":\t");
+            if (name.length() < 15) System.out.print("\t");
+            if (name.length() < 7) System.out.print("\t");
+            
+            for (int i = 0; i < highScores.get(name).size(); i++) {
+                currentGrade = highScores.get(name).get(i);
+                System.out.print(currentGrade);
+                
+                if (currentGrade.length() < 6) System.out.print("  ");
+                else if (currentGrade.length() < 7) System.out.print(" ");
+                System.out.print(" | ");
+            }
+            
+            System.out.println(""); // line break;
+        }
         
         System.out.println("-------------------------------------------------------------------------");
     }
