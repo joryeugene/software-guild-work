@@ -40,7 +40,7 @@ public class Database {
     //////////////////////// Quiz Scores Menu ////////////////////////
     public HashMap findHighestLowestQuizScore(boolean highest) { // if false => find lowest
         HashMap<String, ArrayList<String>> highScores = new HashMap<>();
-        int highestQuiz = 0;
+        int highestLowestQuiz = (true) ? 0 : 100;
         int currentQuiz;
         String formattedStr;
         
@@ -50,8 +50,11 @@ public class Database {
             for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
                 currentQuiz = studentQuizGrades.get(student).get(i);
                 
-                if (highest) if (currentQuiz > highestQuiz) highestQuiz = currentQuiz;
-                else if (currentQuiz < highestQuiz) highestQuiz = currentQuiz;
+                if (highest) {
+                    if (currentQuiz > highestLowestQuiz) highestLowestQuiz = currentQuiz;
+                } else {
+                    if (currentQuiz < highestLowestQuiz) highestLowestQuiz = currentQuiz;
+                }
             }
         }
         
@@ -61,8 +64,8 @@ public class Database {
             for (int i = 0; i < studentQuizGrades.get(student).size(); i++) {
                 currentQuiz = studentQuizGrades.get(student).get(i);
                 
-                if (currentQuiz == highestQuiz) {
-                    formattedStr = "Q" + (i+1) + ": " + highestQuiz;
+                if (currentQuiz == highestLowestQuiz) {
+                    formattedStr = "Q" + (i+1) + ": " + highestLowestQuiz;
                     if (!highScores.containsKey(student)) highScores.put(student, new ArrayList<>());
                     highScores.get(student).add(formattedStr);
                 }
