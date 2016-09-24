@@ -1,0 +1,12 @@
+Student 0
+0 0 0 
+Student 75
+50 75 100 
+Student 50
+100 50 0 
+Student 123
+1 2 3 
+Student None
+Student 100
+100 
+Student None None
