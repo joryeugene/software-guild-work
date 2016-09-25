@@ -1,0 +1,9 @@
+Given a String, if the String "del" appears starting at index 1, return a String where that "del" has been deleted. Otherwise, return the String unchanged. 
+
+removeDel("adelbc") -> "abc"
+removeDel("adelHello") -> "aHello"
+removeDel("adedbc") -> "adedbc"
+
+public String removeDel(String str) {
+
+}

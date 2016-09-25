@@ -1,0 +1,9 @@
+Given a String, return a new String where the first and last chars have been exchanged. 
+
+frontBack("code") -> "eodc"
+frontBack("a") -> "a"
+frontBack("ab") -> "ba"
+
+public String frontBack(String str) {
+
+}

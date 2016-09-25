@@ -1,0 +1,9 @@
+Given a String, return a new String where the last 3 chars are now in upper case. If the String has less than 3 chars, uppercase whatever is there. 
+
+endUp("Hello") -> "HeLLO"
+endUp("hi there") -> "hi thERE"
+endUp("hi") -> "HI"
+
+public String endUp(String str) {
+
+}

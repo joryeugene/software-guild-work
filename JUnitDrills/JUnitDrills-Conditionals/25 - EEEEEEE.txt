@@ -1,0 +1,9 @@
+Return true if the given String contains between 1 and 3 'e' chars. 
+
+gotE("Hello") -> true
+gotE("Heelle") -> true
+gotE("Heelele") -> false
+
+public boolean gotE(String str) {
+
+}

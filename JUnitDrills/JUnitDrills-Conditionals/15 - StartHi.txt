@@ -1,0 +1,9 @@
+Given a String, return true if the String starts with "hi" and false otherwise. 
+
+startHi("hi there") -> true
+startHi("hi") -> true
+startHi("high up") -> false
+
+public boolean startHi(String str) {
+
+}
