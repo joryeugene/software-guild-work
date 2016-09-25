@@ -1,0 +1,9 @@
+Given a String, return true if "bad" appears starting at index 0 or 1 in the String, such as with "badxxx" or "xbadxx" but not "xxbadxx". The String may be any length, including 0.
+
+hasBad("badxx") -> true
+hasBad("xbadxx") -> true
+hasBad("xxbadxx") -> false
+
+public boolean hasBad(String str) {
+
+}

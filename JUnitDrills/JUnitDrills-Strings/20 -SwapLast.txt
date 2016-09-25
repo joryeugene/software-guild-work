@@ -1,0 +1,9 @@
+Given a String of any length, return a new String where the last 2 chars, if present, are swapped, so "coding" yields "codign". 
+
+swapLast("coding") -> "codign"
+swapLast("cat") -> "cta"
+swapLast("ab") -> "ba"
+
+public String swapLast(String str) {
+
+}

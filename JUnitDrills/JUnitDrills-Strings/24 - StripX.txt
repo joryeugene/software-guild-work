@@ -1,0 +1,9 @@
+Given a String, if the first or last chars are 'x', return the String without those 'x' chars, and otherwise return the String unchanged. 
+
+stripX("xHix") -> "Hi"
+stripX("xHi") -> "Hi"
+stripX("Hxix") -> "Hxi"
+
+public String stripX(String str) {
+
+}

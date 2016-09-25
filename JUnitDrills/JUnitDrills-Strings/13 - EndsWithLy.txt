@@ -1,0 +1,9 @@
+Given a String, return true if it ends in "ly". 
+
+endsWithLy("oddly") -> true
+endsWithLy("y") -> false
+endsWithLy("oddy") -> false
+
+public boolean endsWithLy(String str) { 
+
+}
