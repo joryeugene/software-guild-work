@@ -1,30 +1,27 @@
+
 package com.jorypestorious.simplecalculator;
 
-import java.util.Scanner;
-
-public class CalculatorUI {
+public class CalculatorDriverRefactor {
     
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
         Calculator c = new Calculator();
+        ConsoleIO io = new ConsoleIO();
         
         boolean running = true;
         String input,
-                output;
+               output;
         double op1,
-                op2,
-                calculation = 0.0;
+               op2,
+               calculation;
         
         do {
-            System.out.print("\n'add', 'subtract', 'multiply', 'divide', or 'quit'? ");
-            input = scan.next();
+            input = io.promptString("\n'add', 'subtract', 'multiply', 'divide', or 'quit'? ");
             
             if (input.equalsIgnoreCase("quit")) {
                 running = false;
             } else {
-                System.out.print("Two operands: ");
-                op1 = scan.nextDouble();
-                op2 = scan.nextDouble();
+                op1 = io.promptDouble("First operand: ");
+                op2 = io.promptDouble("Second operand: ");
                 
                 switch(input) {
                     case "add":
@@ -46,12 +43,12 @@ public class CalculatorUI {
                 
                 output = (calculation == -Math.PI) ? "Invalid" : Double.toString(calculation);
                 
-                System.out.println("> " + output);
+                io.printString("> " + output);
             }
             
         } while (running);
         
-        System.out.println("\nThank you.");
+        io.printString("\nThank you.");
     }
     
 }
