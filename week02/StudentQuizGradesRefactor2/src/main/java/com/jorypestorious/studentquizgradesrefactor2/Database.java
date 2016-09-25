@@ -39,7 +39,7 @@ public class Database {
     
     //////////////////////// Quiz Scores Menu ////////////////////////
     public HashMap findHighestLowestQuizScore(boolean highest) { // if false => find lowest
-        HashMap<String, ArrayList<String>> highScores = new HashMap<>();
+        HashMap<String, ArrayList<String>> highLowScores = new HashMap<>();
         int highestLowestQuiz = (true) ? 0 : 100;
         int currentQuiz;
         String formattedStr;
@@ -66,13 +66,13 @@ public class Database {
                 
                 if (currentQuiz == highestLowestQuiz) {
                     formattedStr = "Q" + (i+1) + ": " + highestLowestQuiz;
-                    if (!highScores.containsKey(student)) highScores.put(student, new ArrayList<>());
-                    highScores.get(student).add(formattedStr);
+                    if (!highLowScores.containsKey(student)) highLowScores.put(student, new ArrayList<>());
+                    highLowScores.get(student).add(formattedStr);
                 }
             }
         }
         
-        return highScores;
+        return highLowScores;
     }
     
     public String findQuizAverage() {

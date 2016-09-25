@@ -1,9 +1,9 @@
 Brad Pitt
 100 88 99 100 
-George Michael
-78 83 77 
 Barney
 46 0 51 56 0 
+George Michael Bluth
+78 83 77 
 Paris Hilton
 0 11 6 88 37 
 Spock
