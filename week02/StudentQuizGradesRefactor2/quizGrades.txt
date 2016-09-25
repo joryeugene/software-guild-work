@@ -2,6 +2,8 @@ Brad Pitt
 100 88 99 100 
 Barney
 46 0 51 56 0 
+Winona
+70 65 77 
 George Michael Bluth
 78 83 77 
 Paris Hilton

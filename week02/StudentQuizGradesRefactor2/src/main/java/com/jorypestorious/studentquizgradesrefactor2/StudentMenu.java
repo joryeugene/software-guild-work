@@ -27,6 +27,7 @@ public class StudentMenu {
             
             boolean stayOnMenu = true;
             int selection;
+            int numOfQuizzes;
             
             do {                
                 io.displaySpecificStudentsQuizScores(dm.getDatabase(), student);
@@ -41,7 +42,7 @@ public class StudentMenu {
                         io.display("* Successfully Added: Q" + nextQuiz + ": " + quizScoreToAdd);
                         break;
                     case 2:
-                        int numOfQuizzes = dm.getNumOfStudentsQuizzes(student);
+                        numOfQuizzes = dm.getNumOfStudentsQuizzes(student);
                         if (numOfQuizzes < 1) {
                             io.display("! No Quizzes Found");
                         } else {
@@ -52,7 +53,12 @@ public class StudentMenu {
                         }
                         break;
                     case 3:
-                        dm.removeLastQuizScore(student);
+                        numOfQuizzes = dm.getNumOfStudentsQuizzes(student);
+                        if (numOfQuizzes < 1) {
+                            io.display("! No Quizzes to Remove");
+                        } else {
+                            dm.removeLastQuizScore(student);
+                        }
                         break;
                     case 4:
                         io.display(dm.findAverageForOneStudent(student));
