@@ -35,14 +35,12 @@ public class MainMenu {
                     break;
                 case 2:
                     student = io.promptString("> Student's Name: ");
-                    boolean addedStudent = dm.addStudent(student);
-                    if (addedStudent) io.display("* Successfully Added: " + student);
+                    if (dm.addStudent(student)) io.display("* Successfully Added: " + student);
                     else io.display("! Student Already Exists");
                     break;
                 case 3:
                     student = io.promptString("> Student's Name: ");
-                    boolean removedStudent = dm.removeStudent(student);
-                    if (removedStudent) io.display("* Successfully Removed: " + student);
+                    if (dm.removeStudent(student)) io.display("* Successfully Removed: " + student);
                     else io.display("! Student Not Found");
                     break;
                 case 4:
