@@ -2,11 +2,15 @@ Brad Pitt
 100 88 99 100 
 Barney
 46 0 51 56 0 
+Born Lestiorus
+93 39 33 
 George Michael Bluth
 78 83 77 
 Paris Hilton
 0 11 6 88 37 
 Spock
 100 100 100 99 100 
+Winona Ryder
+50 34 
 Jory Pestorious
 100 81 80 99 90 
