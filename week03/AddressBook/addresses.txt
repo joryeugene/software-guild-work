@@ -1,0 +1,3 @@
+Joey::Wright::4500 Six Mile Creek Road::Princeton::MN::55375
+David::Hobbs::1900 Wagner Street::Waconia::MN::55000
+Chelsea::Rice::222 Kings Avenue::Minnetonka::MN::55333
