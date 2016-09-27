@@ -13,8 +13,8 @@ public class Address {
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
-        this.state = state;
         this.city = city;
+        this.state = state;
         this.zipcode = zipcode;
     }
     

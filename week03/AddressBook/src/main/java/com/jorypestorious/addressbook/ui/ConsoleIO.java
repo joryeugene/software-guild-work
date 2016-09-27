@@ -14,6 +14,16 @@ public class ConsoleIO {
         return input;
     }
     
+    public String promptStateCode(String prompt) {
+        System.out.print(prompt);
+        String input = scan.nextLine().toUpperCase().trim();
+        while(input.length() != 2) {
+            System.out.print("Enter a state code consisting of two characters: ");
+            input = scan.nextLine().toUpperCase().trim();
+        }
+        return input;
+    }
+    
     public int promptInt(String prompt, int min, int max) {
         String errorMsg = "Enter a number between " + min + " and " + max + ": ";
         int input;

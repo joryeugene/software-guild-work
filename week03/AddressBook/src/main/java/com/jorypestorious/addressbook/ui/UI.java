@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class UI {
     
     public void listAddresses(HashMap<String, Address> addressBook) {
-        System.out.println("         Addresses         \n" +
+        System.out.println("\n         Addresses         \n" +
                            "---------------------------\n");
         
         for (String lastName : addressBook.keySet()) {
@@ -14,6 +14,10 @@ public class UI {
         }
         
         System.out.println("---------------------------\n");
+    }
+    
+    public void displayAddress(Address a) {
+        System.out.println(a);
     }
 
 }
