@@ -9,7 +9,7 @@ public class DVD {
     private String studio;
     private String note; // user rating or note
     
-    DVD(String title, int year, String mpaa, String director, String studio, String note) {
+    public DVD(String title, int year, String mpaa, String director, String studio, String note) {
         this.title = title;
         this.year = year;
         this.mpaa = mpaa;
@@ -20,8 +20,14 @@ public class DVD {
     
     @Override
     public String toString() {
-        return "\"" + title + "\"";
+        return "\"" + title + "\" (" + year + ") Rated " + mpaa + 
+                "\nDirected by " + director + " and Produced by " +
+                studio + "\nNote: " + note;
     }
+    
+    //“Spring, Summer, Fall, Winter... and Spring” (2003) Rated R
+    //Directed by Ki-duk Kim and Produced by Korea Pictures 
+    //Note: 
 
     public String getTitle() {
         return title;
