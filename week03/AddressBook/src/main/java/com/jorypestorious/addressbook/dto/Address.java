@@ -20,9 +20,9 @@ public class Address {
     
     @Override
     public String toString() {
-        return getFirstName() + " " + getLastName() + "\n" +
-               getStreet() + "\n" +
-               getCity() + ", " + getState() + " " + getZipcode();
+        return firstName + " " + lastName+ "\n" +
+               street+ "\n" +
+               city+ ", " + state+ " " + zipcode;
     }
 
     public String getFirstName() {
