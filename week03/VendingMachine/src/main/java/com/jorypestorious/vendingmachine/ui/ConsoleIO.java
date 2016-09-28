@@ -50,7 +50,7 @@ public class ConsoleIO {
                 scan.next();
             }
             
-            input = scan.nextInt();
+            input = scan.nextDouble();
             
             if (input > max || input < min) {
                 System.out.print(errorMsg);

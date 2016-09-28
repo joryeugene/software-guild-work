@@ -1,3 +1,3 @@
-Twinkies::2.25::5
-Gum::1.10::9
-Cheetos::1.50::5
+Twinkies::2.25::4
+Cheetos::1.5::5
+Gum::1.1::4

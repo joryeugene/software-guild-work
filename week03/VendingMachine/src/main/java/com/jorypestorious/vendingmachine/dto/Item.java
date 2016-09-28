@@ -19,9 +19,8 @@ public class Item {
     @Override
     public String toString() {
         return name + " - $" + df.format(cost) + " - Quantity: " + count;
-                
     }
-
+    
     public String getName() {
         return name;
     }
@@ -34,5 +33,8 @@ public class Item {
         return count;
     }
     
+    public int takeOne() {
+        return --count;
+    }
     
 }
