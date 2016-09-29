@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DataPersistence {
     
-    public HashMap fileToHashMap(String filename) {
-        HashMap<String, Address> addressBook = new HashMap<>();
+    public Map fileToHashMap(String filename) {
+        Map<String, Address> addressBook = new HashMap<>();
         try {
             Scanner scanFile = new Scanner(new BufferedReader(new FileReader(filename)));
         
@@ -30,7 +31,7 @@ public class DataPersistence {
         return addressBook;
     }
     
-    public boolean saveToFile(HashMap<String, Address> a, String filename) {
+    public boolean saveToFile(Map<String, Address> a, String filename) {
         try {
             PrintWriter write = new PrintWriter(new FileWriter(filename));
             

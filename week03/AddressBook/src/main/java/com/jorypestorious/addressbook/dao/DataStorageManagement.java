@@ -2,10 +2,11 @@ package com.jorypestorious.addressbook.dao;
 
 import com.jorypestorious.addressbook.dto.Address;
 import java.util.HashMap;
+import java.util.Map;
 
-public class DataStorageManagement {
+public class DataStorageManagement implements DAO {
     
-    private final HashMap<String, Address> addressBook;
+    private final Map<String, Address> addressBook;
     private final DataPersistence dao;
     private final String filename;
     
@@ -15,14 +16,17 @@ public class DataStorageManagement {
         addressBook = dao.fileToHashMap(filename);
     }
     
-    public HashMap getAddressBook() {
+    @Override
+    public Map getAddressBook() {
         return new HashMap<>(addressBook);
     }
     
+    @Override
     public int getNumOfAddresses() {
         return addressBook.size();
     }
     
+    @Override
     public boolean addAddress(Address a) {
         if (addressBook.containsKey(a.getLastName())) {
             return false;
@@ -35,6 +39,7 @@ public class DataStorageManagement {
         }
     }
     
+    @Override
     public boolean removeAddress(String name) {
         if (addressBook.containsKey(name)) {            
             addressBook.remove(name);
@@ -45,13 +50,15 @@ public class DataStorageManagement {
         }
     }
     
+    @Override
     public void editAddress(String fullName, Address a) {
         addressBook.replace(fullName, a);
         dao.saveToFile(addressBook, filename);
     }
 
-    public HashMap findAddress(String lastName) {
-        HashMap<String, Address> searchQuery = new HashMap<>();
+    @Override
+    public Map findAddress(String lastName) {
+        Map<String, Address> searchQuery = new HashMap<>();
         
         for (String name : addressBook.keySet()) {
             if (addressBook.get(name).getLastName().equalsIgnoreCase(lastName)) {
@@ -62,6 +69,7 @@ public class DataStorageManagement {
         return searchQuery;
     }
     
+    @Override
     public void save() {
         dao.saveToFile(addressBook, filename);
     }

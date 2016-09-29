@@ -1,6 +1,6 @@
 package com.jorypestorious.addressbook.controller;
 
-import com.jorypestorious.addressbook.dao.DataStorageManagement;
+import com.jorypestorious.addressbook.dao.DAO;
 import com.jorypestorious.addressbook.dto.Address;
 import com.jorypestorious.addressbook.ui.ConsoleIO;
 import com.jorypestorious.addressbook.ui.UI;
@@ -8,11 +8,11 @@ import com.jorypestorious.addressbook.ui.UI;
 public class Controller {
     
     private final ConsoleIO io;
-    private final DataStorageManagement dao;
+    private final DAO dao;
     private final UI ui;
     
-    public Controller(String filename) {
-        dao = new DataStorageManagement(filename);
+    public Controller(DAO dao) {
+        this.dao = dao;
         io = new ConsoleIO();
         ui = new UI();
     }

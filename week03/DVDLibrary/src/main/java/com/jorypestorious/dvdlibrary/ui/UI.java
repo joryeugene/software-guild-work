@@ -1,11 +1,11 @@
 package com.jorypestorious.dvdlibrary.ui;
 
 import com.jorypestorious.dvdlibrary.dto.DVD;
-import java.util.HashMap;
+import java.util.Map;
 
 public class UI {
     
-    public void listLibrary(HashMap<String, DVD> dvdLibrary) {
+    public void listLibrary(Map<String, DVD> dvdLibrary) {
         System.out.println("\n                               DVDs                               \n" +
                            "------------------------------------------------------------------\n");
         

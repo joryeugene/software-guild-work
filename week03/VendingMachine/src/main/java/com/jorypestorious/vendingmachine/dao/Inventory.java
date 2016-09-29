@@ -4,7 +4,7 @@ import com.jorypestorious.vendingmachine.dto.Item;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory {
+public class Inventory implements DAO {
     
     private final Map<String, Item> inventory;
     private final DataPersistence dao;
@@ -16,14 +16,17 @@ public class Inventory {
         inventory = dao.fileToHashMap(filename);
     }
     
+    @Override
     public void save() {
         dao.saveToFile(inventory, filename);
     }
     
+    @Override
     public Map getInventory() {
         return new HashMap<>(inventory);
     }
     
+    @Override
     public int getItemCount(String item) {
         if (inventory.containsKey(item)) {
             return inventory.get(item).getCount();
@@ -32,10 +35,12 @@ public class Inventory {
         }
     }
     
+    @Override
     public double getItemCost(String item) {
         return inventory.get(item).getCost();
     }
     
+    @Override
     public double buy(String name, double money) {
         double cost = inventory.get(name).getCost();
         if (money >= cost && inventory.get(name).getCount() > 0) {

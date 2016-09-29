@@ -1,6 +1,6 @@
 package com.jorypestorious.dvdlibrary.controller;
 
-import com.jorypestorious.dvdlibrary.dao.DVDLibrary;
+import com.jorypestorious.dvdlibrary.dao.DAO;
 import com.jorypestorious.dvdlibrary.dto.DVD;
 import com.jorypestorious.dvdlibrary.ui.ConsoleIO;
 import com.jorypestorious.dvdlibrary.ui.UI;
@@ -8,11 +8,11 @@ import com.jorypestorious.dvdlibrary.ui.UI;
 public class Controller {
     
     private final ConsoleIO io;
-    private final DVDLibrary dao;
+    private final DAO dao;
     private final UI ui;
     
-    public Controller(String filename) {
-        dao = new DVDLibrary(filename);
+    public Controller(DAO library) {
+        dao = library;
         io = new ConsoleIO();
         ui = new UI();
     }

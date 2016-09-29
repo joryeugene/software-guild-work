@@ -1,6 +1,6 @@
 package com.jorypestorious.vendingmachine.controller;
 
-import com.jorypestorious.vendingmachine.dao.Inventory;
+import com.jorypestorious.vendingmachine.dao.DAO;
 import com.jorypestorious.vendingmachine.ui.ConsoleIO;
 import com.jorypestorious.vendingmachine.ui.UI;
 import java.text.DecimalFormat;
@@ -8,12 +8,12 @@ import java.text.DecimalFormat;
 public class Controller {
     
     private final DecimalFormat df;
-    private final Inventory dao;
+    private final DAO dao;
     private final ConsoleIO io;
     private final UI ui;
     private double money;
     
-    public Controller(Inventory inv) {
+    public Controller(DAO inv) {
         dao = inv;
         ui = new UI();
         io = new ConsoleIO();

@@ -1,11 +1,11 @@
 package com.jorypestorious.addressbook.ui;
 
 import com.jorypestorious.addressbook.dto.Address;
-import java.util.HashMap;
+import java.util.Map;
 
 public class UI {
     
-    public void listAddresses(HashMap<String, Address> addressBook) {
+    public void listAddresses(Map<String, Address> addressBook) {
         System.out.println("\n         Addresses         \n" +
                            "---------------------------\n");
         

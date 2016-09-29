@@ -1,13 +1,12 @@
 package com.jorypestorious.addressbook;
 
 import com.jorypestorious.addressbook.controller.Controller;
+import com.jorypestorious.addressbook.dao.DataStorageManagement;
 
 public class Manager {
     
     public static void main(String[] args) throws InterruptedException {
-        String filename = "addresses.txt";
-        Controller c = new Controller(filename);
-        c.run();
+        new Controller(new DataStorageManagement("addresses.txt")).run();
     }
 
 }
