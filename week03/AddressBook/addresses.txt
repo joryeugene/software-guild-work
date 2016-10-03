@@ -1,5 +1,5 @@
 Chad::Pestorious::1111 Cool Street::Rochester::MN::44444
 Joey::Wright::4500 Seven Mile Creek Road::Princeton::TX::55375
 Chelsea::Rice::222 Kings Avenue::Minnetonka::MN::55333
-Jory::Pestorious::888 Awesome Street::Minnetrista::MN::55455
+Jory::Pestorious::800 Sweet Street::Minnetrista::MN::55455
 David::Hobbs::1900 Wagner Street::Waconia::MN::55000

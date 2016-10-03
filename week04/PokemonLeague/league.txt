@@ -2,8 +2,8 @@ Team Dim Sun::Blake Hall
 Team Rocket::Jessie
 Team Rocket::Meowth
 Team Rocket::James
+Team Rocket::Jory
 Team Snagem::Gonzap
 Team Snagem::Wes
-Team Awesome::Jory
 Team Galactic::Cyrus
 Team Galactic::Saturn
