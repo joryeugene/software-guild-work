@@ -15,14 +15,10 @@ public class Product {
     protected double price;
     protected int quantity;
     
-    public Product() {
-        id = productId;
-        productId++;
-    }
+    public Product() {}
     
     public Product(String brand, String name, double price, int quantity) {
-        this();
-        this.id = productId;
+        this.id = getProductId();
         this.brand = brand;
         this.name = name;
         this.price = price;
@@ -30,7 +26,6 @@ public class Product {
     }
     
     public Product(int id, String brand, String name, double price, int quantity) {
-        this();
         this.id = id;
         this.brand = brand;
         this.name = name;
@@ -38,8 +33,14 @@ public class Product {
         this.quantity = quantity;
     }
     
-    public final static int getProductId() {
-        return productId;
+    protected final int getProductId() {
+        int id = productId;
+        productId++;
+        return id;
+    }
+    
+    public final static int getCurrentProductId() {
+        return productId-1;
     }
     
     public final static void setProductId(int id) {
@@ -49,8 +50,13 @@ public class Product {
         }
     }
     
+    public String getCategory() {
+        return "Product";
+    }
+    
+    @Override
     public String toString() {
-        return id + " " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + id + "] " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
     }
 
     public int getId() {
@@ -76,6 +82,10 @@ public class Product {
     public double getPrice() {
         return price;
     }
+    
+    public String getPriceFormatted() {
+        return df.format(price);
+    }
 
     public void setPrice(double price) {
         this.price = price;
@@ -85,8 +95,12 @@ public class Product {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+    
+    public void removeQuantity(int quantity) {
+        this.quantity -= quantity;
     }
     
 }

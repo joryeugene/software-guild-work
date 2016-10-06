@@ -1,12 +1,11 @@
 package com.jorypestorious.productinventory.dto;
 
-public class Shoes extends Product {
+public class Shoe extends Product {
     
     private String size;
     private String color;
     
-    public Shoes(String brand, String name, String size, String color, double price, int quantity) {
-        super();
+    public Shoe(String brand, String name, String size, String color, double price, int quantity) {
         this.id = super.getProductId();
         this.brand = brand;
         this.name = name;
@@ -16,8 +15,7 @@ public class Shoes extends Product {
         this.quantity = quantity;
     }
     
-    public Shoes(int id, String brand, String name, String size, String color, double price, int quantity) {
-        super();
+    public Shoe(int id, String brand, String name, String size, String color, double price, int quantity) {
         this.id = id;
         this.brand = brand;
         this.name = name;
@@ -27,8 +25,14 @@ public class Shoes extends Product {
         this.quantity = quantity;
     }
     
+    @Override
     public String toString() {
-        return id + " " + brand + " - " + name + " " + size + " " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + id + "] " + brand + " - " + name + " - " + size + " - " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+    }
+    
+    @Override
+    public String getCategory() {
+        return "Shoe";
     }
 
     public String getSize() {

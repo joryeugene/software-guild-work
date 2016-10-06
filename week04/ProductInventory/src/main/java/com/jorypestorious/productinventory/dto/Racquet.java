@@ -6,7 +6,6 @@ public class Racquet extends Product {
     private String color;
     
     public Racquet(String brand, String name, String weight, String color, double price, int quantity) {
-        super();
         this.id = super.getProductId();
         this.brand = brand;
         this.name = name;
@@ -17,7 +16,6 @@ public class Racquet extends Product {
     }
     
     public Racquet(int id, String brand, String name, String weight, String color, double price, int quantity) {
-        super();
         this.id = id;
         this.brand = brand;
         this.name = name;
@@ -27,8 +25,14 @@ public class Racquet extends Product {
         this.quantity = quantity;
     }
     
+    @Override
     public String toString() {
-        return id + " " + brand + " - " + name + " " + weight + " " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + id + "] " + brand + " - " + name + " - " + weight + " - " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+    }
+    
+    @Override
+    public String getCategory() {
+        return "Racquet";
     }
 
     public String getWeight() {

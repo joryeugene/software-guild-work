@@ -2,22 +2,37 @@ package com.jorypestorious.productinventory.dto;
 
 public class Ball extends Product {
     
-    public Ball(String brand, String name, double price, int quantity) {
-        super();
+    private String dots;
+    
+    public Ball(String brand, String name, String dots, double price, int quantity) {
         this.id = super.getProductId();
         this.brand = brand;
         this.name = name;
+        this.dots = dots;
         this.price = price;
         this.quantity = quantity;
     }
     
-    public Ball(int id, String brand, String name, double price, int quantity) {
-        super();
+    public Ball(int id, String brand, String name, String dots, double price, int quantity) {
         this.id = id;
         this.brand = brand;
         this.name = name;
+        this.dots = dots;
         this.price = price;
         this.quantity = quantity;
     }
+    
+    @Override
+    public String getCategory() {
+        return "Ball";
+    }
 
+    public String getDots() {
+        return dots;
+    }
+
+    public void setDots(String dots) {
+        this.dots = dots;
+    }
+    
 }

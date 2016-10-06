@@ -3,7 +3,7 @@ package com.jorypestorious.productinventory.dao;
 import com.jorypestorious.productinventory.dto.Ball;
 import com.jorypestorious.productinventory.dto.Product;
 import com.jorypestorious.productinventory.dto.Racquet;
-import com.jorypestorious.productinventory.dto.Shoes;
+import com.jorypestorious.productinventory.dto.Shoe;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,11 +37,11 @@ public class DataPersistence {
                     case "Ball":
                         inventory.put(Integer.parseInt(currentLine[1]), 
                                 new Ball(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
-                                Double.parseDouble(currentLine[4]), Integer.parseInt(currentLine[5])));
+                                currentLine[4], Double.parseDouble(currentLine[5]), Integer.parseInt(currentLine[6])));
                         break;
                     case "Shoes":
                         inventory.put(Integer.parseInt(currentLine[1]), 
-                                new Shoes(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
+                                new Shoe(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
                                 currentLine[4], currentLine[5],
                                 Double.parseDouble(currentLine[6]), Integer.parseInt(currentLine[7])));
                         break;
@@ -66,8 +66,10 @@ public class DataPersistence {
         try {
             PrintWriter write = new PrintWriter(new FileWriter(filename));
             
+            write.println(Product.getCurrentProductId()+1);
+            
             for (Integer id : inv.keySet()) {
-                String category = inv.get(id).getClass().getName();
+                String category = inv.get(id).getCategory();
                 
                 switch (category) {
                     case "Racquet":
@@ -79,10 +81,10 @@ public class DataPersistence {
                     case "Ball":
                         Ball ball = (Ball)inv.get(id);
                         write.println(category + "::" + ball.getId() + "::" + ball.getBrand()  + "::" +
-                                ball.getName() + "::" + ball.getPrice() + "::" + ball.getQuantity());
+                                ball.getName() + "::" + ball.getDots() + "::" + ball.getPrice() + "::" + ball.getQuantity());
                         break;
                     case "Shoes":
-                        Shoes shoes = (Shoes)inv.get(id);
+                        Shoe shoes = (Shoe)inv.get(id);
                         write.println(category + "::" + shoes.getId() + "::" + shoes.getBrand()  + "::" + 
                                 shoes.getName() + "::" + shoes.getSize() + "::" + shoes.getColor() + "::" +
                                 shoes.getPrice() + "::" + shoes.getQuantity());

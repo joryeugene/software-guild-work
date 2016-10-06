@@ -1,0 +1,6 @@
+6
+Product::1::Wrigley’s::Gum::2.5::25
+Racquet::2::Technifibre::Carboflex 125 Basaltex::125g::Black::129.0::5
+Ball::3::Dunlop::Pro (DYD) (3-Ball) Squash Tube::Double Yellow Dot::10.99::15
+Shoes::4::Asics::Gel-Rocket 7::Size 9.5::Black/Silver::69.95::3
+Shoes::5::Asics::Gel-Rocket 7::Size 8::Black/Silver::69.95::4
