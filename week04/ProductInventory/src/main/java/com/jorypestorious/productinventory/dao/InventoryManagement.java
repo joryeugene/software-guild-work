@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class InventoryManagement implements DAO {
     
-    private Map<Integer, Product> inventory;
+    private final Map<Integer, Product> inventory;
     DataPersistence dao;
     String filename;
     

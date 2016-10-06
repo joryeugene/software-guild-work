@@ -39,7 +39,7 @@ public class DataPersistence {
                                 new Ball(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
                                 currentLine[4], Double.parseDouble(currentLine[5]), Integer.parseInt(currentLine[6])));
                         break;
-                    case "Shoes":
+                    case "Shoe":
                         inventory.put(Integer.parseInt(currentLine[1]), 
                                 new Shoe(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
                                 currentLine[4], currentLine[5],
@@ -83,7 +83,7 @@ public class DataPersistence {
                         write.println(category + "::" + ball.getId() + "::" + ball.getBrand()  + "::" +
                                 ball.getName() + "::" + ball.getDots() + "::" + ball.getPrice() + "::" + ball.getQuantity());
                         break;
-                    case "Shoes":
+                    case "Shoe":
                         Shoe shoes = (Shoe)inv.get(id);
                         write.println(category + "::" + shoes.getId() + "::" + shoes.getBrand()  + "::" + 
                                 shoes.getName() + "::" + shoes.getSize() + "::" + shoes.getColor() + "::" +
