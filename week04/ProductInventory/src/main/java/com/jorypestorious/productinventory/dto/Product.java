@@ -51,12 +51,12 @@ public class Product {
     }
     
     public String getCategory() {
-        return "Product";
+        return "General";
     }
     
     @Override
     public String toString() {
-        return "[ID: " + id + "] " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + id + "] " + getCategory() + ": " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
     }
 
     public int getId() {

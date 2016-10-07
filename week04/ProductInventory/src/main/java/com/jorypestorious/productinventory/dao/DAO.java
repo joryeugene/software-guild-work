@@ -8,6 +8,8 @@ public interface DAO {
     
     Map<Integer, Product> getInventory();
     
+    int getNumberOfProducts();
+    
     Product getProduct(int id);
     
     void addProduct(Product product);
@@ -25,5 +27,11 @@ public interface DAO {
     public List<String> getBrands();
     
     List<Product> getProductsToRestock(int quantity);
+    
+    String getProductStockValuation(int id);
+    
+    String getTotalInventoryValuation();
+    
+    void deleteProduct(int id);
 
 }

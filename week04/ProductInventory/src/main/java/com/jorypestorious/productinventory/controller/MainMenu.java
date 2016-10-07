@@ -3,6 +3,7 @@ package com.jorypestorious.productinventory.controller;
 import com.jorypestorious.productinventory.dao.DAO;
 import com.jorypestorious.productinventory.dto.Ball;
 import com.jorypestorious.productinventory.dto.Product;
+import com.jorypestorious.productinventory.dto.ProductTypes;
 import com.jorypestorious.productinventory.dto.Racquet;
 import com.jorypestorious.productinventory.dto.Shoe;
 import com.jorypestorious.productinventory.ui.ConsoleIO;
@@ -44,6 +45,7 @@ public class MainMenu {
             switch (selection) {
                 case 1:
                     ui.displayProducts(dao.getInventory());
+                    io.display("\n>>>>>>> Total Inventory Valuation: " + dao.getTotalInventoryValuation() + " <<<<<<<");
                     break;
                 case 2:
                     displayProductsByCategory();
@@ -52,7 +54,8 @@ public class MainMenu {
                     displayProductsByBrand();
                     break;
                 case 4:
-                    subMenu.run();
+                    if (dao.getNumberOfProducts() > 0) subMenu.run();
+                    else io.display("! Inventory Is Empty");
                     break;
                 case 5:
                     addProduct();
@@ -73,77 +76,89 @@ public class MainMenu {
     }
     
     private void displayProductsByCategory() {
-        List<String> productCategories = dao.getCategories();
-        
-        String prompt = "";
-        
-        for (int i = 0; i < productCategories.size(); i++) {
-            if (productCategories.get(i).equals("Product")) productCategories.set(i, "General");
-            if (i == productCategories.size()-1) prompt += "or " + productCategories.get(i) + "? ";
-            else prompt += productCategories.get(i) + ", ";
+        if (dao.getNumberOfProducts() > 0) {
+            List<String> productCategories = dao.getCategories();
+            
+            String prompt = "OPTIONS: ";
+            
+            if (productCategories.size() < 2) {
+                prompt += productCategories.get(0) + " ";
+            } else {
+                for (int i = 0; i < productCategories.size(); i++) {
+                    if (i == productCategories.size()-1) prompt += "or " + productCategories.get(i) + "? ";
+                    else prompt += productCategories.get(i) + ", ";
+                }
+            }
+            
+            String selection = io.promptString(prompt);
+            io.display(""); // line break
+            
+            boolean knownCategory = false;
+            
+            for (String category : productCategories) {
+                if (selection.equals(category)) knownCategory = true;
+            }
+            
+            if (knownCategory) ui.displayProducts(dao.getProductsByCategory(selection));
+            else io.display("! Category Not Found");
+        } else {
+            io.display("! Inventory Is Empty");
         }
-        
-        String selection = io.promptString(prompt);
-        io.display(""); // line break
-        boolean knownCategory = false;
-                
-        for (String category : productCategories) {
-            if (selection.equals(category)) knownCategory = true;
-        }
-        
-        if (selection.equals("General")) selection = "Product";
-                
-        if (knownCategory) ui.displayProducts(dao.getProductsByCategory(selection));
-        else io.display("! Category Not Found");
     }
     
     private void displayProductsByBrand() {
-        List<String> brands = dao.getBrands();
-        
-        String prompt = "";
-        
-        for (int i = 0; i < brands.size(); i++) {
-            if (i == brands.size()-1) prompt += "or " + brands.get(i) + "? ";
-            else prompt += brands.get(i) + ", ";
+        if (dao.getNumberOfProducts() > 0) {
+            List<String> brands = dao.getBrands();
+            
+            String prompt = "OPTIONS: ";
+            
+            if (brands.size() < 2) {
+                prompt += brands.get(0) + " ";
+            } else {
+                for (int i = 0; i < brands.size(); i++) {
+                    if (i == brands.size()-1) prompt += "or " + brands.get(i) + "? ";
+                    else prompt += brands.get(i) + ", ";
+                }
+            }
+            
+            String selection = io.promptString(prompt);
+            io.display(""); // line break
+            boolean knownBrand = false;
+            
+            for (String brand : brands) {
+                if (selection.equals(brand)) knownBrand = true;
+            }
+            
+            if (knownBrand) ui.displayProducts(dao.getProductsByBrand(selection));
+            else io.display("! Brand Not Found");
+        } else {
+            io.display("! Inventory Is Empty");
         }
-        
-        String selection = io.promptString(prompt);
-        io.display(""); // line break
-        boolean knownBrand = false;
-                
-        for (String brand : brands) {
-            if (selection.equals(brand)) knownBrand = true;
-        }
-                        
-        if (knownBrand) ui.displayProducts(dao.getProductsByBrand(selection));
-        else io.display("! Brand Not Found");
     }
     
-    private void addProduct() { // service layer
-        List<String> productCategories = dao.getCategories();
+    private void addProduct() {
+        String[] productCategories = ProductTypes.toStringArray();
         
-        String prompt = "";
+        String prompt = "OPTIONS: ";
         
-        for (int i = 0; i < productCategories.size(); i++) {
-            if (productCategories.get(i).equals("Product")) productCategories.set(i, "General");
-            if (i == productCategories.size()-1) prompt += "or " + productCategories.get(i) + "? ";
-            else prompt += productCategories.get(i) + ", ";
+        for (int i = 0; i < productCategories.length; i++) {
+            if (i == productCategories.length-1) prompt += "or " + productCategories[i] + "? ";
+            else prompt += productCategories[i] + ", ";
         }
         
         String selection = io.promptString(prompt);
         io.display(""); // line break
+        
         boolean knownCategory = false;
                 
         for (String category : productCategories) {
             if (selection.equals(category)) knownCategory = true;
         }
-        
-        if (selection.equals("General")) selection = "Product";
-                
+                        
         if (!knownCategory) io.display("! Category Not Found");
         else {
-            switch (selection) {
-                case "Product":
+            switch (selection) { ///////////// Need to add need Product subclasses here /////////////
+                case "General":
                     dao.addProduct(createNewProduct());
                     break;
                 case "Racquet":
@@ -158,7 +173,6 @@ public class MainMenu {
             
             io.display("\n* Product Added Successfully");
         }
-         
     }
     
     private Product createNewProduct() {

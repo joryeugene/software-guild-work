@@ -27,46 +27,61 @@ public class ProductSubMenu {
         
         if (product == null) {
             io.display("! Product Not Found");
-        } else {
-            io.display("\n" + product);
+        } else {            
+            displayProductDetails();
             
-            String menuPrompt = "\n1. Add Quantity\n" +
-                                  "2. Remove Quantity\n" +
-                                  "3. Change Brand Name\n" +
-                                  "4. Change Product Name\n" +
-                                  "5. Change Price\n" +
-                                  "6. Back to Main Menu\n" +
+            String menuPrompt = "\n1. View Product Details\n" +
+                                  "2. Add Quantity\n" +
+                                  "3. Remove Quantity\n" +
+                                  "4. Change Brand Name\n" +
+                                  "5. Change Product Name\n" +
+                                  "6. Change Price\n" +
+                                  "7. Delete Product from System\n" +
+                                  "8. Back to Main Menu\n" +
                                   "> Selection: ";
         
             boolean keepRunning = true;
             
             while (keepRunning) {
-                int selection = io.promptInt(menuPrompt, 1, 6);
+                
+                Thread.sleep(1000);
+                
+                int selection = io.promptInt(menuPrompt, 1, 8);
                 io.display(""); // line break
                 
                 switch (selection) {
                     case 1:
-                        addQuantity();
+                        displayProductDetails();
                         break;
                     case 2:
-                        removeQuantity();
+                        addQuantity();
                         break;
                     case 3:
-                        changeBrandName();
+                        removeQuantity();
                         break;
                     case 4:
-                        changeProductName();
+                        changeBrandName();
                         break;
                     case 5:
-                        changePrice();
+                        changeProductName();
                         break;
                     case 6:
+                        changePrice();
+                        break;
+                    case 7:
+                        if (deleteProduct()) keepRunning = false;
+                    case 8:
                         keepRunning = false;
                 }
                 
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }
         }
+    }
+    
+    private void displayProductDetails() {
+        io.display("\n" + product);
+        io.display("\n>>>>>>> Total Product Valuation: " + dao.getProductStockValuation(id) + " <<<<<<<");
     }
     
     private void addQuantity() {
@@ -107,6 +122,17 @@ public class ProductSubMenu {
         product.setPrice(newPrice);
         dao.updateProduct(id, product);
         io.display("\n* Successfully Change Price from " + oldPrice + " to " + product.getPriceFormatted());
+    }
+    
+    private boolean deleteProduct() {
+        if (io.promptString("Enter 'delete' to continue with this action: ").equalsIgnoreCase("delete")) {
+            dao.deleteProduct(id);
+            io.display("* Product Successfully Removed");
+            return true;
+        } else {
+            io.display("! Action Canceled");
+            return false;
+        }
     }
 
 }

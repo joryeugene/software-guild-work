@@ -1,10 +1,10 @@
 10
-Product::1::Wrigley’s::Gum::2.5::25
+General::1::Wrigley’s::Gum::2.5::25
 Racquet::2::Technifibre::Carboflex 125 Basaltex::125g::Black::129.0::5
 Ball::3::Dunlop::Pro (DYD) (3-Ball) Squash Tube::Double Yellow Dot::10.99::15
 Shoe::4::Asics::Gel-Rocket 7::Size 9.5::Black/Silver::69.95::3
 Shoe::5::Asics::Gel-Rocket 7::Size 8::Black/Silver::69.95::4
 Racquet::6::Harrow::Jonathan Power Custom Spark::135g::Black/yellow::229.0::2
-Product::7::Rockstar::Energy Drink::2.99::10
+General::7::Rockstar::Energy Drink::2.99::10
 Ball::8::Prince::Rebel (3-Ball) Tube::Single Blue Dot::7.99::4
-Product::9::Qdoba::Bottled Water::1.35::5
+General::9::Dasani::Bottled Water::1.25::5

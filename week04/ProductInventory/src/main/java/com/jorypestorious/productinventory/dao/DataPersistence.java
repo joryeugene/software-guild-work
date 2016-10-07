@@ -27,7 +27,7 @@ public class DataPersistence {
                 String[] currentLine = scanFile.nextLine().split("::");
                 String category = currentLine[0];
                 
-                switch (category) {
+                switch (category) { ///////////// Need to add need Product subclasses here /////////////
                     case "Racquet":
                         inventory.put(Integer.parseInt(currentLine[1]), 
                                 new Racquet(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
@@ -45,7 +45,7 @@ public class DataPersistence {
                                 currentLine[4], currentLine[5],
                                 Double.parseDouble(currentLine[6]), Integer.parseInt(currentLine[7])));
                         break;
-                    case "Product":
+                    case "General":
                         inventory.put(Integer.parseInt(currentLine[1]), 
                                 new Product(Integer.parseInt(currentLine[1]), currentLine[2], currentLine[3],
                                 Double.parseDouble(currentLine[4]), Integer.parseInt(currentLine[5])));
@@ -66,35 +66,37 @@ public class DataPersistence {
         try {
             PrintWriter write = new PrintWriter(new FileWriter(filename));
             
-            write.println(Product.getCurrentProductId()+1);
-            
-            for (Integer id : inv.keySet()) {
-                String category = inv.get(id).getCategory();
+            if (inv.size() > 0) {
+                write.println(Product.getCurrentProductId()+1);
                 
-                switch (category) {
-                    case "Racquet":
-                        Racquet racquet = (Racquet)inv.get(id);
-                        write.println(category + "::" + racquet.getId() + "::" + racquet.getBrand()  + "::" + 
-                                racquet.getName() + "::" + racquet.getWeight() + "::" + racquet.getColor() + "::" +
-                                racquet.getPrice() + "::" + racquet.getQuantity());
-                        break;
-                    case "Ball":
-                        Ball ball = (Ball)inv.get(id);
-                        write.println(category + "::" + ball.getId() + "::" + ball.getBrand()  + "::" +
-                                ball.getName() + "::" + ball.getDots() + "::" + ball.getPrice() + "::" + ball.getQuantity());
-                        break;
-                    case "Shoe":
-                        Shoe shoes = (Shoe)inv.get(id);
-                        write.println(category + "::" + shoes.getId() + "::" + shoes.getBrand()  + "::" + 
-                                shoes.getName() + "::" + shoes.getSize() + "::" + shoes.getColor() + "::" +
-                                shoes.getPrice() + "::" + shoes.getQuantity());
-                        break;
-                    case "Product":
-                        Product item = inv.get(id);
-                        write.println(category + "::" + item.getId() + "::" + item.getBrand()  + "::" +
-                                item.getName() + "::" + item.getPrice() + "::" + item.getQuantity());
-                        break;
-                    default:
+                for (Integer id : inv.keySet()) {
+                    String category = inv.get(id).getCategory();
+                    
+                    switch (category) { ///////////// Need to add need Product subclasses here /////////////
+                        case "Racquet":
+                            Racquet racquet = (Racquet)inv.get(id);
+                            write.println(category + "::" + racquet.getId() + "::" + racquet.getBrand()  + "::" +
+                                    racquet.getName() + "::" + racquet.getWeight() + "::" + racquet.getColor() + "::" +
+                                    racquet.getPrice() + "::" + racquet.getQuantity());
+                            break;
+                        case "Ball":
+                            Ball ball = (Ball)inv.get(id);
+                            write.println(category + "::" + ball.getId() + "::" + ball.getBrand()  + "::" +
+                                    ball.getName() + "::" + ball.getDots() + "::" + ball.getPrice() + "::" + ball.getQuantity());
+                            break;
+                        case "Shoe":
+                            Shoe shoes = (Shoe)inv.get(id);
+                            write.println(category + "::" + shoes.getId() + "::" + shoes.getBrand()  + "::" +
+                                    shoes.getName() + "::" + shoes.getSize() + "::" + shoes.getColor() + "::" +
+                                    shoes.getPrice() + "::" + shoes.getQuantity());
+                            break;
+                        case "General":
+                            Product item = inv.get(id);
+                            write.println(category + "::" + item.getId() + "::" + item.getBrand()  + "::" +
+                                    item.getName() + "::" + item.getPrice() + "::" + item.getQuantity());
+                            break;
+                        default:
+                    }
                 }
             }
             
