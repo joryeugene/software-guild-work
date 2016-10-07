@@ -157,17 +157,17 @@ public class MainMenu {
                         
         if (!knownCategory) io.display("! Category Not Found");
         else {
-            switch (selection) { ///////////// Need to add need Product subclasses here /////////////
-                case "General":
+            switch (ProductTypes.valueOf(selection)) { ///////////// Need to add need Product subclasses here /////////////
+                case General:
                     dao.addProduct(createNewProduct());
                     break;
-                case "Racquet":
+                case Racquet:
                     dao.addProduct(createNewRacquet());
                     break;
-                case "Ball":
+                case Ball:
                     dao.addProduct(createNewBall());
                     break;
-                case "Shoe":
+                case Shoe:
                     dao.addProduct(createNewShoe());
             }
             

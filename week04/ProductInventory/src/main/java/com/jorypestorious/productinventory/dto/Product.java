@@ -54,9 +54,21 @@ public class Product {
         return "General";
     }
     
+    public String getDisplayId() {
+        int idLength = Integer.toString(id).length();
+        int standardLength = 4;
+        String initialZeros = "";
+        
+        for (int i = 0; i < standardLength - idLength; i++) {
+            initialZeros += 0;
+        }
+        
+        return initialZeros + id;
+    }
+    
     @Override
     public String toString() {
-        return "[ID: " + id + "] " + getCategory() + ": " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + getDisplayId() + "] " + getCategory() + ": " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
     }
 
     public int getId() {
