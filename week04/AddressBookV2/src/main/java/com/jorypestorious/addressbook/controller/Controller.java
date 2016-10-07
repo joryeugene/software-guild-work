@@ -5,6 +5,7 @@ import com.jorypestorious.addressbook.dto.Address;
 import com.jorypestorious.addressbook.ui.ConsoleIO;
 import com.jorypestorious.addressbook.ui.UI;
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
     
@@ -22,40 +23,56 @@ public class Controller {
         String menuPrompt = "\n        ADDRESS BOOK\n" +
                             "============================\n" +
                             "1. List All Addresses\n" +
-                            "2. Find an Address\n" +
-                            "3. Add an Address\n" +
-                            "4. Edit an Address\n" +
-                            "5. Delete an Address\n" +
-                            "6. List Number of Addresses\n" +
-                            "7. Exit the Program\n\n" +
+                            "2. Search Addresses by Last Name\n" +
+                            "3. Search Addresses by City\n" +
+                            "4. Search Addresses by State\n" +
+                            "5. Search Addresses by Zip Code\n" +
+                            "6. Add an Address\n" +
+                            "7. Edit an Address\n" +
+                            "8. Delete an Address\n" +
+                            "9. List Number of Addresses\n" +
+                            "0. Exit the Program\n\n" +
                             "> Selection: ";
         
         boolean keepRunning = true;
         
         while (keepRunning) {
-            int selection = io.promptInt(menuPrompt, 1, 7);
+            int selection = io.promptInt(menuPrompt, 0, 9);
             io.display(""); // line break
             
+//3. The user must be able to search addresses by City.
+//4. The user must be able to search addresses by State.
+//       a. When searching by state, the results must be sorted into separate data structures by City.
+//5. The user must be able to search addresses by Zipcode.
             switch (selection) {
                 case 1:
                     ui.listAddresses(dao.getAddressBook());
                     break;
                 case 2:
-                    findAddress();
+                    searchAddressesByLastName();
                     break;
                 case 3:
-                    addAddress();
+                    searchAddressesByCity();
                     break;
                 case 4:
-                    editAddress();
+                    searchAddressesByState();
                     break;
                 case 5:
-                    deleteAddress();
+                    searchAddressesByZip();
                     break;
                 case 6:
-                    listNumOfAddress();
+                    addAddress();
                     break;
                 case 7:
+                    editAddress();
+                    break;
+                case 8:
+                    deleteAddress();
+                    break;
+                case 9:
+                    listNumOfAddress();
+                    break;
+                case 0:
                     keepRunning = false;
             }
             
@@ -65,6 +82,46 @@ public class Controller {
         dao.save();
     }
     
+    private void searchAddressesByLastName() {
+        String last = io.promptString("Last name: ");
+        List<Address> addressBookQuery = dao.searchAddressesByLastName(last);
+        if (addressBookQuery.size() > 0) {
+            ui.listAddresses(addressBookQuery);
+        } else {
+            io.display("! ERROR: Could not find an address for " + last);
+        }
+    }
+    
+    private void searchAddressesByCity() {
+        String city = io.promptString("City: ");
+        List<Address> addressBookQuery = dao.searchAddressesByCity(city);
+        if (addressBookQuery.size() > 0) {
+            ui.listAddresses(addressBookQuery);
+        } else {
+            io.display("! ERROR: Could not find an address in " + city);
+        }
+    }
+    
+    private void searchAddressesByState() {
+        String state = io.promptStateCode("State Code: ");
+        Map<String, List<Address>> addressBookQuery = dao.searchAddressesByState(state);
+        if (addressBookQuery.size() > 0) {
+            ui.listAddresses(addressBookQuery);
+        } else {
+            io.display("! ERROR: Could not find an address in " + state);
+        }
+    }
+    
+    private void searchAddressesByZip() {
+        int zip = io.promptInt("Zip Code: ", 10000, 99999);
+        List<Address> addressBookQuery = dao.searchAddressesByZip(zip);
+        if (addressBookQuery.size() > 0) {
+            ui.listAddresses(addressBookQuery);
+        } else {
+            io.display("! ERROR: Could not find an address with the zip code " + zip);
+        }
+    }
+    
     private void addAddress() {
         String firstName = io.promptString("First Name: ");
         String lastName = io.promptString("Last Name: ");
@@ -72,7 +129,7 @@ public class Controller {
         String city = io.promptString("City: ");
         String state = io.promptStateCode("State Code: ");
         int zipcode = io.promptInt("Zip Code: ", 10000, 99999);
-        if (dao.addAddress(new Address(firstName, lastName, street, city, state, zipcode))) {
+        if (dao.addAddress(new Address(firstName, lastName, street, city, state, zipcode, dao.getNumOfAddresses()))) {
             io.display("* Successfully added " + firstName + " " + lastName);
         } else {
             io.display("! ERROR: Could not add " + firstName + " " + lastName);
@@ -80,23 +137,13 @@ public class Controller {
     }
     
     private void deleteAddress() {
-        int id = io.promptInt("Entry ID: ", 1, dao.getNumOfAddresses()) - 1;
+        int id = io.promptInt("Entry ID: ", 0, dao.getNumOfAddresses()-1);
         String delete = io.promptString("Enter 'delete' to continue with this action: ");
         if (delete.equalsIgnoreCase("delete")) {
             dao.removeAddress(id);
             io.display("* Successfully Removed Entry");
         } else {
             io.display("! Action Canceled");
-        }
-    }
-    
-    private void findAddress() {
-        String last = io.promptString("Last name: ");
-        List<Address> addressBookQuery = dao.findAddress(last);
-        if (addressBookQuery.size() > 0) {
-            ui.listAddresses(addressBookQuery);
-        } else {
-            io.display("! ERROR: Could not find an address for " + last);
         }
     }
     
@@ -108,7 +155,7 @@ public class Controller {
     
     private void editAddress() {
         if (dao.getNumOfAddresses() > 0) {
-            int id = io.promptInt("Entry ID for Address to Edit: ", 1, dao.getNumOfAddresses()) - 1;
+            int id = io.promptInt("Entry ID for Address to Edit: ", 0, dao.getNumOfAddresses()-1);
         
             String editPrompt = "\n           Edit\n" +
                     "--------------------------\n" +
@@ -118,7 +165,7 @@ public class Controller {
                     "4. City\n" +
                     "5. State Code\n" +
                     "6. Zip Code\n" +
-                    "7. Main Menu\n\n" +
+                    "7. Back to Main Menu\n\n" +
                     "> Selection: ";
             
             Address a = (Address)dao.getAddressBook().get(id);
@@ -126,7 +173,7 @@ public class Controller {
             
             while (keepRunning) {
                 io.display(""); // line break
-                ui.displayAddress(id, a);
+                ui.displayAddress(a);
                 int selection = io.promptInt(editPrompt, 1, 7);
                 io.display(""); // line break
                 

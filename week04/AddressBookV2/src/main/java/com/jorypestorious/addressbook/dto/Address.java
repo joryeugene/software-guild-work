@@ -8,19 +8,22 @@ public class Address {
     private String state;
     private String city;
     private int zipcode;
+    private int id;
     
-    public Address(String firstName, String lastName, String street, String city, String state, int zipcode) {
+    public Address(String firstName, String lastName, String street, String city, String state, int zipcode, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zipcode = zipcode;
+        this.id = id;
     }
     
     @Override
     public String toString() {
-        return firstName + " " + lastName + "\n" +
+        return "ID: " + id + "\n" +
+               firstName + " " + lastName + "\n" +
                street + "\n" +
                city+ ", " + state + " " + zipcode;
     }
@@ -71,6 +74,10 @@ public class Address {
 
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
+    }
+    
+    public int getId() {
+        return id;
     }
 
 }

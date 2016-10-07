@@ -2,7 +2,9 @@ package com.jorypestorious.addressbook.dao;
 
 import com.jorypestorious.addressbook.dto.Address;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DataStorageManagement implements DAO {
@@ -33,7 +35,7 @@ public class DataStorageManagement implements DAO {
             return false;
         } else {
             addressBook.add(new Address(a.getFirstName(), a.getLastName(), a.getStreet(), 
-                                        a.getCity(), a.getState(), a.getZipcode()));
+                                        a.getCity(), a.getState(), a.getZipcode(), a.getId()));
             save();
             return true;
         }
@@ -52,9 +54,36 @@ public class DataStorageManagement implements DAO {
     }
 
     @Override
-    public List findAddress(String lastName) {
+    public List searchAddressesByLastName(String lastName) {
         List<Address> searchQuery = addressBook.stream()
                 .filter(a -> a.getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
+        
+        return searchQuery;
+    }
+    
+    @Override
+    public List searchAddressesByCity(String city) {
+        List<Address> searchQuery = addressBook.stream()
+                .filter(a -> a.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+        
+        return searchQuery;
+    }
+    
+    @Override
+    public Map searchAddressesByState(String state) {        
+        Map<String, List<Address>> searchQuery = addressBook.stream()
+                .filter((a) -> (a.getState().equalsIgnoreCase(state)))
+                .collect(Collectors.groupingBy(Address::getCity));
+        
+        return searchQuery;
+    }
+    
+    @Override
+    public List searchAddressesByZip(int zip) {
+        List<Address> searchQuery = addressBook.stream()
+                .filter(a -> a.getZipcode() == zip)
                 .collect(Collectors.toList());
         
         return searchQuery;
