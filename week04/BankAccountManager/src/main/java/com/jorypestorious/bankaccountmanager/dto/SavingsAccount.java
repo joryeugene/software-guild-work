@@ -1,4 +1,6 @@
-package com.jorypestorious.bankaccountmanager;
+package com.jorypestorious.bankaccountmanager.dto;
+
+import com.jorypestorious.bankaccountmanager.dto.Account;
 
 public class SavingsAccount extends Account {
     

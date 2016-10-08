@@ -1,4 +1,9 @@
-package com.jorypestorious.bankaccountmanager;
+package com.jorypestorious.bankaccountmanager.controller;
+
+import com.jorypestorious.bankaccountmanager.dto.Account;
+import com.jorypestorious.bankaccountmanager.dto.CheckingAccount;
+import com.jorypestorious.bankaccountmanager.ui.ConsoleIO;
+import com.jorypestorious.bankaccountmanager.dto.SavingsAccount;
 
 public class ATMController {
     

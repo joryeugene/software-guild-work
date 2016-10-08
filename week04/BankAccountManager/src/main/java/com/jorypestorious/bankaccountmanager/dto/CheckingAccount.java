@@ -1,4 +1,4 @@
-package com.jorypestorious.bankaccountmanager;
+package com.jorypestorious.bankaccountmanager.dto;
 
 public class CheckingAccount extends Account {
     

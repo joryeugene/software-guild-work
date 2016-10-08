@@ -1,4 +1,4 @@
-package com.jorypestorious.bankaccountmanager;
+package com.jorypestorious.bankaccountmanager.ui;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
