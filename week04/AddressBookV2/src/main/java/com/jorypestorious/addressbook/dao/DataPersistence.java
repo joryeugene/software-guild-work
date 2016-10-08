@@ -17,12 +17,11 @@ public class DataPersistence {
         List<Address> addressBook = new ArrayList<>();
         try {
             Scanner scanFile = new Scanner(new BufferedReader(new FileReader(filename)));
-            int count = 0; // for settings IDs
+            
             while (scanFile.hasNextLine()) {
                 String[] currentLine = scanFile.nextLine().split("::");
                 addressBook.add(new Address(currentLine[0], currentLine[1], currentLine[2],
-                        currentLine[3], currentLine[4], Integer.parseInt(currentLine[5]), count));
-                count++;
+                        currentLine[3], currentLine[4], Integer.parseInt(currentLine[5])));
             }
             
         } catch (FileNotFoundException e) {

@@ -6,13 +6,17 @@ import java.util.Map;
 
 public interface DAO {
     
-    List getAddressBook();
+    List<Address> getAddressBook();
     
     int getNumOfAddresses();
     
     boolean addAddress(Address a);
     
     void removeAddress(int index);
+    
+    void removeAll();
+    
+    void setAddressIds();
     
     void editAddress(int index, Address a);
 

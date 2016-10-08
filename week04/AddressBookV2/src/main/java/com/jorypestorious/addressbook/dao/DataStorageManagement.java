@@ -17,10 +17,11 @@ public class DataStorageManagement implements DAO {
         dao = new DataPersistence();
         this.filename = filename;
         addressBook = dao.fileToHashMap(filename);
+        setAddressIds();
     }
     
     @Override
-    public List getAddressBook() {
+    public List<Address> getAddressBook() {
         return new ArrayList<>(addressBook);
     }
     
@@ -35,7 +36,7 @@ public class DataStorageManagement implements DAO {
             return false;
         } else {
             addressBook.add(new Address(a.getFirstName(), a.getLastName(), a.getStreet(), 
-                                        a.getCity(), a.getState(), a.getZipcode(), a.getId()));
+                                        a.getCity(), a.getState(), a.getZipcode(), getNumOfAddresses()));
             save();
             return true;
         }
@@ -44,7 +45,20 @@ public class DataStorageManagement implements DAO {
     @Override
     public void removeAddress(int index) {
         addressBook.remove(index);
+        setAddressIds();
         save();
+    }
+    
+    @Override
+    public void removeAll() {
+        addressBook.clear();
+    }
+    
+    @Override
+    public void setAddressIds() {
+        for (int i = 0; i < addressBook.size(); i++) {
+            addressBook.get(i).setid(i);
+        }
     }
     
     @Override

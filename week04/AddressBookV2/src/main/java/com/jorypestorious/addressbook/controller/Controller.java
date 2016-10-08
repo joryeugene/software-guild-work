@@ -129,7 +129,7 @@ public class Controller {
         String city = io.promptString("City: ");
         String state = io.promptStateCode("State Code: ");
         int zipcode = io.promptInt("Zip Code: ", 10000, 99999);
-        if (dao.addAddress(new Address(firstName, lastName, street, city, state, zipcode, dao.getNumOfAddresses()))) {
+        if (dao.addAddress(new Address(firstName, lastName, street, city, state, zipcode))) {
             io.display("* Successfully added " + firstName + " " + lastName);
         } else {
             io.display("! ERROR: Could not add " + firstName + " " + lastName);

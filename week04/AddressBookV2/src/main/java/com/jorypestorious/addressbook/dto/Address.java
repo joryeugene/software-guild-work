@@ -10,6 +10,15 @@ public class Address {
     private int zipcode;
     private int id;
     
+    public Address(String firstName, String lastName, String street, String city, String state, int zipcode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+    }
+    
     public Address(String firstName, String lastName, String street, String city, String state, int zipcode, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -78,6 +87,10 @@ public class Address {
     
     public int getId() {
         return id;
+    }
+    
+    public void setid(int id) {
+        this.id = id;
     }
 
 }
