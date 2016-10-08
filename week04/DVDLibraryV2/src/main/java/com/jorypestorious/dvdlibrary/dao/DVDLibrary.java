@@ -28,7 +28,7 @@ public class DVDLibrary implements DAO {
     }
     
     @Override
-    public Map getDVDLibrary() {
+    public Map<String, DVD> getDVDLibrary() {
         return new HashMap<>(dvdLibrary);
     }
     

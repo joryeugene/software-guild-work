@@ -8,7 +8,7 @@ public interface DAO {
     
     void save();
     
-    Map getDVDLibrary();
+    Map<String, DVD> getDVDLibrary();
     
     DVD searchByTitle(String title);
     
