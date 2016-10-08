@@ -5,6 +5,7 @@ import com.jorypestorious.dvdlibrary.dto.DVD;
 import com.jorypestorious.dvdlibrary.ui.ConsoleIO;
 import com.jorypestorious.dvdlibrary.ui.UI;
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
     
@@ -34,12 +35,7 @@ public class Controller {
                               "11. Remove a DVD\n" +
                               "0. Exit\n\n" +
                               "> Selection: ";
-        
-
-//3. Find all the movies by a given director
-//    a. When searching by director, the movies should be sorted into separate data structures by
-//    MPAA rating.
-        
+                
         boolean keepRunning = true;
         
         while (keepRunning) {
@@ -123,7 +119,7 @@ public class Controller {
     
     private void searchByDirector() {
         String director = io.promptString("Director to Search for: ");
-        List<DVD> searchQuery = dao.searchByDirector(director);
+        Map<String, List<DVD>> searchQuery = dao.searchByDirector(director);
         if (searchQuery.size() > 0) {
             ui.displayListQuery(searchQuery);
         } else {

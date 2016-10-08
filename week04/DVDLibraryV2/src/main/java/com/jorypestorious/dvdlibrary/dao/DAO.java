@@ -16,7 +16,7 @@ public interface DAO {
     
     List<DVD> searchByMpaa(String mpaa);
     
-    List<DVD> searchByDirector(String director);
+    Map<String, List<DVD>> searchByDirector(String director);
     
     List<DVD> findRecent(int years);
     

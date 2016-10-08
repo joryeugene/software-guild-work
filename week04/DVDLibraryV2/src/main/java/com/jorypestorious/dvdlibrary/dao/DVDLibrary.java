@@ -57,10 +57,10 @@ public class DVDLibrary implements DAO {
     }
     
     @Override
-    public List<DVD> searchByDirector(String director) {
-        List<DVD> searchQuery = dvdLibrary.values().stream()
-                .filter(dvd -> dvd.getDirector().equalsIgnoreCase(director))
-                .collect(Collectors.toList());
+    public Map<String, List<DVD>> searchByDirector(String director) {        
+        Map<String, List<DVD>> searchQuery = dvdLibrary.values().stream()
+                .filter( dvd -> dvd.getDirector().equalsIgnoreCase(director) )
+                .collect(Collectors.groupingBy(DVD::getMpaa));
         
         return searchQuery;
     }

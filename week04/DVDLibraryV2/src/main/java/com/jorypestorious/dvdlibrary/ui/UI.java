@@ -32,5 +32,19 @@ public class UI {
         
         System.out.println("------------------------------------------------------------------\n");
     }
+    
+    public void displayListQuery(Map<String, List<DVD>> dvds) {        
+        System.out.println("\n------------------------------------------------------------------\n");
+        
+        for (String mpaa : dvds.keySet()) {
+            System.out.println(">>>> " + mpaa + " <<<<");
+            
+            for (int i = 0; i < dvds.get(mpaa).size(); i++) {
+                System.out.print(dvds.get(mpaa).get(i) + "\n\n");
+            }
+        }
+        
+        System.out.println("------------------------------------------------------------------\n");
+    }
 
 }
