@@ -22,9 +22,9 @@ public interface DAO {
     
     List<String> getCategories();
     
-    public List<Product> getProductsByBrand(String brand);
+    List<Product> getProductsByBrand(String brand);
     
-    public List<String> getBrands();
+    List<String> getBrands();
     
     List<Product> getProductsToRestock(int quantity);
     

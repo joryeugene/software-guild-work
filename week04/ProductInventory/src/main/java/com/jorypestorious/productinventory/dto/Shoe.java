@@ -27,7 +27,9 @@ public class Shoe extends Product {
     
     @Override
     public String toString() {
-        return "[ID: " + getDisplayId() + "] " + getCategory() + ":    " + brand + " - " + name + " - " + size + " - " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + getDisplayId() + "] " + getCategory() + ":    " + brand
+                + " - " + name + " - " + size + " - " + color + 
+                " (" + df.format(price) + " : " + quantity + ")"; 
     }
     
     @Override

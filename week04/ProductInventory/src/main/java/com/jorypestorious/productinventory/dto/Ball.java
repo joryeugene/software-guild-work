@@ -24,7 +24,8 @@ public class Ball extends Product {
     
     @Override
     public String toString() {
-        return "[ID: " + getDisplayId() + "] " + getCategory() + ":    " + brand + " - " + name + " - " + dots + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + getDisplayId() + "] " + getCategory() + ":    " + brand 
+                + " - " + name + " - " + dots + " (" + df.format(price) + " : " + quantity + ")"; 
     }
     
     @Override

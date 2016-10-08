@@ -27,7 +27,9 @@ public class Racquet extends Product {
     
     @Override
     public String toString() {
-        return "[ID: " + getDisplayId() + "] " + getCategory() + ": " + brand + " - " + name + " - " + weight + " - " + color + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + getDisplayId() + "] " + getCategory() + ": " + brand + 
+                " - " + name + " - " + weight + " - " + color +
+                " (" + df.format(price) + " : " + quantity + ")"; 
     }
     
     @Override

@@ -68,7 +68,8 @@ public class Product {
     
     @Override
     public String toString() {
-        return "[ID: " + getDisplayId() + "] " + getCategory() + ": " + brand + " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
+        return "[ID: " + getDisplayId() + "] " + getCategory() + ": " + brand + 
+                " - " + name + " (" + df.format(price) + " : " + quantity + ")"; 
     }
 
     public int getId() {
