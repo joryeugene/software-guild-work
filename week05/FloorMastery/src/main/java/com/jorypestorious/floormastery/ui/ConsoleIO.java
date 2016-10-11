@@ -1,6 +1,8 @@
 package com.jorypestorious.floormastery.ui;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ConsoleIO {
@@ -60,6 +62,38 @@ public class ConsoleIO {
         
         clearBuffer();
         return input;
+    }
+    
+    public LocalDate promptDate(String p) {
+        System.out.print(p);
+        String dateString;
+        LocalDate date = null;
+        
+        while(date == null) {
+            try {
+                dateString = scan.nextLine();
+                date = LocalDate.parse(dateString);
+            }
+            catch(DateTimeParseException e) {
+                System.out.print("Date must be in format yyyy-mm-dd.\n" +
+                                 "Please re-enter: ");
+            }
+        }
+        
+        return date;
+    }
+    
+    public LocalDate promptDate(String p, LocalDate min, LocalDate max) {
+        LocalDate in = promptDate(p);
+        
+        while(in.compareTo(min) < 0 || in.compareTo(max) > 0) {
+            System.out.print("Date must be between " + min.toString() + 
+                             " and " + max.toString() + ".\n" + 
+                             "Please re-enter: ");
+            in = promptDate("");
+        }
+        
+        return in;
     }
     
     private void clearBuffer() {

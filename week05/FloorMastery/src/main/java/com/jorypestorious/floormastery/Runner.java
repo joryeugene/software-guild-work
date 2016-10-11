@@ -12,9 +12,14 @@ public class Runner {
     
     public static void main(String[] args) throws InterruptedException {
         switch(readConfigFile()) {
-            case "Test": new Controller(new OrderDAOTest()).run();
-            case "Prod": new Controller(new OrderDAOProd()).run();
-            default: System.out.println("! Error Reading Configuration File");
+            case "Test": 
+                System.out.println("Test Mode"); // delete
+                new Controller(new OrderDAOTest()).run();
+                break;
+            case "Prod":
+                System.out.println("Production Mode"); // delete
+                new Controller(new OrderDAOProd()).run();
+                break;
         }
     }
     

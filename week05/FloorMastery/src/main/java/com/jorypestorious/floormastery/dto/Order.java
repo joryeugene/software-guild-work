@@ -1,15 +1,133 @@
 package com.jorypestorious.floormastery.dto;
 
-public class Order {
-//An Order consists of an order number, customer name, state, tax rate, product type, area, cost
-//per square foot, labor cost per square foot, material cost, labor cost, tax, and
-//total. Orders_06012013.txt is a sample row of data for one order.
+import java.text.DecimalFormat;
 
+public class Order {
     
-//OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCost
-//PerSquareFoot,MaterialCost,LaborCost,Tax,Total
-//1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.88
+    DecimalFormat dpercent = new DecimalFormat("##0.00%");
+    DecimalFormat df = new DecimalFormat("##0.00");
     
-    // with readIn constructor set currentID = (currentID < orderNumber) ? orderNumber : currentID;
-    // and static get next ID method currentID + 1
+    protected static int currentOrderNumber = 1;
+    
+    private final int orderNumber;
+    private String customer;
+    private TaxRate taxRate;
+    private Product productType;
+    private double area;
+    
+    private double materialCost;
+    private double laborCost;
+    private double taxCost;
+    private double totalCost;
+
+    public Order (int orderNumber, String customer, TaxRate taxRate, Product productType, double area) {
+        if (orderNumber >= currentOrderNumber) currentOrderNumber = orderNumber + 1;
+        this.orderNumber = orderNumber;
+        this.customer = customer;
+        this.taxRate = taxRate;
+        this.productType = productType;
+        this.area = area;
+        
+    }
+    
+    public Order (String customer, TaxRate taxRate, Product productType, double area) {
+        this.orderNumber = assignOrderNumber();
+        this.customer = customer;
+        this.taxRate = taxRate;
+        this.productType = productType;
+        this.area = area;
+        
+    }
+    
+    public static void resetCurrentOrderNumber() {
+        currentOrderNumber = 1;
+    }
+    
+    public static int getCurrentOrderNumber() {
+        return currentOrderNumber;
+    }
+    
+    private int assignOrderNumber() {
+        int num = currentOrderNumber;
+        currentOrderNumber++;
+        return num;
+    }
+    
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public TaxRate getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(TaxRate taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public Product getProductType() {
+        return productType;
+    }
+
+    public void setProductType(Product productType) {
+        this.productType = productType;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
+    public double getMaterialCost() {
+        materialCost = area * productType.getMaterialCostPerSquareFoot();
+        return materialCost;
+    }
+
+    public double getLaborCost() {
+        laborCost = area * productType.getLaborCostPerSquareFoot();
+        return laborCost;
+    }
+
+    public double getTaxCost() {
+        taxCost = ( getMaterialCost() + getLaborCost() ) * taxRate.getTaxRate();
+        return taxCost;
+    }
+
+    public double getTotalCost() {
+        totalCost = getTaxCost() + getMaterialCost() + getLaborCost();
+        return totalCost;
+    }
+    
+    private String getTaxRatePercentage() {
+        return dpercent.format(taxRate.getTaxRate());
+    }
+    
+    @Override
+    public String toString() {
+        return "Order# " + orderNumber + " - " + customer + " (" + taxRate.getStateCode() + " " + getTaxRatePercentage() + ") " + 
+                productType.getType() + " : " + df.format(area) + "ft²" + "\n" +
+                "(Cost per ft²: $" + productType.getMaterialCostPerSquareFoot() + " | Labor Cost per ft²: $" + productType.getLaborCostPerSquareFoot() + ")\n" +
+                "Material Cost: $" + df.format(getMaterialCost()) + ", Labor Cost: $ " + df.format(getLaborCost()) + "\n" +
+                "Tax: $" + df.format(getTaxCost()) + "\n" +
+                "Total: $" + df.format(getTotalCost());
+    }
+    
+    public String writeToFile() {
+        return orderNumber + "," + customer + "," + taxRate.getStateCode() + "," + (taxRate.getTaxRate() * 100) + "," + 
+                productType.getType() + "," + df.format(area) + "," + productType.getMaterialCostPerSquareFoot() + "," + 
+                productType.getLaborCostPerSquareFoot() + "," + df.format(getMaterialCost()) + "," + df.format(getLaborCost()) + "," + 
+                df.format(getTaxCost()) + "," + df.format(getTotalCost());
+    }
+       
 }
