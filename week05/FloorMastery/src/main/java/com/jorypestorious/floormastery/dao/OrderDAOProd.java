@@ -122,9 +122,30 @@ public class OrderDAOProd implements OrderDAO {
     }
     
     @Override
+    public Order getOrder(LocalDate date, int orderNumber) {
+        readFileToList(date);
+        Order orderToReturn = null;
+        
+        for (Order order : currentOrderList) {
+            if (order.getOrderNumber() == orderNumber) {
+                orderToReturn = order;
+            }
+        }
+        
+        return orderToReturn;
+    }
+    
+    @Override
     public void addOrder(LocalDate date, Order newOrder) { // for current date
         readFileToList(date);
         currentOrderList.add(newOrder);
+        save();
+    }
+    
+    @Override
+    public void editOrder(Order oldOrder, Order updatedOrder) {
+        int index = currentOrderList.indexOf(oldOrder);
+        currentOrderList.set(index, updatedOrder);
         save();
     }
     

@@ -16,9 +16,13 @@ public interface OrderDAO {
     
     List<String> getStateCodes();
     
-    List<Order> getOrders(LocalDate date);  
+    List<Order> getOrders(LocalDate date); 
+    
+    Order getOrder(LocalDate date, int orderNumber);
     
     void addOrder(LocalDate date, Order newOrder);
+    
+    void editOrder(Order oldOrder, Order updatedOrder);
     
     boolean removeOrder(LocalDate date, int orderNumber);
 

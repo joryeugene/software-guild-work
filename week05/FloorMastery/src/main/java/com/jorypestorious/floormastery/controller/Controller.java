@@ -149,7 +149,7 @@ public class Controller {
         boolean invalidProductType = true;
         
         do {
-            if (invalidProductType) productTypeInput = io.promptString(prompt).toUpperCase();
+            if (invalidProductType) productTypeInput = io.promptString(prompt);
             
             for (String productType : productTypes) {
                 if (productType.equalsIgnoreCase(productTypeInput)) invalidProductType = false;
@@ -160,8 +160,66 @@ public class Controller {
         return productTypeInput;
     }
     
+    
+    
     private void editOrder() {
+        LocalDate date = io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now());
         
+        if (displayOrders(date)) {
+            int orderNumber = io.promptInt("\nOrder# to Edit (0 to Cancel): ", 0, Order.getCurrentOrderNumber()-1);
+            Order order = dao.getOrder(date, orderNumber);
+            if (order == null) {
+                io.display("! Order Not Found");
+            } else {
+                // get new customer name, empty string to keep the same
+                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Enter to Pass: ");
+                newName = (newName.length() > 0) ? newName : order.getCustomer();
+                
+                // get new state code, empty string to keep the same, make sure state code is valid if new one entered
+                String newStateCode = io.promptString("New State Code (" + order.getTaxRate().getStateCode() + ") Enter to Pass: ").toUpperCase();
+                
+                if (newStateCode.length() > 0) {
+                    boolean validStateCode = false;
+                    List<String> stateCodes = dao.getStateCodes();
+                    
+                    for (String stateCode : stateCodes) {
+                        if (stateCode.equalsIgnoreCase(newStateCode)) validStateCode = true;
+                    }
+                    
+                    if (!validStateCode) newStateCode = getStateCode();
+                    
+                } else {
+                    newStateCode = order.getTaxRate().getStateCode();
+                }
+                
+                // get new product type, empty string to keep the same, make sure product type is valid if new one entered
+                String newProductType = io.promptString("New Product Type (" + order.getProductType().getType() + ") Enter to Pass: ");
+                
+                if (newProductType.length() > 0) {
+                    boolean validProductType = false;
+                    List<String> productTypes = dao.getProductTypes();
+                    
+                    for (String productType : productTypes) {
+                        if (productType.equalsIgnoreCase(newProductType)) validProductType = true;
+                    }
+                    
+                    if (!validProductType) newProductType = getProductType();
+                    
+                } else {
+                    newStateCode = order.getTaxRate().getStateCode();
+                }
+                
+                // get new area, 0 to keep the same
+                double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to Pass: ", 0, 100000);
+                newArea = (newArea != 0) ? newArea : order.getArea();
+                
+                Order updatedOrder= new Order(order.getOrderNumber(), newName, dao.getTaxRate(newStateCode), dao.getProduct(newProductType), newArea);
+                
+                dao.editOrder(order, updatedOrder);
+                io.display("\n* Order Successfully Updated\n" + updatedOrder);
+                
+            }
+        }      
     }
     
     private void removeOrder() {
