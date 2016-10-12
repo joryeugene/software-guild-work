@@ -99,7 +99,6 @@ public class OrderDAOProd implements OrderDAO {
     }
     
     private void save() {
-        
         String fileName = createFileName(currentOrderListDate);
         
         try ( PrintWriter write = new PrintWriter(new FileWriter(fileName)) ) {
@@ -110,7 +109,6 @@ public class OrderDAOProd implements OrderDAO {
         } catch (IOException e) {
             System.out.println("! Error Saving Data to File");
         }
-        
     }
     
     @Override
