@@ -81,18 +81,9 @@ public class Controller {
     private void addOrder(LocalDate date) {
         dao.getOrders(date); // load orderList into dao
         
-        // get needed input to create Order object
         String customer = io.promptString("Customer Name: ");
-        
-        TaxRate taxRate = dao.getTaxRate(
-                ui.getInputFromList(
-                        getDynamicPrompt("State Code", dao.getStateCodes()),
-                        dao.getStateCodes() ) );
-        Product productType = dao.getProduct(
-                ui.getInputFromList(
-                        getDynamicPrompt("Product Type", dao.getProductTypes()), 
-                        dao.getProductTypes() ) );
-        
+        TaxRate taxRate = getTaxRateFromUser();
+        Product productType = getProductTypeFromUser();
         double area = io.promptDouble("Area of Material (ft²): ", 0.1, 100000);
         
         // show new order object to user and ask for confirmation to add
@@ -109,6 +100,20 @@ public class Controller {
             io.display("! Order Not Added");
         }
         
+    }
+    
+    private TaxRate getTaxRateFromUser() {
+        return dao.getTaxRate(
+                ui.getInputFromList(
+                        getDynamicPrompt("State Code", dao.getStateCodes()),
+                        dao.getStateCodes() ) );
+    }
+    
+    private Product getProductTypeFromUser() {
+        return dao.getProduct(
+                ui.getInputFromList(
+                        getDynamicPrompt("Product Type", dao.getProductTypes()), 
+                        dao.getProductTypes() ) );
     }
             
     private String getDynamicPrompt(String type, List<String> list) {
@@ -130,46 +135,58 @@ public class Controller {
         LocalDate date = io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now());
         
         if (displayOrders(date)) {
-            
             int orderNumber = io.promptInt("\nOrder# to Edit (0 to Cancel): ", 0, Order.getCurrentOrderNumber()-1);
             Order order = dao.getOrder(date, orderNumber);
             
             if (order == null) {
                 io.display("! Order Not Found");
             } else {
+                String newName = getNewNameFromUser(order);
+                TaxRate newTaxRate = getNewTaxRateFromUser(order);
+                Product newProduct = getNewProductFromUser(order);
+                double newArea = getNewAreaFromUser(order);
                 
-                // get new customer name, empty string to keep the same
-                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Leave empty to pass: ");
-                newName = (newName.length() > 0) ? newName : order.getCustomer();
-                
-                // get new state code, empty string to keep the same, make sure state code is valid if new one entered
-                String newStateCode = ui.getInputFromList(
-                        "New State Code (" + order.getTaxRate().getStateCode() + ") Leave empty to pass: ",
-                        getDynamicPrompt("State Code", dao.getStateCodes()),
-                        dao.getStateCodes() );
-                
-                newStateCode = (newStateCode.length() > 0) ? newStateCode : order.getTaxRate().getStateCode();
-                
-                // get new product type, empty string to keep the same, make sure product type is valid if new one entered
-                String newProductType = ui.getInputFromList(
-                        "New Product Type (" + order.getProductType().getType() + ") Leave empty to pass: ", 
-                        getDynamicPrompt("Product Type", dao.getProductTypes()), 
-                        dao.getProductTypes() );
-                
-                newProductType = (newProductType.length() > 0) ? newProductType : order.getProductType().getType();
-                
-                // get new area, 0 to keep the same
-                double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to pass: ", 0, 100000);
-                newArea = (newArea != 0.0) ? newArea : order.getArea();
-                
-                Order updatedOrder = new Order(order.getOrderNumber(), 
-                        newName, dao.getTaxRate(newStateCode), 
-                        dao.getProduct(newProductType), newArea);
-                
+                Order updatedOrder = new Order(order.getOrderNumber(), newName, newTaxRate, newProduct, newArea);
                 dao.editOrder(order, updatedOrder);
                 io.display("\n* Order Successfully Updated\n" + updatedOrder);
             }
         }      
+    }
+    
+    private String getNewNameFromUser(Order order) {
+        // get new customer name, empty string to keep the same
+        String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Leave empty to pass: ");
+        return (newName.length() > 0) ? newName : order.getCustomer();
+    }
+    
+    private TaxRate getNewTaxRateFromUser(Order order) {
+        // get new state code, empty string to keep the same, make sure state code is valid if new one entered
+        String newStateCode = ui.getInputFromList(
+                "New State Code (" + order.getTaxRate().getStateCode() + ") Leave empty to pass: ",
+                getDynamicPrompt("State Code", dao.getStateCodes()),
+                dao.getStateCodes() );
+
+        newStateCode = (newStateCode.length() > 0) ? newStateCode : order.getTaxRate().getStateCode();
+        
+        return dao.getTaxRate(newStateCode);
+    }
+    
+    private Product getNewProductFromUser(Order order) {
+        // get new product type, empty string to keep the same, make sure product type is valid if new one entered
+        String newProductType = ui.getInputFromList(
+                "New Product Type (" + order.getProductType().getType() + ") Leave empty to pass: ", 
+                getDynamicPrompt("Product Type", dao.getProductTypes()), 
+                dao.getProductTypes() );
+
+        newProductType = (newProductType.length() > 0) ? newProductType : order.getProductType().getType();
+        
+        return dao.getProduct(newProductType);
+    }
+    
+    private double getNewAreaFromUser(Order order) {
+        // get new area, 0 to keep the same
+        double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to pass: ", 0, 100000);
+        return (newArea != 0.0) ? newArea : order.getArea();
     }
     
     private void removeOrder() {
