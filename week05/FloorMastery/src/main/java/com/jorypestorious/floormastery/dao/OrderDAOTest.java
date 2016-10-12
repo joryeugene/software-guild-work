@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class OrderDAOTest implements OrderDAO {
     
-    // private LocalDate currentOrderListDate;
     private final List<Order> currentOrderList;
     private final List<Product> productTypes;
     private final List<TaxRate> stateTaxRates;
@@ -25,6 +24,7 @@ public class OrderDAOTest implements OrderDAO {
     
     private void initializeListForTest() {
         // Test list
+        Order.resetCurrentOrderNumber();
         currentOrderList.add(new Order("Customer1", getTaxRate("OH"), getProduct("Carpet"), 100));
         currentOrderList.add(new Order("Customer2", getTaxRate("PA"), getProduct("Laminate"), 200));
         currentOrderList.add(new Order("Customer3", getTaxRate("MI"), getProduct("Tile"), 300));
@@ -101,7 +101,7 @@ public class OrderDAOTest implements OrderDAO {
         
         for (Order order : currentOrderList) {
             if (order.getOrderNumber() == orderNumber) {
-                currentOrderList.remove(order);
+                currentOrderList.remove(orderNumber);
                 save();
                 return true;
             }

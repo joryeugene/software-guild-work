@@ -5,9 +5,7 @@ import com.jorypestorious.floormastery.dto.Order;
 import com.jorypestorious.floormastery.dto.Product;
 import com.jorypestorious.floormastery.dto.TaxRate;
 import java.time.LocalDate;
-import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,63 +47,67 @@ public class OrderDAOJUnitTests {
     @Test
     public void testGetTaxRate() {
         System.out.println("getTaxRate");
-        String stateCode = "";
-        TaxRate expResult = null;
+        String stateCode = "OH";
         TaxRate result = instance.getTaxRate(stateCode);
-        assertEquals(expResult, result);
+        assertNotEquals(null, result);
     }
 
     @Test
     public void testGetStateCodes() {
         System.out.println("getStateCodes");
-        List<String> expResult = null;
-        List<String> result = instance.getStateCodes();
+        int result = instance.getStateCodes().size();
+        assertTrue(result > 0);
+    }
+
+    @Test
+    public void testGetOrders() {
+        System.out.println("getOrders");
+        LocalDate date = null;
+        int expResult = 4;
+        int result = instance.getOrders(date).size();
         assertEquals(expResult, result);
     }
 
-//    @Test
-//    public void testGetOrders() {
-//        System.out.println("getOrders");
-//        LocalDate date = null;
-//        List<Order> expResult = null;
-//        List<Order> result = instance.getOrders(date);
-//        assertEquals(expResult, result);
-//    }
-//
-//    @Test
-//    public void testGetOrder() {
-//        System.out.println("getOrder");
-//        LocalDate date = null;
-//        int orderNumber = 0;
-//        Order expResult = null;
-//        Order result = instance.getOrder(date, orderNumber);
-//        assertEquals(expResult, result);
-//    }
-//
-//    @Test
-//    public void testAddOrder() {
-//        System.out.println("addOrder");
-//        LocalDate date = null;
-//        Order newOrder = null;
-//        instance.addOrder(date, newOrder);
-//    }
-//
-//    @Test
-//    public void testEditOrder() {
-//        System.out.println("editOrder");
-//        Order oldOrder = null;
-//        Order updatedOrder = null;
-//        instance.editOrder(oldOrder, updatedOrder);
-//    }
-//
-//    @Test
-//    public void testRemoveOrder() {
-//        System.out.println("removeOrder");
-//        LocalDate date = null;
-//        int orderNumber = 0;
-//        boolean expResult = false;
-//        boolean result = instance.removeOrder(date, orderNumber);
-//        assertEquals(expResult, result);
-//    }
+    @Test
+    public void testGetOrder() {
+        System.out.println("getOrder");
+        LocalDate date = null;
+        int orderNumber = 1;
+        Order result = instance.getOrder(date, orderNumber);
+        assertNotEquals(null, result);
+    }
+
+    @Test
+    public void testAddOrder() {
+        System.out.println("addOrder");
+        LocalDate date = null;
+        Order newOrder = new Order("Customer5", instance.getTaxRate("PA"), instance.getProduct("Carpet"), 400);
+        instance.addOrder(date, newOrder);
+        assertEquals(5, instance.getOrders(date).size());
+    }
+
+    @Test
+    public void testEditOrder() {
+        System.out.println("editOrder");
+        LocalDate date = null;
+        int orderNumber = 4;
+        Order oldOrder = instance.getOrder(date, orderNumber);
+        Order updatedOrder = new Order(4, "Customer5", instance.getTaxRate("PA"), instance.getProduct("Carpet"), 400);
+        instance.editOrder(oldOrder, updatedOrder);
+        String expResult = "Customer5";
+        String result = instance.getOrder(date, orderNumber).getCustomer();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testRemoveOrder() {
+        instance.getOrders(LocalDate.MAX).stream().forEach(o -> System.out.print(o));
+        System.out.println("removeOrder");
+        LocalDate date = null;
+        int orderNumber = 1;
+        boolean result = instance.removeOrder(date, orderNumber);
+        assertTrue(result);
+        assertEquals(3, instance.getOrders(date).size());
+    }
 
 }
