@@ -17,7 +17,6 @@ public class Runner {
                 new Controller(new OrderDAOTest()).run();
                 break;
             case "Prod":
-                System.out.println("Production Mode"); // can delete
                 new Controller(new OrderDAOProd()).run();
                 break;
         }

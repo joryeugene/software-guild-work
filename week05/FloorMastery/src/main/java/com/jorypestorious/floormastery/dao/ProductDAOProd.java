@@ -28,6 +28,7 @@ public class ProductDAOProd implements ProductDAO {
                             Double.parseDouble(productParameters[2])) );
                 }
             }
+            
         } catch (FileNotFoundException ex) {
             System.out.println("! Error Reading from /Data/ProductTypes.txt");
         }

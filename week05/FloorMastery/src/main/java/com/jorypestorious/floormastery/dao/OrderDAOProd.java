@@ -31,7 +31,6 @@ public class OrderDAOProd implements OrderDAO {
     public Product getProduct(String productName) {
         return productTypes.stream()
                 .filter(p -> p.getType().equalsIgnoreCase(productName))
-                .distinct()
                 .findFirst()
                 .get();
     }
@@ -45,7 +44,6 @@ public class OrderDAOProd implements OrderDAO {
     public TaxRate getTaxRate(String stateCode) {
         return stateTaxRates.stream()
                 .filter(tax-> tax.getStateCode().equalsIgnoreCase(stateCode))
-                .distinct()
                 .findFirst()
                 .get();
     }
@@ -55,11 +53,7 @@ public class OrderDAOProd implements OrderDAO {
         return stateTaxRates.stream().map(p -> p.getStateCode()).collect(Collectors.toList());
     }
     
-    private void readFileToList(LocalDate date) {
-        currentOrderListDate = date;
-        Order.resetCurrentOrderNumber();
-        List<Order> orderList = new ArrayList<>();
-        
+    private String createFileName(LocalDate date) {
         String fileName = "Data/Orders_";
         
         if (date.getMonthValue() < 10) fileName += "0" + date.getMonthValue();
@@ -70,8 +64,17 @@ public class OrderDAOProd implements OrderDAO {
         
         fileName += date.getYear() + ".txt";
         
-        try {
-            Scanner scanFile = new Scanner(new BufferedReader(new FileReader(fileName)));
+        return fileName;
+    }
+    
+    private void readFileToList(LocalDate date) {
+        currentOrderListDate = date;
+        Order.resetCurrentOrderNumber();
+        List<Order> orderList = new ArrayList<>();
+        
+        String fileName = createFileName(date);
+        
+        try ( Scanner scanFile = new Scanner(new BufferedReader( new FileReader(fileName) )) ) {
             
             while (scanFile.hasNextLine()) {
                 String currentLine = scanFile.nextLine();
@@ -85,6 +88,9 @@ public class OrderDAOProd implements OrderDAO {
                                              Double.parseDouble(orderParameters[5])) );
                 }
             }
+            
+            scanFile.close();
+            
         } catch (FileNotFoundException ex) {
             // returns an empty orderList
         }
@@ -93,18 +99,10 @@ public class OrderDAOProd implements OrderDAO {
     }
     
     private void save() {
-        String fileName = "Data/Orders_";
         
-        if (currentOrderListDate.getMonthValue() < 10) fileName += "0" + currentOrderListDate.getMonthValue();
-        else  fileName += currentOrderListDate.getMonthValue();
+        String fileName = createFileName(currentOrderListDate);
         
-        if (currentOrderListDate.getDayOfMonth() < 10) fileName += "0" + currentOrderListDate.getDayOfMonth();
-        else  fileName += currentOrderListDate.getDayOfMonth();
-        
-        fileName += currentOrderListDate.getYear() + ".txt";
-        
-        try {
-            PrintWriter write = new PrintWriter(new FileWriter(fileName));
+        try ( PrintWriter write = new PrintWriter(new FileWriter(fileName)) ) {
             currentOrderList.stream().forEach(order -> write.println(order.writeToFile()) );
             write.flush();
             write.close();
@@ -136,7 +134,7 @@ public class OrderDAOProd implements OrderDAO {
     }
     
     @Override
-    public void addOrder(LocalDate date, Order newOrder) { // for current date
+    public void addOrder(LocalDate date, Order newOrder) {
         readFileToList(date);
         currentOrderList.add(newOrder);
         save();

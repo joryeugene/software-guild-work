@@ -5,7 +5,7 @@ import com.jorypestorious.floormastery.dto.Order;
 import com.jorypestorious.floormastery.dto.Product;
 import com.jorypestorious.floormastery.dto.TaxRate;
 import com.jorypestorious.floormastery.ui.ConsoleIO;
-import com.jorypestorious.floormastery.ui.UI;
+import com.jorypestorious.floormastery.ui.FlooringIO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,12 +13,12 @@ public class Controller {
     
     private final OrderDAO dao;
     private final ConsoleIO io;
-    private final UI ui;
+    private final FlooringIO ui;
     
     public Controller(OrderDAO dao) {
         this.dao = dao;
         io = new ConsoleIO();
-        ui = new UI();
+        ui = new FlooringIO(io);
     }
     
     public void run() throws InterruptedException {
@@ -68,6 +68,7 @@ public class Controller {
     
     private boolean displayOrders(LocalDate date) {
         List<Order> orders = dao.getOrders(date);
+        
         if (orders.size() < 1) {
             io.display("! Order Not Found for this Date");
             return false;
@@ -78,15 +79,24 @@ public class Controller {
     }
     
     private void addOrder(LocalDate date) {
-        dao.getOrders(date); 
+        dao.getOrders(date); // load orderList into dao
         
+        // get needed input to create Order object
         String customer = io.promptString("Customer Name: ");
-        TaxRate taxRate = dao.getTaxRate(getStateCode());
-        Product productType = dao.getProduct(getProductType());
+        
+        TaxRate taxRate = dao.getTaxRate(
+                ui.getInputFromList(
+                        getDynamicPrompt("State Code", dao.getStateCodes()),
+                        dao.getStateCodes() ) );
+        Product productType = dao.getProduct(
+                ui.getInputFromList(
+                        getDynamicPrompt("Product Type", dao.getProductTypes()), 
+                        dao.getProductTypes() ) );
+        
         double area = io.promptDouble("Area of Material (ft²): ", 0.1, 100000);
         
+        // show new order object to user and ask for confirmation to add
         Order newOrder = new Order(customer, taxRate, productType, area);
-        
         ui.displayOrder(newOrder);
         
         String commitInquiry = io.promptString("\nAdd this Order (y/n)? ");
@@ -100,121 +110,64 @@ public class Controller {
         }
         
     }
-    
-    private String getStateCode() {
-        List<String> stateCodes = dao.getStateCodes();
-        
-        String prompt = "State Code (";
+            
+    private String getDynamicPrompt(String type, List<String> list) {
+        String prompt = type + " (";
 
-        if (stateCodes.size() == 1) {
-            prompt += stateCodes.get(0);
+        if (list.size() == 1) {
+            prompt += list.get(0);
         } else {
-            for (int i = 0; i < stateCodes.size(); i++) {
-                if (i == stateCodes.size()-1) prompt += "or " + stateCodes.get(i) + "): ";
-                else prompt += stateCodes.get(i) + ", ";
+            for (int i = 0; i < list.size(); i++) {
+                if (i == list.size()-1) prompt += "or " + list.get(i) + "): ";
+                else prompt += list.get(i) + ", ";
             }
         }
         
-        String stateCodeInput = "";
-        boolean invalidStateCode = true;
-        
-        do {
-            if (invalidStateCode) stateCodeInput = io.promptString(prompt).toUpperCase();
-            
-            for (String stateCode : stateCodes) {
-                if (stateCode.equalsIgnoreCase(stateCodeInput)) invalidStateCode = false;
-            }
-            
-        } while (invalidStateCode);
-        
-        return stateCodeInput;
-    }
-    
-    private String getProductType() {
-        List<String> productTypes = dao.getProductTypes();
-        
-        String prompt = "Product Type (";
+        return prompt;
+    }    
 
-        if (productTypes.size() == 1) {
-            prompt += productTypes.get(0);
-        } else {
-            for (int i = 0; i < productTypes.size(); i++) {
-                if (i == productTypes.size()-1) prompt += "or " + productTypes.get(i) + "): ";
-                else prompt += productTypes.get(i) + ", ";
-            }
-        }
-        
-        String productTypeInput = "";
-        boolean invalidProductType = true;
-        
-        do {
-            if (invalidProductType) productTypeInput = io.promptString(prompt);
-            
-            for (String productType : productTypes) {
-                if (productType.equalsIgnoreCase(productTypeInput)) invalidProductType = false;
-            }
-            
-        } while (invalidProductType);
-        
-        return productTypeInput;
-    }
-    
     private void editOrder() {
         LocalDate date = io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now());
         
         if (displayOrders(date)) {
+            
             int orderNumber = io.promptInt("\nOrder# to Edit (0 to Cancel): ", 0, Order.getCurrentOrderNumber()-1);
             Order order = dao.getOrder(date, orderNumber);
+            
             if (order == null) {
                 io.display("! Order Not Found");
             } else {
+                
                 // get new customer name, empty string to keep the same
-                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Empty to Pass: ");
+                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Leave empty to pass: ");
                 newName = (newName.length() > 0) ? newName : order.getCustomer();
                 
                 // get new state code, empty string to keep the same, make sure state code is valid if new one entered
-                String newStateCode = io.promptString("New State Code (" + order.getTaxRate().getStateCode() + ") Empty to Pass: ").toUpperCase();
+                String newStateCode = ui.getInputFromList(
+                        "New State Code (" + order.getTaxRate().getStateCode() + ") Leave empty to pass: ",
+                        getDynamicPrompt("State Code", dao.getStateCodes()),
+                        dao.getStateCodes() );
                 
-                if (newStateCode.length() > 0) {
-                    boolean validStateCode = false;
-                    List<String> stateCodes = dao.getStateCodes();
-                    
-                    for (String stateCode : stateCodes) {
-                        if (stateCode.equalsIgnoreCase(newStateCode)) validStateCode = true;
-                    }
-                    
-                    if (!validStateCode) newStateCode = getStateCode();
-                    
-                } else {
-                    newStateCode = order.getTaxRate().getStateCode();
-                }
+                newStateCode = (newStateCode.length() > 0) ? newStateCode : order.getTaxRate().getStateCode();
                 
                 // get new product type, empty string to keep the same, make sure product type is valid if new one entered
-                String newProductType = io.promptString("New Product Type (" + order.getProductType().getType() + ") Empty to Pass: ");
+                String newProductType = ui.getInputFromList(
+                        "New Product Type (" + order.getProductType().getType() + ") Leave empty to pass: ", 
+                        getDynamicPrompt("Product Type", dao.getProductTypes()), 
+                        dao.getProductTypes() );
                 
-                if (newProductType.length() > 0) {
-                    boolean validProductType = false;
-                    List<String> productTypes = dao.getProductTypes();
-                    
-                    for (String productType : productTypes) {
-                        if (productType.equalsIgnoreCase(newProductType)) validProductType = true;
-                    }
-                    
-                    if (!validProductType) newProductType = getProductType();
-                    
-                } else {
-                    newStateCode = order.getTaxRate().getStateCode();
-                }
+                newProductType = (newProductType.length() > 0) ? newProductType : order.getProductType().getType();
                 
                 // get new area, 0 to keep the same
-                double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to Pass: ", 0, 100000);
+                double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to pass: ", 0, 100000);
                 newArea = (newArea != 0.0) ? newArea : order.getArea();
                 
-                Order updatedOrder= new Order(order.getOrderNumber(), newName, dao.getTaxRate(newStateCode), dao.getProduct(newProductType), newArea);
+                Order updatedOrder = new Order(order.getOrderNumber(), 
+                        newName, dao.getTaxRate(newStateCode), 
+                        dao.getProduct(newProductType), newArea);
                 
                 dao.editOrder(order, updatedOrder);
                 io.display("\n* Order Successfully Updated\n" + updatedOrder);
-                
             }
         }      
     }

@@ -12,6 +12,7 @@ public class TaxRateDAOProd implements TaxRateDAO {
     
     @Override
     public List<TaxRate> run() {
+        
         List<TaxRate> taxRates =  new ArrayList<>();
         
         try {
@@ -26,9 +27,11 @@ public class TaxRateDAOProd implements TaxRateDAO {
                             Double.parseDouble(taxRateParameters[1])) );
                 }
             }
+            
         } catch (FileNotFoundException ex) {
             System.out.println("! Error Reading from /Data/TaxRates.txt");
         }
+        
         return taxRates;
     }
     

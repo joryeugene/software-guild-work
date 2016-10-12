@@ -10,16 +10,21 @@ import java.util.stream.Collectors;
 
 public class OrderDAOTest implements OrderDAO {
     
-    private LocalDate currentOrderListDate;
-    private List<Order> currentOrderList;
+    // private LocalDate currentOrderListDate;
+    private final List<Order> currentOrderList;
     private final List<Product> productTypes;
     private final List<TaxRate> stateTaxRates;
     
     public OrderDAOTest() {
         productTypes = new ProductDAOProd().run();
         stateTaxRates = new TaxRateDAOProd().run();
-        // Test list
+        
         currentOrderList = new ArrayList<>();
+        initializeListForTest();
+    }
+    
+    private void initializeListForTest() {
+        // Test list
         currentOrderList.add(new Order("Customer1", getTaxRate("OH"), getProduct("Carpet"), 100));
         currentOrderList.add(new Order("Customer2", getTaxRate("PA"), getProduct("Laminate"), 200));
         currentOrderList.add(new Order("Customer3", getTaxRate("MI"), getProduct("Tile"), 300));
@@ -30,7 +35,6 @@ public class OrderDAOTest implements OrderDAO {
     public Product getProduct(String productName) {
         return productTypes.stream()
                 .filter(p -> p.getType().equalsIgnoreCase(productName))
-                .distinct()
                 .findFirst()
                 .get();
     }
@@ -44,7 +48,6 @@ public class OrderDAOTest implements OrderDAO {
     public TaxRate getTaxRate(String stateCode) {
         return stateTaxRates.stream()
                 .filter(tax-> tax.getStateCode().equalsIgnoreCase(stateCode))
-                .distinct()
                 .findFirst()
                 .get();
     }
@@ -79,7 +82,7 @@ public class OrderDAOTest implements OrderDAO {
     }
     
     @Override
-    public void addOrder(LocalDate date, Order newOrder) { // for current date
+    public void addOrder(LocalDate date, Order newOrder) {
         readFileToList(date);
         currentOrderList.add(newOrder);
         save();
