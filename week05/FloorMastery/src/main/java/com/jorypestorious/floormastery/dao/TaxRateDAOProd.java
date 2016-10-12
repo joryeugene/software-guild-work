@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class TaxRateDAOProd implements TaxRateDAO {
     
+    @Override
     public List<TaxRate> run() {
         List<TaxRate> taxRates =  new ArrayList<>();
         

@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 
 public class OrderDAOProd implements OrderDAO {
     
-    LocalDate currentOrderListDate;
-    List<Order> currentOrderList;
-    List<Product> productTypes;
-    List<TaxRate> stateTaxRates;
+    private LocalDate currentOrderListDate ;
+    private List<Order> currentOrderList;
+    private final List<Product> productTypes;
+    private final List<TaxRate> stateTaxRates;
     
     public OrderDAOProd() {
         productTypes = new ProductDAOProd().run();
@@ -163,10 +163,5 @@ public class OrderDAOProd implements OrderDAO {
         
         return false;
     }
-
-
-
-    
-    
 
 }

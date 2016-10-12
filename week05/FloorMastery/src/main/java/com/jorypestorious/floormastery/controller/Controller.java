@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Controller {
     
-    OrderDAO dao;
-    ConsoleIO io;
-    UI ui;
+    private final OrderDAO dao;
+    private final ConsoleIO io;
+    private final UI ui;
     
     public Controller(OrderDAO dao) {
         this.dao = dao;
@@ -64,7 +64,6 @@ public class Controller {
         }
         
         io.display("Goodbye.");
-        
     }
     
     private boolean displayOrders(LocalDate date) {
@@ -159,8 +158,6 @@ public class Controller {
         
         return productTypeInput;
     }
-    
-    
     
     private void editOrder() {
         LocalDate date = io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now());

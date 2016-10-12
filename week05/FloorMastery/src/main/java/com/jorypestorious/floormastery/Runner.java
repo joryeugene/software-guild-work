@@ -13,11 +13,11 @@ public class Runner {
     public static void main(String[] args) throws InterruptedException {
         switch(readConfigFile()) {
             case "Test": 
-                System.out.println("Test Mode"); // delete
+                System.out.println("Test Mode"); // can delete
                 new Controller(new OrderDAOTest()).run();
                 break;
             case "Prod":
-                System.out.println("Production Mode"); // delete
+                System.out.println("Production Mode"); // can delete
                 new Controller(new OrderDAOProd()).run();
                 break;
         }
