@@ -68,7 +68,7 @@ public class Controller {
     
     private boolean displayOrders(LocalDate date) {
         List<Order> orders = dao.getOrders(date);
-        if (orders == null) {
+        if (orders.size() < 1) {
             io.display("! Order Not Found for this Date");
             return false;
         } else {
@@ -169,11 +169,11 @@ public class Controller {
                 io.display("! Order Not Found");
             } else {
                 // get new customer name, empty string to keep the same
-                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Enter to Pass: ");
+                String newName = io.promptString("\nNew Customer Name (" + order.getCustomer() + ") Empty to Pass: ");
                 newName = (newName.length() > 0) ? newName : order.getCustomer();
                 
                 // get new state code, empty string to keep the same, make sure state code is valid if new one entered
-                String newStateCode = io.promptString("New State Code (" + order.getTaxRate().getStateCode() + ") Enter to Pass: ").toUpperCase();
+                String newStateCode = io.promptString("New State Code (" + order.getTaxRate().getStateCode() + ") Empty to Pass: ").toUpperCase();
                 
                 if (newStateCode.length() > 0) {
                     boolean validStateCode = false;
@@ -190,7 +190,7 @@ public class Controller {
                 }
                 
                 // get new product type, empty string to keep the same, make sure product type is valid if new one entered
-                String newProductType = io.promptString("New Product Type (" + order.getProductType().getType() + ") Enter to Pass: ");
+                String newProductType = io.promptString("New Product Type (" + order.getProductType().getType() + ") Empty to Pass: ");
                 
                 if (newProductType.length() > 0) {
                     boolean validProductType = false;
@@ -208,7 +208,7 @@ public class Controller {
                 
                 // get new area, 0 to keep the same
                 double newArea = io.promptDouble("New Area (" + order.getArea() + ") 0 to Pass: ", 0, 100000);
-                newArea = (newArea != 0) ? newArea : order.getArea();
+                newArea = (newArea != 0.0) ? newArea : order.getArea();
                 
                 Order updatedOrder= new Order(order.getOrderNumber(), newName, dao.getTaxRate(newStateCode), dao.getProduct(newProductType), newArea);
                 

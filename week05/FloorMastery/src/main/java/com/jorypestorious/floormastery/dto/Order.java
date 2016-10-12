@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class Order {
     
-    DecimalFormat dpercent = new DecimalFormat("##0.00%");
-    DecimalFormat df = new DecimalFormat("##0.00");
+    private final DecimalFormat dpercent = new DecimalFormat("##0.00%");
+    private final DecimalFormat df = new DecimalFormat("##0.00");
     
     protected static int currentOrderNumber = 1;
     
