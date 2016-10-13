@@ -21,13 +21,15 @@ public class OrderDAOProd implements OrderDAO {
     
     private LocalDate currentOrderListDate;
     private List<Order> currentOrderList;
+    private final OrderFilesDAO files;
     private final Map<String, List<Order>> orderListsDatabase;
     private final List<String> orderListFileNames;
     private final List<Product> productTypes;
     private final List<TaxRate> stateTaxRates;
     
     public OrderDAOProd() {
-        orderListFileNames = getOrderListFileNames();
+        files = new OrderFilesDAOProd();
+        orderListFileNames = files.getOrderListFileNames();
         productTypes = new ProductDAOProd().run();
         stateTaxRates = new TaxRateDAOProd().run();
         orderListsDatabase = loadFilestoDatabase();
@@ -85,43 +87,10 @@ public class OrderDAOProd implements OrderDAO {
         } else {
             orderListsDatabase.put(fileName, orderList);
             orderListFileNames.add(fileName);
-            saveOrderListFileNames();
+            files.saveOrderListFileNames(orderListFileNames);
         }
         
         currentOrderList = orderList;
-    }
-    
-    private List<String> getOrderListFileNames() {
-        List<String> fileNames = new ArrayList<>();
-        
-        try ( Scanner scanFile = new Scanner(new BufferedReader( new FileReader("Data/OrderListFileNames.txt") )) ) {
-            
-            while (scanFile.hasNextLine()) {
-                String currentLine = scanFile.nextLine();
-                
-                if (currentLine.length() > 0 ) {
-                    fileNames.add(currentLine.trim());
-                }
-            }
-            
-            scanFile.close();
-            
-        } catch (FileNotFoundException ex) {
-            // returns an empty list
-        }
-        
-        return fileNames;
-    }
-    
-    private void saveOrderListFileNames() {
-        try ( PrintWriter write = new PrintWriter(new FileWriter("Data/OrderListFileNames.txt")) ) {
-            orderListFileNames.stream().forEach(fileName -> write.println(fileName));
-            write.flush();
-            write.close();
-            
-        } catch (IOException e) {
-            System.out.println("! Error Saving Order Lists Filename Data to File");
-        }
     }
     
     private Map<String, List<Order>> loadFilestoDatabase() {

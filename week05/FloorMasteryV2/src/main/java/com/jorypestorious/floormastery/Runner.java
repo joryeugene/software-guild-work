@@ -13,7 +13,7 @@ public class Runner {
     public static void main(String[] args) throws InterruptedException {
         switch(readConfigFile()) {
             case "Test": 
-                System.out.println("Test Mode"); // can delete
+                System.out.println("Test Mode - Data Not Saved"); // can delete or leave to inform user that data will not be saved
                 new Controller(new OrderDAOTest()).run();
                 break;
             case "Prod":
@@ -27,7 +27,7 @@ public class Runner {
             Scanner scanFile = new Scanner(new BufferedReader(new FileReader("Data/Config.txt")));
             return scanFile.nextLine().trim();
         } catch (FileNotFoundException ex) {
-            return "Test"; // or change to "Prod"
+            return "Test"; // or change to "Prod" as default if no config file found
         }
     }
 

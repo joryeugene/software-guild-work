@@ -59,6 +59,7 @@ public class Controller {
                     break;
                 case 6:
                     dao.save();
+                    io.display("* Work Saved");
                     break;
                 case 7:
                     keepRunning = false;
