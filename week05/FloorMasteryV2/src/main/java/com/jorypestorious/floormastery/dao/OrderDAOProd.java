@@ -150,13 +150,10 @@ public class OrderDAOProd implements OrderDAO {
     @Override
     public Order getOrder(LocalDate date, int orderNumber) {
         setCurrentList(date);
-        Order orderToReturn = null;
-        
-        for (Order order : currentOrderList) {
-            if (order.getOrderNumber() == orderNumber) {
-                orderToReturn = order;
-            }
-        }
+        Order orderToReturn = currentOrderList.stream()
+                .filter(order -> order.getOrderNumber() == orderNumber)
+                .findFirst()
+                .orElse(null);
         
         return orderToReturn;
     }
@@ -192,15 +189,10 @@ public class OrderDAOProd implements OrderDAO {
     public boolean removeOrder(LocalDate date, int orderNumber) {
         setCurrentList(date);
         
-        for (Order order : currentOrderList) {
-            if (order.getOrderNumber() == orderNumber) {
-                currentOrderList.remove(order);
-                save(); //remove to allow data to be discarded when not explicitly saving
-                return true;
-            }
-        }
+        boolean succesfulRemoval = currentOrderList.removeIf(order -> order.getOrderNumber() == orderNumber);
+        save(); //remove to allow data to be discarded when not explicitly saving
         
-        return false;
+        return succesfulRemoval;
     }
     
 }
