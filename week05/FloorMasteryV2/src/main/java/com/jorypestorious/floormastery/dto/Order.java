@@ -12,6 +12,7 @@ public class Order {
     private TaxRate taxRate;
     private Product productType;
     private double area;
+    private String fileName;
     
     private double materialCost;
     private double laborCost;
@@ -24,7 +25,23 @@ public class Order {
         this.taxRate = taxRate;
         this.productType = productType;
         this.area = area;
-        
+    }
+    
+    public Order (int orderNumber, String customer, TaxRate taxRate, Product productType, double area, String fileName) {
+        this.orderNumber = orderNumber;
+        this.customer = customer;
+        this.taxRate = taxRate;
+        this.productType = productType;
+        this.area = area;
+        this.fileName = fileName;
+    }
+    
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    
+    public String getFileName() {
+        return fileName;
     }
     
     public int getOrderNumber() {

@@ -27,18 +27,19 @@ public class Controller {
         
         String menuPrompt = "\n       SWC Corp Flooring       \n" +
                           "===============================\n" +
-                          "1. Find Order(s) by Date    \n" +
-                          "2. Add Order for Current Date  \n" +
-                          "3. Add Order for Past Date     \n" +
-                          "4. Edit an Order               \n" +
-                          "5. Remove an Order             \n" +
-                          "6. Save Current Work           \n" +
-                          "7. Exit                      \n\n" +
+                          "1. Find Order(s) by Date       \n" +
+                          "2. Find Order(s) by State Code \n" +
+                          "3. Add Order for Current Date  \n" +
+                          "4. Add Order for Past Date     \n" +
+                          "5. Edit an Order               \n" +
+                          "6. Remove an Order             \n" +
+                          "7. Save Current Work           \n" +
+                          "8. Exit                      \n\n" +
                           "> Selection: ";
         
         while (keepRunning) {
             
-            int selection = io.promptInt(menuPrompt, 1, 7);
+            int selection = io.promptInt(menuPrompt, 1, 8);
             io.display(""); // line break
             
             switch (selection) {
@@ -46,22 +47,25 @@ public class Controller {
                     displayOrders( io.promptDate("Date of Order (YYYY-MM-DD): ") );
                     break;
                 case 2:
-                    addOrder(LocalDate.now());
+                    findOrdersMatchingStateCode();
                     break;
                 case 3:
-                    addOrder( io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now()) );
+                    addOrder(LocalDate.now());
                     break;
                 case 4:
-                    editOrder();
+                    addOrder( io.promptDate("Date of Order (YYYY-MM-DD): ", LocalDate.MIN, LocalDate.now()) );
                     break;
                 case 5:
-                    removeOrder();
+                    editOrder();
                     break;
                 case 6:
+                    removeOrder();
+                    break;
+                case 7:
                     dao.save();
                     io.display("* Work Saved");
                     break;
-                case 7:
+                case 8:
                     keepRunning = false;
             }
             
@@ -206,6 +210,20 @@ public class Controller {
                 io.display("! Order Not Found");
             }
         }        
+    }
+    
+    private void findOrdersMatchingStateCode() {
+        String stateCode = ui.getInputFromList(
+                        getDynamicPrompt("State Code", dao.getStateCodes()),
+                        dao.getStateCodes() );
+        
+        List<Order> searchQuery = dao.getOrdersMatchingStateCode(stateCode);
+        
+        if (searchQuery.size() < 1) {
+            io.display("! No Orders Found");
+        } else {
+            ui.displayOrdersWithFileNames(searchQuery);
+        }
     }
 
 }

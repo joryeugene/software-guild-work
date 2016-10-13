@@ -16,6 +16,10 @@ public class FlooringIO {
         orders.stream().forEach(o -> System.out.println("\n" + o));
     }
     
+    public void displayOrdersWithFileNames(List<Order> orders) {
+        orders.stream().forEach(o -> System.out.println("\n" + o.getFileName().substring(5) + "\n" + o));
+    }
+    
     public void displayOrder(Order order) {
         System.out.println("\n" + order);
     }

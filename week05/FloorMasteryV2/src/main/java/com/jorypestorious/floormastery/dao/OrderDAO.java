@@ -29,5 +29,7 @@ public interface OrderDAO {
     void editOrder(Order oldOrder, Order updatedOrder);
     
     boolean removeOrder(LocalDate date, int orderNumber);
-
+    
+    List<Order> getOrdersMatchingStateCode(String stateCode); // new
+    
 }

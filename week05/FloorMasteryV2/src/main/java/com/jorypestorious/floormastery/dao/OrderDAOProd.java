@@ -145,7 +145,8 @@ public class OrderDAOProd implements OrderDAO {
                             orderParameters[1],
                             getTaxRate(orderParameters[2]),
                             getProduct(orderParameters[4]),
-                            Double.parseDouble(orderParameters[5])) );
+                            Double.parseDouble(orderParameters[5]), 
+                            fileName) );
                 }
             }
             
@@ -207,6 +208,7 @@ public class OrderDAOProd implements OrderDAO {
     @Override
     public void addOrder(LocalDate date, Order newOrder) {
         setCurrentList(date);
+        newOrder.setFileName(createFileName(date));
         currentOrderList.add(newOrder);
         save(); //remove to allow data to be discarded when not explicitly saving
     }
@@ -225,6 +227,13 @@ public class OrderDAOProd implements OrderDAO {
         save(); //remove to allow data to be discarded when not explicitly saving
         
         return succesfulRemoval;
+    }
+    
+    public List<Order> getOrdersMatchingStateCode(String stateCode) {
+        return orderListsDatabase.values().stream()
+                .flatMap(orders -> orders.stream())
+                .filter(order -> order.getTaxRate().getStateCode().equalsIgnoreCase(stateCode))
+                .collect(Collectors.toList());
     }
     
 }
