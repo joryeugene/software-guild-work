@@ -27,7 +27,7 @@ public class Controller {
         
         String menuPrompt = "\n       SWC Corp Flooring       \n" +
                           "===============================\n" +
-                          "1. Display Order(s) by Date    \n" +
+                          "1. Find Order(s) by Date    \n" +
                           "2. Add Order for Current Date  \n" +
                           "3. Add Order for Past Date     \n" +
                           "4. Edit an Order               \n" +
