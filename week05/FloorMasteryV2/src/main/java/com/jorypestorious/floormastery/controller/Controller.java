@@ -32,12 +32,13 @@ public class Controller {
                           "3. Add Order for Past Date     \n" +
                           "4. Edit an Order               \n" +
                           "5. Remove an Order             \n" +
-                          "6. Exit                      \n\n" +
+                          "6. Save Current Work           \n" +
+                          "7. Exit                      \n\n" +
                           "> Selection: ";
         
         while (keepRunning) {
             
-            int selection = io.promptInt(menuPrompt, 1, 6);
+            int selection = io.promptInt(menuPrompt, 1, 7);
             io.display(""); // line break
             
             switch (selection) {
@@ -57,6 +58,9 @@ public class Controller {
                     removeOrder();
                     break;
                 case 6:
+                    dao.save();
+                    break;
+                case 7:
                     keepRunning = false;
             }
             

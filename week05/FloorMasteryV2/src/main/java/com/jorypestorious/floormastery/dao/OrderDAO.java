@@ -16,6 +16,8 @@ public interface OrderDAO {
     
     List<String> getStateCodes();
     
+    void save();
+    
     List<Order> getOrders(LocalDate date); 
     
     Order getOrder(LocalDate date, int orderNumber);

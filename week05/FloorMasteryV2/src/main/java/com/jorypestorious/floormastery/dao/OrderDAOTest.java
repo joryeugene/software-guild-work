@@ -92,7 +92,8 @@ public class OrderDAOTest implements OrderDAO {
         currentOrderList = orderList;
     }
         
-    private void save() {
+    @Override
+    public void save() {
         orderListsDatabase.put(createFileName(currentOrderListDate), currentOrderList);
     }
     
@@ -130,13 +131,13 @@ public class OrderDAOTest implements OrderDAO {
     public void addOrder(LocalDate date, Order newOrder) {
         setCurrentList(date);
         currentOrderList.add(newOrder);
-        save();
+        save(); //remove to allow data to be discarded when not explicitly saving
     }
     
     @Override
     public void editOrder(Order oldOrder, Order updatedOrder) {
         currentOrderList.set(currentOrderList.indexOf(oldOrder), updatedOrder);
-        save();
+        save(); //remove to allow data to be discarded when not explicitly saving
     }
     
     @Override
@@ -146,7 +147,7 @@ public class OrderDAOTest implements OrderDAO {
         for (Order order : currentOrderList) {
             if (order.getOrderNumber() == orderNumber) {
                 currentOrderList.remove(order);
-                save();
+                save(); //remove to allow data to be discarded when not explicitly saving
                 return true;
             }
         }
