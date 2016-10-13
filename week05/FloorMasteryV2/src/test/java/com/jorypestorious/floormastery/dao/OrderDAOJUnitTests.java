@@ -117,5 +117,13 @@ public class OrderDAOJUnitTests {
         assertTrue(result);
         assertEquals(3, instance.getOrders(date).size());
     }
+    
+    @Test
+    public void testGetOrdersMatchingStateCode() {
+        System.out.println("getOrdersMatchingStateCode");
+        int expResult = 1;
+        int result = instance.getOrdersMatchingStateCode("OH").size();
+        assertEquals(expResult, result);
+    }
 
 }

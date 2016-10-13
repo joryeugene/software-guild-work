@@ -147,4 +147,12 @@ public class OrderDAOTest implements OrderDAO {
         return succesfulRemoval;
     }
     
+    @Override
+    public List<Order> getOrdersMatchingStateCode(String stateCode) {
+        return orderListsDatabase.values().stream()
+                .flatMap(orders -> orders.stream())
+                .filter(order -> order.getTaxRate().getStateCode().equalsIgnoreCase(stateCode))
+                .collect(Collectors.toList());
+    }
+    
 }

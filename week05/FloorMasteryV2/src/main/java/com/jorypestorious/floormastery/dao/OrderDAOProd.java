@@ -229,6 +229,7 @@ public class OrderDAOProd implements OrderDAO {
         return succesfulRemoval;
     }
     
+    @Override
     public List<Order> getOrdersMatchingStateCode(String stateCode) {
         return orderListsDatabase.values().stream()
                 .flatMap(orders -> orders.stream())
