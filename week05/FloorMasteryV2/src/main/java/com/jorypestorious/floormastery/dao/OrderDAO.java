@@ -20,7 +20,7 @@ public interface OrderDAO {
     
     Order getOrder(LocalDate date, int orderNumber);
     
-    int getHighestOrderNumber(); // new method to test
+    int getHighestOrderNumber();
     
     void addOrder(LocalDate date, Order newOrder);
     

@@ -193,10 +193,14 @@ public class OrderDAOProd implements OrderDAO {
     @Override
     public int getHighestOrderNumber() {
         int highestNumber = 0;
-        if (currentOrderList.size() > 0) highestNumber = currentOrderList.stream()
+        
+        if (currentOrderList.size() > 0) {
+            highestNumber = currentOrderList.stream()
                 .max((order1, order2) -> order1.getOrderNumber() > order2.getOrderNumber() ? 1 : -1)
                 .get()
                 .getOrderNumber();
+        }
+        
         return highestNumber;
     }
     
