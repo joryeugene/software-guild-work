@@ -129,7 +129,7 @@ public class Controller {
         String prompt = type + " (";
 
         if (list.size() == 1) {
-            prompt += list.get(0);
+            prompt += list.get(0) + ")";
         } else {
             for (int i = 0; i < list.size(); i++) {
                 if (i == list.size()-1) prompt += "or " + list.get(i) + "): ";

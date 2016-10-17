@@ -25,8 +25,7 @@ public class FlooringIO {
     }
     
     //////////////////////// Input ////////////////////////
-    public String getInputFromList(String prompt, List<String> list) {        
-        list.add(""); // allow for blank entry
+    public String getInputFromList(String prompt, List<String> list) { 
         String input = "";
         boolean invalidInput = true;
         

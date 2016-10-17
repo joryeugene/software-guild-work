@@ -18,7 +18,7 @@ public class Order {
     private double laborCost;
     private double taxCost;
     private double totalCost;
-
+    
     public Order (int orderNumber, String customer, TaxRate taxRate, Product productType, double area) {
         this.orderNumber = orderNumber;
         this.customer = customer;
