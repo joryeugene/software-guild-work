@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lucky 7's</title>
+        <title>Factorizor</title>
         <style>
             .center {
                 margin: 0 auto;  
@@ -13,10 +13,10 @@
     </head>
     <body>
         <div class="center">
-            <h1>Lucky 7's</h1>
+            <h1>Factorizor</h1>
                 
-            <form method="post" action="Lucky7s02.jsp">
-                <b>Initial Bet: $</b><input type="text" name="initialValue" size="5"><br><br>
+            <form method="post" action="Factorizor02.jsp">
+                <b>Number to Factor: </b><input type="text" name="num" size="5"><br><br>
                 <input type="submit">
             </form>
         </div>
