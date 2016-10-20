@@ -32,8 +32,6 @@ public class Controller {
         int inputNum = num.getNum(),
             sum = 0;
         
-        System.out.println("The factors of " + inputNum + " are:");
-        
         for (int i = 1; i <= inputNum/2; i++) {
             if (inputNum % i == 0) {
                 num.addFactor(i);
