@@ -42,7 +42,9 @@
             
             <h1>Unit Converter</h1>
             
-            <p><fmt:formatNumber maxFractionDigits="2" value="${result}"/></p>
+            <p><b>${result.startingUnit} to ${result.endingUnit}</b></p>
+            <p><b>Value: </b><fmt:formatNumber maxFractionDigits="2" value="${result.value}"/></p>
+            <p><b>Result </b><fmt:formatNumber maxFractionDigits="2" value="${result.result}"/></p>
             
             <a href="${pageContext.request.contextPath}/apps/unitconverter"><button>Again</button></a>
             

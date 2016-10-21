@@ -1,5 +1,6 @@
 package com.swcguild.jspsitelab;
 
+import com.swcguild.jspsitelab.dto.UnitConversion;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,19 +28,21 @@ public class UnitConverterController {
         
         switch (converter) {
             case "length":
-                result = convertLength(startingUnit, endingUnit, value);
+                result = convertLength(value, startingUnit, endingUnit);
                 break;
             case "temperature":
-                result = convertTemperature(startingUnit, endingUnit, value);
+                result = convertTemperature(value, startingUnit, endingUnit);
                 break;
         }
         
-        model.addAttribute("result", result);
+        UnitConversion conversionResult = new UnitConversion(value, startingUnit, endingUnit, result);
+        
+        model.addAttribute("result", conversionResult);
         
         return "UnitConverter02";
     }
     
-    private double convertLength(String startingUnit, String endingUnit, double value) {
+    private double convertLength(double value, String startingUnit, String endingUnit) {
         double base = 0.0;
         double result = 0.0;
         
@@ -60,7 +63,7 @@ public class UnitConverterController {
         return result;        
     }
     
-    private double convertTemperature(String startingUnit, String endingUnit, double value) {
+    private double convertTemperature(double value, String startingUnit, String endingUnit) {
         double base = 0.0;
         double result = 0.0;
         
