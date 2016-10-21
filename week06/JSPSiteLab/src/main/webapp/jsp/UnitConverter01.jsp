@@ -51,23 +51,27 @@
                 
                 <div id="length" class="visible">
                     <select name="startingUnit" class="child-select">
-                          <option value="foot" selected>Foot</option>
-                          <option value="yard">Yard</option>
+                        <option value="foot" selected>Foot</option>
+                        <option value="yard">Yard</option>
+                        <option value="mile">Mile</option>
                     </select>
                     <select name="endingUnit" class="child-select">
-                          <option value="foot">Foot</option>
-                          <option value="yard" selected>Yard</option>
+                        <option value="foot">Foot</option>
+                        <option value="yard" selected>Yard</option>
+                        <option value="mile">Mile</option>
                     </select>
                 </div>
                 
                 <div id="temperature" class="hidden">
                     <select name="startingUnit" class="child-select">
-                          <option value="celsius" selected>Celsius</option>
-                          <option value="farenheit">Farenheit</option>
+                        <option value="celsius" selected>Celsius</option>
+                        <option value="farenheit">Farenheit</option>
+                        <option value="kelvin">Kelvin</option>
                     </select>
                     <select name="endingUnit" class="child-select">
-                          <option value="celsius">Celsius</option>
-                          <option value="farenheit" selected>Farenheit</option>
+                        <option value="celsius">Celsius</option>
+                        <option value="farenheit" selected>Farenheit</option>
+                        <option value="kelvin">Kelvin</option>                        
                     </select>
                 </div>
                 
@@ -85,27 +89,28 @@
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script>
-            var showCorrectSelect = function() {
+            var showCorrectSelect = function () {
                 var converter = document.getElementById('converter');
                 var type = converter.options[converter.selectedIndex].value;
-                
+
                 var length = document.getElementById('length');
                 var temperature = document.getElementById('temperature');
-               
-                $('.child-select').attr('name', '');               
-                
+
+                $('.child-select').attr('name', '');
+
                 length.className = 'hidden';
                 temperature.className = 'hidden';
-                
-                switch(type) {
-                    case 'length': 
+
+                switch (type) {
+                    case 'length':
                         length.className = 'visible';
-                        $( '#length > select:nth-child(1)').attr('name', 'startingUnit');
-                        $( '#length > select:nth-child(2)').attr('name', 'endingUnit');
+                        $('#length > select:nth-child(1)').attr('name', 'startingUnit');
+                        $('#length > select:nth-child(2)').attr('name', 'endingUnit');
                         break;
-                    case 'temperature': temperature.className = "visible";
-                        $( '#temperature > select:nth-child(1)').attr('name', 'startingUnit');
-                        $( '#temperature > select:nth-child(2)').attr('name', 'endingUnit');
+                    case 'temperature':
+                        temperature.className = "visible";
+                        $('#temperature > select:nth-child(1)').attr('name', 'startingUnit');
+                        $('#temperature > select:nth-child(2)').attr('name', 'endingUnit');
                         break;
                 }
             };

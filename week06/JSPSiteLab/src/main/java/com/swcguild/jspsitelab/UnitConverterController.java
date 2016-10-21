@@ -51,12 +51,16 @@ public class UnitConverterController {
                 break;
             case "yard": base = value * 3;
                 break;
+            case "mile": base = value * 5280;
+                break;
         }
         
         switch(endingUnit) {
             case "foot": result = base;
                 break;
             case "yard": result = base / 3;
+                break;
+            case "mile": result = base / 5280;
                 break;
         }
 
@@ -72,12 +76,16 @@ public class UnitConverterController {
                 break;
             case "farenheit": base = (value - 32) / 1.8;
                 break;
+            case "kelvin": base = value - 273.15;
+                break;
         }
         
         switch(endingUnit) {
             case "celsius": result = base;
                 break;
             case "farenheit": result = base * 1.8 + 32;
+                break;
+            case "kelvin": result = base + 273.15;
                 break;
         }
 
