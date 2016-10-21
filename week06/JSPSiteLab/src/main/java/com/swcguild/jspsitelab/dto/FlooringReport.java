@@ -1,7 +1,5 @@
 package com.swcguild.jspsitelab.dto;
 
-import java.text.DecimalFormat;
-
 public class FlooringReport {
     
     private final int width;
@@ -36,6 +34,4 @@ public class FlooringReport {
         return laborCost;
     }
     
-    
-
 }

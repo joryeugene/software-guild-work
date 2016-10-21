@@ -1,5 +1,6 @@
 package com.swcguild.jspsitelab;
 
+import com.swcguild.jspsitelab.dto.Check;
 import com.swcguild.jspsitelab.dto.FactorizorReport;
 import com.swcguild.jspsitelab.dto.FlooringReport;
 import com.swcguild.jspsitelab.dto.InterestReport;
@@ -157,7 +158,20 @@ public class WebController {
         return "FlooringCalculator02";
     }
     
+    @RequestMapping(value="tipcalculator", method=RequestMethod.GET)
+    public String displayTipCalculator(HttpServletRequest req, Model model) {
+        return "TipCalculator01";
+    }
+    
+    @RequestMapping(value="tipcalculatorresults", method=RequestMethod.POST)
+    public String displayTipCalculatorResults(HttpServletRequest req, Model model) { 
+        double subtotal = Double.parseDouble(req.getParameter("subtotal"));
+        double tipPercentage = Double.parseDouble(req.getParameter("tipPercentage"));
+        
+        Check check = new Check(subtotal, tipPercentage);
+        model.addAttribute("check", check);
+        
+        return "TipCalculator02";
+    }
+    
 }
-
-//20 square feet of flooring per hour at a cost of $86.00/hr with a 15-minute
-//billing increment. 
