@@ -8,7 +8,19 @@
         <title>JSP Site Lab</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
-
+        <style>
+            .visible {
+                visibility: visible;
+            }
+            
+            .main-select {
+                width: 205px;
+            }
+            
+            .child-select {
+                width: 100px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -19,33 +31,30 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/apps/luckysevens">Lucky Sevens</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/apps/luckysevens">Lucky Sevens</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/apps/factorizor">Factorizor</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/apps/interestcalculator">Interest Calculator</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/apps/flooringcalculator">Flooring Calculator</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/apps/tipcalculator">Tip Calculator</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/apps/unitconverter">Unit Converter</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/apps/unitconverter">Unit Converter</a></li>
                 </ul>    
             </div>
-                
-            <h1>Lucky 7's</h1>
             
-            <p><b>Initial Bet: </b>$${lucky.initialValue}</p>
-            <p><b>Max Money: </b>$${lucky.maxValue}</p>
-            <p><b>Round # at Max: </b>${lucky.maxTurn}</p>
-            <p><b>Round # at 0: </b>${lucky.totalTurns}</p>
+            <h1>Unit Converter</h1>
             
-            <a href="${pageContext.request.contextPath}/apps/luckysevens"><button>Again</button></a>
+            <p><fmt:formatNumber maxFractionDigits="2" value="${result}"/></p>
+            
+            <a href="${pageContext.request.contextPath}/apps/unitconverter"><button>Again</button></a>
             
         </div>
         
         <footer>
             <p>Jory Pestorious 2016<br>Powered by Java and Bootstrap</p>
         </footer>
-                
+        
         <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
+                
     </body>
 </html>
 

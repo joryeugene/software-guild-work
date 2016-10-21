@@ -51,7 +51,9 @@
                         <td><c:out value="${report.endingPrincipal}"/></td>
                     </tr>
                 </c:forEach>
-            </table>            
+            </table>      
+            <br>
+            <a href="${pageContext.request.contextPath}/apps/interestcalculator"><button>Again</button></a>
             
         </div>
         

@@ -34,6 +34,8 @@
             <b>Tip %: </b>${check.tipPercentage}%<br>
             <b>Tip: </b><fmt:formatNumber value="${check.tip}" type="currency"/><br>
             <b>Total: </b><fmt:formatNumber value="${check.total}" type="currency"/><br>
+            <br>
+            <a href="${pageContext.request.contextPath}/apps/tipcalculator"><button>Again</button></a>
             
         </div>
         

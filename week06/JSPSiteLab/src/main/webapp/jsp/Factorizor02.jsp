@@ -36,6 +36,8 @@
             <p><b>Prime: </b>${num.prime}</p>
             <p><b>Perfect: </b>${num.perfect}</p>
             
+            <a href="${pageContext.request.contextPath}/apps/factorizor"><button>Again</button></a>
+            
         </div>
         
         <footer>

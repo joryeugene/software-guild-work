@@ -34,6 +34,8 @@
             <p><b>Material Cost: </b><fmt:formatNumber value="${report.materialCost}" type="currency"/></p>
             <p><b>Labor Cost: </b><fmt:formatNumber value="${report.laborCost}" type="currency"/></p>
             
+            <a href="${pageContext.request.contextPath}/apps/flooringcalculator"><button>Again</button></a>
+            
         </div>
         
         <footer>
