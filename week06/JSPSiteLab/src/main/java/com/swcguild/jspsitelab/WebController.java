@@ -1,6 +1,7 @@
 package com.swcguild.jspsitelab;
 
 import com.swcguild.jspsitelab.dto.FactorizorReport;
+import com.swcguild.jspsitelab.dto.FlooringReport;
 import com.swcguild.jspsitelab.dto.InterestReport;
 import com.swcguild.jspsitelab.dto.Lucky7Report;
 import com.swcguild.jspsitelab.dto.YearlyInterestReport;
@@ -134,4 +135,29 @@ public class WebController {
         
         return "InterestCalculator02";
     }
+    
+    @RequestMapping(value="flooringcalculator", method=RequestMethod.GET)
+    public String displayFlooringCalculator(HttpServletRequest req, Model model) {
+        return "FlooringCalculator01";
+    }
+    
+    @RequestMapping(value="flooringcalculatorresults", method=RequestMethod.POST)
+    public String displayFlooringCalculatorResults(HttpServletRequest req, Model model) { 
+        int width = Integer.parseInt(req.getParameter("width"));
+        int length = Integer.parseInt(req.getParameter("length"));
+        double materialCostPerSquareFt = Double.parseDouble(req.getParameter("materialCostPerSquareFt"));
+        
+        int area = width * length;
+        double materialCost = area * materialCostPerSquareFt;
+        double laborCost = Math.ceil(((area/20) * 60) / 15) * 21.5;  // ($21.5 for every 15 minutes of work / 20 ft an hour)
+        
+        FlooringReport report = new FlooringReport(width, length, materialCost, laborCost);
+        model.addAttribute("report", report);
+        
+        return "FlooringCalculator02";
+    }
+    
 }
+
+//20 square feet of flooring per hour at a cost of $86.00/hr with a 15-minute
+//billing increment. 
