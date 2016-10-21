@@ -1,0 +1,19 @@
+body {
+  padding-top: 70px;
+}
+
+.top-padding {
+  padding-top: 20px;
+}
+
+.top-padding > .nav-tabs {
+  padding-left: 20px;
+}
+
+#big img:first-child {
+  width: 99%;
+}
+
+#small img {
+  width: 98%;
+}
