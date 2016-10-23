@@ -16,7 +16,7 @@ public class OrderDAOJUnitTests {
 
     @Before
     public void setUp() {
-        instance = new OrderDAOTest();
+        instance = new OrderDAOTest("Data/ProductTypes.txt", "Data/TaxRates.txt", "Data/OrderListFileNames.txt");
     }
 
     @After

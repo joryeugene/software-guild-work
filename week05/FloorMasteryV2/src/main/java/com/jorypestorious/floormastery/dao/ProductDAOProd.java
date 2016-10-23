@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class ProductDAOProd implements ProductDAO {
     
     @Override
-    public List<Product> run() {
+    public List<Product> run(String productFile) {
         
         List<Product> productTypes = new ArrayList<>();
         
         try {
-            Scanner scanFile = new Scanner(new BufferedReader(new FileReader("Data/ProductTypes.txt")));
+            Scanner scanFile = new Scanner(new BufferedReader(new FileReader(productFile)));
             
             while (scanFile.hasNextLine()) {
                 String currentLine = scanFile.nextLine();

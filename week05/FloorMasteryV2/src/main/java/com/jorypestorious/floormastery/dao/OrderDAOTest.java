@@ -18,9 +18,9 @@ public class OrderDAOTest implements OrderDAO {
     private final List<Product> productTypes;
     private final List<TaxRate> stateTaxRates;
     
-    public OrderDAOTest() {
-        productTypes = new ProductDAOProd().run();
-        stateTaxRates = new TaxRateDAOProd().run();
+    public OrderDAOTest(String productFile, String taxFile, String orderListFile) {
+        productTypes = new ProductDAOProd().run(productFile);
+        stateTaxRates = new TaxRateDAOProd().run(taxFile);
         orderListsDatabase = new HashMap<>();
         
         currentOrderList = new ArrayList<>();

@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface TaxRateDAO {
     
-    List<TaxRate> run();
+    List<TaxRate> run(String taxFile);
 
 }

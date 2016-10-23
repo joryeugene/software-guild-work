@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ProductDAO {
     
-    List<Product> run();
+    List<Product> run(String productFile);
 
 }

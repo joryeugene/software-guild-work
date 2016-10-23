@@ -14,10 +14,10 @@ public class Runner {
         switch(readConfigFile()) {
             case "Test": 
                 System.out.println("Test Mode - Data Not Saved"); // can delete or leave to inform user that data will not be saved
-                new Controller(new OrderDAOTest()).run();
+                new Controller(new OrderDAOTest("Data/ProductTypes.txt", "Data/TaxRates.txt", "Data/OrderListFileNames.txt")).run();
                 break;
             case "Prod":
-                new Controller(new OrderDAOProd()).run();
+                new Controller(new OrderDAOProd("Data/ProductTypes.txt", "Data/TaxRates.txt", "Data/OrderListFileNames.txt")).run();
                 break;
         }
     }

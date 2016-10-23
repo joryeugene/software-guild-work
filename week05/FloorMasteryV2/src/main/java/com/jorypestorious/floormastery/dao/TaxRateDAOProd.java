@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class TaxRateDAOProd implements TaxRateDAO {
     
     @Override
-    public List<TaxRate> run() {
+    public List<TaxRate> run(String taxFile) {
         
         List<TaxRate> taxRates =  new ArrayList<>();
         
         try {
-            Scanner scanFile = new Scanner(new BufferedReader(new FileReader("Data/TaxRates.txt")));
+            Scanner scanFile = new Scanner(new BufferedReader(new FileReader(taxFile)));
             
             while (scanFile.hasNextLine()) {
                 String currentLine = scanFile.nextLine();

@@ -27,10 +27,10 @@ public class OrderDAOProd implements OrderDAO {
     private final List<Product> productTypes;
     private final List<TaxRate> stateTaxRates;
     
-    public OrderDAOProd() {
-        productTypes = new ProductDAOProd().run();
-        stateTaxRates = new TaxRateDAOProd().run();
-        orderListFileNames = getOrderListFileNames();
+    public OrderDAOProd(String productFile, String taxFile, String orderListFile) {
+        productTypes = new ProductDAOProd().run(productFile);
+        stateTaxRates = new TaxRateDAOProd().run(taxFile);
+        orderListFileNames = getOrderListFileNames(orderListFile);
         orderListsDatabase = loadFilestoDatabase();
         setCurrentList(LocalDate.now());
     }
@@ -98,10 +98,10 @@ public class OrderDAOProd implements OrderDAO {
         return database;
     }
     
-    private List<String> getOrderListFileNames() {
+    private List<String> getOrderListFileNames(String orderListFileNames) {
         List<String> fileNames = new ArrayList<>();
         
-        try ( Scanner scanFile = new Scanner(new BufferedReader( new FileReader("Data/OrderListFileNames.txt") )) ) {
+        try ( Scanner scanFile = new Scanner(new BufferedReader( new FileReader(orderListFileNames) )) ) {
             
             while (scanFile.hasNextLine()) {
                 String currentLine = scanFile.nextLine();
