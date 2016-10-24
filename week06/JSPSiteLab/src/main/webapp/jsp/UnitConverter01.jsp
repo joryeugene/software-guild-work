@@ -63,12 +63,12 @@
                 </div>
                 
                 <div id="temperature" class="hidden">
-                    <select name="startingUnit" class="child-select">
+                    <select name="" class="child-select">
                         <option value="celsius" selected>Celsius</option>
                         <option value="farenheit">Farenheit</option>
                         <option value="kelvin">Kelvin</option>
                     </select>
-                    <select name="endingUnit" class="child-select">
+                    <select name="" class="child-select">
                         <option value="celsius">Celsius</option>
                         <option value="farenheit" selected>Farenheit</option>
                         <option value="kelvin">Kelvin</option>                        

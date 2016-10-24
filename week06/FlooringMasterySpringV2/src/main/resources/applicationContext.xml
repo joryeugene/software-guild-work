@@ -16,15 +16,15 @@
  http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
     
     <bean id="orderDAOProd" class = "com.jorypestorious.floormastery.dao.OrderDAOProd">
-        <constructor-arg index="0" ref="Data/ProductTypes.txt"/>
-        <constructor-arg index="1" ref="Data/TaxRates.txt"/>
-        <constructor-arg index="2" ref="Data/OrderListFileNames.txt"/>
+        <constructor-arg index="0" value="Data/ProductTypes.txt"/>
+        <constructor-arg index="1" value="Data/TaxRates.txt"/>
+        <constructor-arg index="2" value="Data/OrderListFileNames.txt"/>
     </bean>
     
     <bean id="orderDAOTest" class = "com.jorypestorious.floormastery.dao.OrderDAOTest">
-        <constructor-arg index="0" ref="Data/ProductTypes.txt"/>
-        <constructor-arg index="1" ref="Data/TaxRates.txt"/>
-        <constructor-arg index="2" ref="Data/OrderListFileNames.txt"/>
+        <constructor-arg index="0" value="Data/ProductTypes.txt"/>
+        <constructor-arg index="1" value="Data/TaxRates.txt"/>
+        <constructor-arg index="2" value="Data/OrderListFileNames.txt"/>
     </bean>
     
     <bean id="consoleIO" class = "com.jorypestorious.floormastery.ui.ConsoleIO"/>
