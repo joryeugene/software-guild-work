@@ -17,7 +17,7 @@ public class ContactListDaoInMemImpl implements ContactListDao {
     // used to assign ids to Contacts - simulates the auto increment
     // primary key for Contacts in a database
     private static int contactIdCounter = 0;
-
+    
     @Override
     public Contact addContact(Contact contact) {
         // assign the current counter values as the contactid

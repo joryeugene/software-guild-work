@@ -10,6 +10,17 @@ public class Contact {
     private String company;
     private String phone;
     private String email;
+    
+    public Contact () {}
+
+    public Contact(String firstName, String lastName, String company, String phone, String email) {
+        this.contactId = contactId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.company = company;
+        this.phone = phone;
+        this.email = email;
+    }
 
     public int getContactId() {
         return contactId;
