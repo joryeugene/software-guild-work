@@ -35,14 +35,14 @@
                     <label for="edit-first-name" class="col-md-4 control-label">First Name:</label>
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-first-name"
-                                  path="firstName" placeholder="${contact.firstName}"/>
+                                  path="firstName" placeholder="First Name"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit-last-name" class="col-md-4 control-label">Last Name:</label>
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-last-name"
-                                  path="lastName" placeholder="${contact.lastName}"/>
+                                  path="lastName" placeholder="Last Name"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,21 +50,21 @@
 
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-company"
-                                  path="company" placeholder="${contact.company}"/>
+                                  path="company" placeholder="Company"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit-email" class="col-md-4 control-label">Email:</label>
                     <div class="col-md-8">
                         <sf:input type="email" class="form-control" id="edit-email"
-                                  path="email" placeholder="${contact.email}"/>
+                                  path="email" placeholder="Email"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit-phone" class="col-md-4 control-label">Phone:</label>
                     <div class="col-md-8">
                         <sf:input type="tel" class="form-control" id="edit-phone"
-                                  path="phone" placeholder="${contact.phone}"/>
+                                  path="phone" placeholder="Phone Number"/>
                         <sf:hidden path="contactId"/>
                     </div>
                 </div>
