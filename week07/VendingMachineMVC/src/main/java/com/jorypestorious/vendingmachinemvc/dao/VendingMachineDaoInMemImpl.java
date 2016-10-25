@@ -45,7 +45,7 @@ public class VendingMachineDaoInMemImpl implements VendingMachineDao {
     public double buyItem(int id, double money) {
         Item item = itemMap.get(id);
         
-        if (item.getCost() > money) {
+        if (item.getCost() <= money) {
             money -= item.getCost();
             item.takeOne();
             itemMap.put(id, item);
