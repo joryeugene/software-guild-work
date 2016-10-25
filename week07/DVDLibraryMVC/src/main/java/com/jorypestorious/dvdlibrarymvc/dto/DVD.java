@@ -20,18 +20,7 @@ public class DVD {
         this.studio = studio;
         this.note = note;
     }
-    
-    @Override
-    public String toString() {
-        return "\"" + title + "\" (" + year + ") Rated " + mpaa + 
-                "\nDirected by " + director + " and Produced by " +
-                studio + "\nNote: " + note;
-    }
-    
-    //“Spring, Summer, Fall, Winter... and Spring” (2003) Rated R
-    //Directed by Ki-duk Kim and Produced by Korea Pictures 
-    //Note: 
-    
+        
     public void setId(int id) {
         this.id = id;
     }

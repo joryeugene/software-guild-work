@@ -19,6 +19,7 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/search/">Search</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayDVDLibraryNoAjax/">DVD Library (No Ajax)</a></li>
                 </ul>    
             </div>
             <h2>Stats</h2>
