@@ -10,6 +10,8 @@ public class DVD {
     private String studio;
     private String note; // user rating or note
     
+    public DVD() {}
+    
     public DVD(String title, int year, String mpaa, String director, String studio, String note) {
         this.title = title;
         this.year = year;

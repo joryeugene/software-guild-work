@@ -7,6 +7,14 @@ public class Item {
     private double cost;
     private int count;
     
+    public Item() {}
+
+    public Item(String name, double cost, int count) {
+        this.name = name;
+        this.cost = cost;
+        this.count = count;
+    }
+    
     public int takeOne() {
         return --count;
     }
