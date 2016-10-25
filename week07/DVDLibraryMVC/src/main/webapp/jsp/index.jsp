@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Company Contacts</title>
+        <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
         
     </head>
     <body>
         <div class="container">
-            <h1>Company Contacts</h1>
+            <h1>DVD Library</h1>
             <hr>
             <div class="navbar">
                 <ul class="nav nav-tabs">
