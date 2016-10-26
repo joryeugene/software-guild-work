@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label for="edit-cost" class="col-md-4 control-label">Cost Per Unit:</label>
                     <div class="col-md-8">
-                        <sf:input type="text"
+                        <sf:input type="number" step="any"
                                class="form-control"
                                id="edit-cost"
                                path="cost"
@@ -65,7 +65,7 @@
                     <label for="edit-quantity"
                            class="col-md-4 control-label">Quantity:</label>
                     <div class="col-md-8">
-                        <sf:input type="text"
+                        <sf:input type="number"
                                class="form-control"
                                id="edit-quantity"
                                path="count"
