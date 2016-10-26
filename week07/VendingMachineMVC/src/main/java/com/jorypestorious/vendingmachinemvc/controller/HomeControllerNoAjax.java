@@ -5,8 +5,10 @@ import com.jorypestorious.vendingmachinemvc.dto.Item;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,17 +33,18 @@ public class HomeControllerNoAjax {
     }
 
     @RequestMapping(value = "displayNewItemFormNoAjax", method = RequestMethod.GET)
-    public String displayNewContactFormNoAjax() {
+    public String displayNewContactFormNoAjax(Model model) {
+        Item item = new Item();
+        model.addAttribute("item", item);
         return "newItemFormNoAjax";
     }
 
     @RequestMapping(value = "/addNewItemNoAjax", method = RequestMethod.POST)
-    public String addNewItemNoAjax(HttpServletRequest req) {
-        String name = req.getParameter("name");
-        double cost = Double.parseDouble(req.getParameter("cost"));
-        int count = Integer.parseInt(req.getParameter("count"));
-
-        Item item = new Item(name, cost, count);
+    public String addNewItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
+        if (result.hasErrors()) {
+            return "newItemFormNoAjax";
+        }
+        
         dao.addItem(item);
         return "redirect:displayVendingMachineNoAjax";
     }
@@ -69,9 +72,12 @@ public class HomeControllerNoAjax {
     }
 
     @RequestMapping(value = "/editItemNoAjax", method = RequestMethod.POST)
-    public String editItemNoAjax(@ModelAttribute("item") Item item) {
+    public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
+        if (result.hasErrors()) {
+            return "editItemFormNoAjax";
+        }
+        
         dao.updateItem(item);
-
         return "redirect:displayVendingMachineNoAjax";
     }
 }

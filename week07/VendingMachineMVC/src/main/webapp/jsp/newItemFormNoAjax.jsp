@@ -32,29 +32,32 @@
             <a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax">Back - Vending Machine (No Ajax)</a><br/>
             <hr/>
 
-            <form class="form-horizontal"
+            <sf:form class="form-horizontal"
                   role="form"
+                  modelAttribute="item"
                   action="addNewItemNoAjax"
                   method="POST">
                 <div class="form-group">
                     <label for="add-name"
                            class="col-md-4 control-label">Item Name:</label>
                     <div class="col-md-8">
-                        <input type="text"
+                        <sf:input type="text"
                                class="form-control"
                                id="add-name"
-                               name="name"
+                               path="name"
                                placeholder="Item Name"/>
+                        <sf:errors path="name" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="add-cost" class="col-md-4 control-label">Cost Per Unit:</label>
                     <div class="col-md-8">
-                        <input type="text"
+                        <sf:input type="text"
                                class="form-control"
                                id="add-cost"
-                               name="cost"
+                               path="cost"
                                placeholder="Cost Per Unit"/>
+                        <sf:errors path="cost" class="error"></sf:errors>
                     </div>
                 </div>
 
@@ -62,11 +65,12 @@
                     <label for="add-quantity"
                            class="col-md-4 control-label">Quantity:</label>
                     <div class="col-md-8">
-                        <input type="text"
+                        <sf:input type="text"
                                class="form-control"
                                id="add-quantity"
-                               name="count"
+                               path="count"
                                placeholder="Quantity"/>
+                        <sf:errors path="count" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -76,7 +80,7 @@
                                 class="btn btn-default">Add New Item</button>
                     </div>
                 </div>
-            </form>
+            </sf:form>
         </div>
 
 

@@ -46,6 +46,7 @@
                                id="edit-name"
                                path="name"
                                placeholder="Item Name"/>
+                        <sf:errors path="name" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,6 +57,7 @@
                                id="edit-cost"
                                path="cost"
                                placeholder="Cost Per Unit"/>
+                        <sf:errors path="cost" class="error"></sf:errors>
                     </div>
                 </div>
 
@@ -68,6 +70,7 @@
                                id="edit-quantity"
                                path="count"
                                placeholder="Quantity"/>
+                        <sf:errors path="count" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
