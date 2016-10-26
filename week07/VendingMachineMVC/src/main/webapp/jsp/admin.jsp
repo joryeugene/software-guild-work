@@ -18,6 +18,7 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/admin/">ADMIN</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax/">Vending Machine (No Ajax)</a></li>
                 </ul>    
             </div>
             <h2>ADMIN</h2>
