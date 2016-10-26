@@ -5,8 +5,10 @@ import com.jorypestorious.contactlistspringmvc.dto.Contact;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -128,10 +130,12 @@ public class HomeControllerNoAjax {
     // then hands the Contact to the DAO for update, and finally redirects to
     // the displayContactListNoAjax controller endpoint.
     @RequestMapping(value = "/editContactNoAjax", method = RequestMethod.POST)
-    public String editContactNoAjax(@ModelAttribute("contact") Contact contact) {
-
+    public String editContactNoAjax(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
+        if (result.hasErrors()) {
+            return "editContactFormNoAjax";
+        }
+        
         dao.updateContact(contact);
-
         return "redirect:displayContactListNoAjax";
     }
 

@@ -9,6 +9,12 @@
         <title>Company Contacts</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
 
     </head>
     <body>
@@ -25,52 +31,55 @@
             </div>
             <h2>Edit Contact</h2>
 
-            <!-- #1 - Link to displayContactListNoAjax -->
+            
             <a href="displayContactListNoAjax">Back - Contact List (No Ajax)</a><br>
             <hr>
 
             <sf:form class="form-horizontal" role="form" modelAttribute="contact"
                      action="editContactNoAjax" method="POST">
                 <div class="form-group">
-                    <label for="edit-first-name" class="col-md-4 control-label">First Name:</label>
+                    <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
                     <div class="col-md-8">
-                        <sf:input type="text" class="form-control" id="edit-first-name"
+                        <sf:input type="text" class="form-control" id="add-first-name"
                                   path="firstName" placeholder="First Name"/>
+                        <sf:errors path="firstName" class="error"></sf:errors>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-last-name" class="col-md-4 control-label">Last Name:</label>
-                    <div class="col-md-8">
-                        <sf:input type="text" class="form-control" id="edit-last-name"
+                    <div class="form-group">
+                        <label for="add-last-name" class="col-md-4 control-label">Last Name:</label>
+                        <div class="col-md-8">
+                        <sf:input type="text" class="form-control" id="add-last-name"
                                   path="lastName" placeholder="Last Name"/>
+                        <sf:errors path="lastName" class="error"></sf:errors>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-company" class="col-md-4 control-label">Company:</label>
-
-                    <div class="col-md-8">
-                        <sf:input type="text" class="form-control" id="edit-company"
+                    <div class="form-group">
+                        <label for="add-company" class="col-md-4 control-label">Company:</label>
+                        <div class="col-md-8">
+                        <sf:input type="text" class="form-control" id="add-company"
                                   path="company" placeholder="Company"/>
+                        <sf:errors path="company" class="error"></sf:errors>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-email" class="col-md-4 control-label">Email:</label>
-                    <div class="col-md-8">
-                        <sf:input type="email" class="form-control" id="edit-email"
-                                  path="email" placeholder="Email"/>
+                    <div class="form-group">
+                        <label for="add-email" class="col-md-4 control-label">Email:</label>
+                        <div class="col-md-8">
+                        <sf:input type="email" class="form-control" id="add-email" path="email" placeholder="Email"/>
+                        <sf:errors path="email" class="error"></sf:errors>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-phone" class="col-md-4 control-label">Phone:</label>
-                    <div class="col-md-8">
-                        <sf:input type="tel" class="form-control" id="edit-phone"
-                                  path="phone" placeholder="Phone Number"/>
+                    <div class="form-group">
+                        <label for="add-phone" class="col-md-4 control-label">Phone:</label>
+                        <div class="col-md-8">
+                        <sf:input type="tel" class="form-control" id="add-phone"
+                                  path="phone" placeholder="Phone"/>
+                        <sf:errors path="phone" class="error"></sf:errors>
                         <sf:hidden path="contactId"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
-                        <button type="submit" id="edit-button" class="btn btn-default">Update Contact</button>
+                        <button type="submit" id="add-button" class="btn btn-default">Update Contact</button>
                     </div>
                 </div>
             </sf:form>
