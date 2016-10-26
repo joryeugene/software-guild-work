@@ -9,7 +9,12 @@
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -35,6 +40,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-title"
                                   path="title" placeholder="Title"/>
+                        <sf:errors path="title" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,6 +48,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-year"
                                   path="year" placeholder="Year"/>
+                        <sf:errors path="year" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,6 +56,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-mpaa"
                                   path="mpaa" placeholder="MPAA Rating"/>
+                        <sf:errors path="mpaa" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,6 +64,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-director"
                                   path="director" placeholder="Director"/>
+                        <sf:errors path="director" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,6 +72,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-studio"
                                   path="studio" placeholder="Studio"/>
+                        <sf:errors path="studio" class="error"></sf:errors>
                     </div>
                 </div>
                     <div class="form-group">
@@ -70,6 +80,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="edit-note"
                                   path="note" placeholder="Note"/>
+                        <sf:errors path="note" class="error"></sf:errors>
                         <sf:hidden path="id"/>
                     </div>
                 </div>

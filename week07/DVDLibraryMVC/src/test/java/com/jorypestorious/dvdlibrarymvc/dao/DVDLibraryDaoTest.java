@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,7 +26,7 @@ public class DVDLibraryDaoTest {
     @Test
     public void testAddGetRemoveDVD() {
         System.out.println("addDVD");
-        DVD dvd = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
         dao.addDVD(dvd);
         DVD fromDB = dao.getDVDById(dvd.getId());
         assertEquals(dvd, fromDB);
@@ -39,7 +38,7 @@ public class DVDLibraryDaoTest {
     @Test
     public void testUpdateDVD() {
         System.out.println("updateDVD");
-        DVD dvd = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
         dao.addDVD(dvd);
         dvd.setTitle("New Title");
         dao.updateDVD(dvd);
@@ -50,8 +49,8 @@ public class DVDLibraryDaoTest {
     @Test
     public void testGetAllDVDs() {
         System.out.println("getAllDVDs");
-        DVD dvd1 = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
-        DVD dvd2 = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd1 = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd2 = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
         dao.addDVD(dvd1);
         dao.addDVD(dvd2);
         assertEquals(2, dao.getAllDVDs().size());
@@ -60,9 +59,9 @@ public class DVDLibraryDaoTest {
     @Test
     public void testSearchDVDs() {
         System.out.println("searchDVDs");
-        DVD dvd1 = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
-        DVD dvd2 = new DVD("Test Title", 2000, "G", "Test Director", "Test Studio", "Test note");
-        DVD dvd3 = new DVD("Different Title", 2000, "PG", "Different Director", "Different Studio", "Test note");
+        DVD dvd1 = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd2 = new DVD("Test Title", "2000", "G", "Test Director", "Test Studio", "Test note");
+        DVD dvd3 = new DVD("Different Title", "2000", "PG", "Different Director", "Different Studio", "Test note");
         dao.addDVD(dvd1);
         dao.addDVD(dvd2);
         dao.addDVD(dvd3);

@@ -5,8 +5,10 @@ import com.jorypestorious.dvdlibrarymvc.dto.DVD;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +22,8 @@ public class HomeControllerNoAjax {
     @Inject
     public HomeControllerNoAjax(DVDLibraryDao dao) {
         this.dao = dao;
-        dao.addDVD(new DVD("Finding Nemo", 2003, "G", "Andrew Stanton", "Pixar", "Stupid fish swims around aimlessly"));
-        dao.addDVD(new DVD("Spirited Away", 2001, "PG", "Hayao Miyazaki", "Studio Ghibli", "Young girl does some dirty work at a bathhouse"));
+        dao.addDVD(new DVD("Finding Nemo", "2003", "G", "Andrew Stanton", "Pixar", "Stupid fish swims around aimlessly"));
+        dao.addDVD(new DVD("Spirited Away", "2001", "PG", "Hayao Miyazaki", "Studio Ghibli", "Young girl does some dirty work at a bathhouse"));
     }
 
     @RequestMapping(value = "/displayDVDLibraryNoAjax", method = RequestMethod.GET)
@@ -39,7 +41,7 @@ public class HomeControllerNoAjax {
     @RequestMapping(value = "/addNewDVDNoAjax", method = RequestMethod.POST)
     public String addNewDVDNoAjax(HttpServletRequest req) {
         String title = req.getParameter("title");
-        int year = Integer.parseInt(req.getParameter("year"));
+        String year = req.getParameter("year");
         String mpaa = req.getParameter("mpaa");
         String director = req.getParameter("director");
         String studio = req.getParameter("studio");
@@ -74,7 +76,11 @@ public class HomeControllerNoAjax {
     }
 
     @RequestMapping(value = "/editDVDNoAjax", method = RequestMethod.POST)
-    public String editCDVDNoAjax(@ModelAttribute("dvd") DVD dvd) {
+    public String editCDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result) {
+        if (result.hasErrors()) {
+            return "editDVDFormNoAjax";
+        }
+        
         dao.updateDVD(dvd);
         return "redirect:displayDVDLibraryNoAjax";
     }

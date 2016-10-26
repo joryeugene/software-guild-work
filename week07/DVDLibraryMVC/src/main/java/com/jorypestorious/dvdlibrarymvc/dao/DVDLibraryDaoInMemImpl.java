@@ -73,7 +73,7 @@ public class DVDLibraryDaoInMemImpl implements DVDLibraryDao {
 
         yearMatches = (yearCriteria == null || yearCriteria.isEmpty())
                 ? truePredicate
-                : (c) -> Integer.toString(c.getYear()).equalsIgnoreCase(yearCriteria);
+                : (c) -> c.getYear().equalsIgnoreCase(yearCriteria);
 
         mpaaMatches = (mpaaCriteria == null || mpaaCriteria.isEmpty())
                 ? truePredicate
