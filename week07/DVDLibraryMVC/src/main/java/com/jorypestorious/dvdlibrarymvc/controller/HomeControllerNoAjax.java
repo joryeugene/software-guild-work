@@ -34,29 +34,19 @@ public class HomeControllerNoAjax {
     }
 
     @RequestMapping(value = "/displayNewDVDFormNoAjax", method = RequestMethod.GET)
-    public String displayNewDVDFormNoAjax() {
+    public String displayNewDVDFormNoAjax(Model model) {
+        DVD dvd = new DVD("", "", "", "", "", "");
+        model.addAttribute("dvd", dvd);
         return "newDVDFormNoAjax";
     }
 
     @RequestMapping(value = "/addNewDVDNoAjax", method = RequestMethod.POST)
-    public String addNewDVDNoAjax(HttpServletRequest req) {
-        String title = req.getParameter("title");
-        String year = req.getParameter("year");
-        String mpaa = req.getParameter("mpaa");
-        String director = req.getParameter("director");
-        String studio = req.getParameter("studio");
-        String note = req.getParameter("note");
-
-        DVD dvd = new DVD();
-        dvd.setTitle(title);
-        dvd.setYear(year);
-        dvd.setMpaa(mpaa);
-        dvd.setDirector(director);
-        dvd.setStudio(studio);
-        dvd.setNote(note);
-
+    public String addNewDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result) {
+        if (result.hasErrors()) {
+            return "newDVDFormNoAjax";
+        }
+        
         dao.addDVD(dvd);
-
         return "redirect:displayDVDLibraryNoAjax";
     }
 
