@@ -1,5 +1,6 @@
 package com.jorypestorious.vendingmachinemvc.controller;
 
+import com.jorypestorious.vendingmachinemvc.dto.Money;
 import com.jorypestorious.vendingmachinemvc.dao.VendingMachineDao;
 import com.jorypestorious.vendingmachinemvc.dto.Item;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeControllerNoAjax {
 
     private final VendingMachineDao dao;
+    private Money money = null;
 
     @Inject
     public HomeControllerNoAjax(VendingMachineDao dao) {
@@ -27,8 +29,15 @@ public class HomeControllerNoAjax {
 
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)
     public String displayVendingMachineNoAjax(Model model) {
+        if (money == null) {
+            money = new Money();
+        }
+        
+        model.addAttribute("money", money);
+        
         List<Item> itemList = dao.getAllItems();
         model.addAttribute("itemList", itemList);
+        
         return "displayVendingMachineNoAjax";
     }
 
@@ -59,7 +68,24 @@ public class HomeControllerNoAjax {
     @RequestMapping(value = "/buyItemNoAjax", method = RequestMethod.GET)
     public String buyItemNoAjax(HttpServletRequest req) {
         int id = Integer.parseInt(req.getParameter("id"));
-        dao.buyItem(id, 100); // introduce money
+        Item item = dao.getItemById(id);
+        
+        if (item.getCount() > 0 && item.getCost() < money.getAmount()) {
+            dao.buyItem(id, money.getAmount());
+            money.removeAmount(item.getCost());
+            // add item and quantity to list of bought things TODO
+        }
+        
+        return "redirect:displayVendingMachineNoAjax";
+    }
+    
+    @RequestMapping(value = "/addMoneyNoAjax", method = RequestMethod.POST)
+    public String addMoneyNoAjax(@Valid @ModelAttribute("money") Money newMoney, BindingResult result) {
+        if (result.hasErrors()) {
+            return "displayVendingMachineNoAjax";
+        }
+        
+        money.addAmount(newMoney.getAmount());
         return "redirect:displayVendingMachineNoAjax";
     }
 

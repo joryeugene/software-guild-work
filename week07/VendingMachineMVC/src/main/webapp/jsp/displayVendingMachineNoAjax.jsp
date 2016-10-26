@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,17 @@
             <h2>Items</h2>
 
             <a href="${pageContext.request.contextPath}/displayNewItemFormNoAjax">Add an Item</a><br/>
+            <hr/>
+            <div id="money">
+                <b>Current Money: </b> <fmt:formatNumber value="${money.amount}" type="currency"/>
+            </div>
+            
+            <sf:form role="form" modelAttribute="money" action="${pageContext.request.contextPath}/addMoneyNoAjax" method="POST">
+                <sf:input type="number" step="any" path="amount" value="1.00" placeholder="1.00"/>
+                <sf:errors path="amount" class="error"></sf:errors><br>
+                <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
+            </sf:form>
+                
             <hr/>
             
             <c:forEach var="item" items="${itemList}">
