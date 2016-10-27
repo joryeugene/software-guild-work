@@ -2,3 +2,12 @@
     color: red;
     font-weight: bold;
 }
+
+.money-amount {
+    font-size: 1.4em;
+}
+
+#items-div {
+    overflow: scroll;
+    height: 100%;
+}

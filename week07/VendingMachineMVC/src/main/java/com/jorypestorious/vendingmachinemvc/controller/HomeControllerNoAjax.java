@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeControllerNoAjax {
-
+    
     private final VendingMachineDao dao;
     private Money money = null;
     private boolean notEnoughMoney = false;
-
+    
     @Inject
     public HomeControllerNoAjax(VendingMachineDao dao) {
         this.dao = dao;
         dao.addItem(new Item("Item1", 1.5, 15));
         dao.addItem(new Item("Item2", 2, 3));
     }
-
+    
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)
     public String displayVendingMachineNoAjax(Model model) {
         List<Item> itemList = dao.getAllItems();
@@ -35,41 +35,43 @@ public class HomeControllerNoAjax {
         if (money == null) {
             money = new Money();
         }
+        
         Item item = new Item();
-        model.addAttribute("item", item);        
+        model.addAttribute("item", item);
         model.addAttribute("money", money);
-        model.addAttribute("notEnoughMoney", notEnoughMoney);
         model.addAttribute("itemList", itemList);
+        model.addAttribute("notEnoughMoney", notEnoughMoney);
         notEnoughMoney = false;
         
         return "displayVendingMachineNoAjax";
     }
-
-    // can delete
+    
     @RequestMapping(value = "displayNewItemFormNoAjax", method = RequestMethod.GET)
     public String displayNewContactFormNoAjax(Model model) {
         Item item = new Item();
         model.addAttribute("item", item);
         return "newItemFormNoAjax";
     }
-
+    
     @RequestMapping(value = "/addNewItemNoAjax", method = RequestMethod.POST)
-    public String addNewItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
+    public String addNewItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("money", money);
+            model.addAttribute("itemList", dao.getAllItems());
             return "displayVendingMachineNoAjax";
         }
         
         dao.addItem(item);
         return "redirect:displayVendingMachineNoAjax";
     }
-
+    
     @RequestMapping(value = "/deleteItemNoAjax", method = RequestMethod.GET)
     public String deleteItemNoAjax(HttpServletRequest req) {
         int id = Integer.parseInt(req.getParameter("id"));
         dao.removeItem(id);
         return "redirect:displayVendingMachineNoAjax";
     }
-
+    
     @RequestMapping(value = "/buyItemNoAjax", method = RequestMethod.GET)
     public String buyItemNoAjax(HttpServletRequest req) {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -88,15 +90,11 @@ public class HomeControllerNoAjax {
     }
     
     @RequestMapping(value = "/addMoneyNoAjax", method = RequestMethod.POST)
-    public String addMoneyNoAjax(@Valid @ModelAttribute("money") Money newMoney, BindingResult result) {
-        if (result.hasErrors()) {
-            return "displayVendingMachineNoAjax";
-        }
-        
-        money.addAmount(newMoney.getAmount());
+    public String addMoneyNoAjax(HttpServletRequest req) {
+        money.addAmount(Double.parseDouble(req.getParameter("amount")));
         return "redirect:displayVendingMachineNoAjax";
     }
-
+    
     @RequestMapping(value = "/displayEditItemFormNoAjax", method = RequestMethod.GET)
     public String displayEditItemFormNoAjax(HttpServletRequest req, Model model) {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -104,7 +102,7 @@ public class HomeControllerNoAjax {
         model.addAttribute("item", item);
         return "editItemFormNoAjax";
     }
-
+    
     @RequestMapping(value = "/editItemNoAjax", method = RequestMethod.POST)
     public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
         if (result.hasErrors()) {
