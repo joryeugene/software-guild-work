@@ -19,6 +19,7 @@ public class HomeControllerNoAjax {
 
     private final VendingMachineDao dao;
     private Money money = null;
+    private boolean notEnoughMoney = false;
 
     @Inject
     public HomeControllerNoAjax(VendingMachineDao dao) {
@@ -29,14 +30,16 @@ public class HomeControllerNoAjax {
 
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)
     public String displayVendingMachineNoAjax(Model model) {
+        List<Item> itemList = dao.getAllItems();
+        
         if (money == null) {
             money = new Money();
         }
         
         model.addAttribute("money", money);
-        
-        List<Item> itemList = dao.getAllItems();
+        model.addAttribute("notEnoughMoney", notEnoughMoney);
         model.addAttribute("itemList", itemList);
+        notEnoughMoney = false;
         
         return "displayVendingMachineNoAjax";
     }
@@ -71,9 +74,12 @@ public class HomeControllerNoAjax {
         Item item = dao.getItemById(id);
         
         if (item.getCount() > 0 && item.getCost() < money.getAmount()) {
+            notEnoughMoney = false;
             dao.buyItem(id, money.getAmount());
             money.removeAmount(item.getCost());
             // add item and quantity to list of bought things TODO
+        } else {
+            notEnoughMoney = true;
         }
         
         return "redirect:displayVendingMachineNoAjax";

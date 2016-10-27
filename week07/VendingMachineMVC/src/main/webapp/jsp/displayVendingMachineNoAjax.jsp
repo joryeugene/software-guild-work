@@ -36,6 +36,9 @@
             </div>
             
             <sf:form role="form" modelAttribute="money" action="${pageContext.request.contextPath}/addMoneyNoAjax" method="POST">
+                <c:if test="${notEnoughMoney}">
+                    <span class="error">NOT ENOUGH MONEY</span><br/>
+                </c:if>
                 <sf:input type="number" step="any" path="amount" value="1.00" placeholder="1.00"/>
                 <sf:errors path="amount" class="error"></sf:errors><br>
                 <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
