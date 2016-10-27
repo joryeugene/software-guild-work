@@ -28,59 +28,36 @@
             <a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax">Back - Vending Machine (No Ajax)</a><br/>
             <hr/>
 
-            <sf:form class="form-horizontal"
-                  role="form"
-                  modelAttribute="item"
-                  action="editItemNoAjax"
-                  method="POST">
+            <sf:form class="form-horizontal" role="form" modelAttribute="item" action="editItemNoAjax" method="POST">
                 <div class="form-group">
-                    <label for="edit-name"
-                           class="col-md-2 control-label">Item Name:</label>
+                    <label for="edit-name" class="col-md-2 control-label">Item Name:</label>
                     <div class="col-md-3">
-                        <sf:input type="text"
-                               class="form-control"
-                               id="edit-name"
-                               path="name"
-                               placeholder="Item Name"/>
+                        <sf:input type="text" class="form-control" id="edit-name" path="name" placeholder="Item Name"/>
                         <sf:errors path="name" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit-cost" class="col-md-2 control-label">Cost Per Unit:</label>
                     <div class="col-md-3">
-                        <sf:input type="number" step="any"
-                               class="form-control"
-                               id="edit-cost"
-                               path="cost"
-                               placeholder="Cost Per Unit"/>
+                        <sf:input type="number" step="any" class="form-control" id="edit-cost" path="cost" placeholder="Cost Per Unit"/>
                         <sf:errors path="cost" class="error"></sf:errors>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="edit-quantity"
-                           class="col-md-2 control-label">Quantity:</label>
+                    <label for="edit-quantity" class="col-md-2 control-label">Quantity:</label>
                     <div class="col-md-3">
-                        <sf:input type="number"
-                               class="form-control"
-                               id="edit-quantity"
-                               path="count"
-                               placeholder="Quantity"/>
+                        <sf:input type="number" class="form-control" id="edit-quantity" path="count" placeholder="Quantity"/>
                         <sf:errors path="count" class="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-3">
-                        <button type="submit"
-                                id="add-button"
-                                class="btn btn-default">Update Item</button>
+                        <button type="submit" id="add-button" class="btn btn-default">Update Item</button>
                     </div>
                 </div>
             </sf:form>
         </div>
-
-
-
+            
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     </body>

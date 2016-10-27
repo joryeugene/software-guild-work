@@ -8,8 +8,18 @@
 }
 
 #items-div {
-    border: 1px solid grey;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    height: 450px;
     padding: 10px;
     overflow: scroll;
-    height: 450px;
+}
+
+#vending-machine {
+    background-color: orange;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #888888;
+    color: white;
+    padding-bottom: 20px;
 }

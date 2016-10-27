@@ -27,7 +27,7 @@ public class HomeControllerNoAjax {
     }
     
     private void populateVendingMachine() {
-        dao.addItem(new Item("Twinkie", .5, 2));
+        dao.addItem(new Item("Twinkie", .5, 1));
         dao.addItem(new Item("Wrigley's Winterfresh Gum", 1.25, 3));
         dao.addItem(new Item("Hot Tamales", 1.75, 7));
         dao.addItem(new Item("Sour Patch Kids", 1.25, 9));
@@ -53,13 +53,6 @@ public class HomeControllerNoAjax {
         notEnoughMoney = false;
         
         return "displayVendingMachineNoAjax";
-    }
-    
-    @RequestMapping(value = "displayNewItemFormNoAjax", method = RequestMethod.GET)
-    public String displayNewContactFormNoAjax(Model model) {
-        Item item = new Item();
-        model.addAttribute("item", item);
-        return "newItemFormNoAjax";
     }
     
     @RequestMapping(value = "/addNewItemNoAjax", method = RequestMethod.POST)
@@ -105,20 +98,29 @@ public class HomeControllerNoAjax {
     }
     
     @RequestMapping(value = "/displayEditItemFormNoAjax", method = RequestMethod.GET)
-    public String displayEditItemFormNoAjax(HttpServletRequest req, Model model) {
+    public String displayVendingMachineNoAjaxEditItem(HttpServletRequest req, Model model) {
+        List<Item> itemList = dao.getAllItems();
         int id = Integer.parseInt(req.getParameter("id"));
         Item item = dao.getItemById(id);
+        
         model.addAttribute("item", item);
-        return "editItemFormNoAjax";
+        model.addAttribute("money", money);
+        model.addAttribute("itemList", itemList);
+        model.addAttribute("notEnoughMoney", notEnoughMoney);
+        
+        return "displayVendingMachineNoAjaxEditItem";
     }
     
     @RequestMapping(value = "/editItemNoAjax", method = RequestMethod.POST)
-    public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
+    public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "editItemFormNoAjax";
+            model.addAttribute("money", money);
+            model.addAttribute("itemList", dao.getAllItems());
+            return "displayVendingMachineNoAjaxEditItem";
         }
         
         dao.updateItem(item);
         return "redirect:displayVendingMachineNoAjax";
     }
+    
 }

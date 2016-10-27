@@ -48,7 +48,7 @@
                     </form>
 
                     <hr/>
-                    
+
                     <!-- list of bought items -->
                 </div>
 
@@ -81,41 +81,41 @@
                 </div>
 
                 <div class="col-md-4">
-                    <h2 class="text-center">Add Item</h2>
-                    <sf:form class="form-horizontal" role="form" modelAttribute="item"
-                             action="${pageContext.request.contextPath}/addNewItemNoAjax" method="POST">
+                    <h2 class="text-center">Edit Item</h2>
+                    <sf:form class="form-horizontal" role="form" modelAttribute="item" action="editItemNoAjax" method="POST">
                         <div class="form-group">
-                            <label for="add-name" class="col-md-4 control-label">Item Name:</label>
+                            <label for="edit-name" class="col-md-4 control-label">Item Name:</label>
                             <div class="col-md-8">
-                                <sf:input type="text" class="form-control" id="add-name" path="name" placeholder="Item Name"/>
+                                <sf:input type="text" class="form-control" id="edit-name" path="name" placeholder="Item Name"/>
                                 <sf:errors path="name" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="add-cost" class="col-md-4 control-label">Cost Per Unit:</label>
+                                <label for="edit-cost" class="col-md-4 control-label">Cost Per Unit:</label>
                                 <div class="col-md-8">
-                                <sf:input type="number" step="any" class="form-control" id="add-cost" path="cost" placeholder="Cost Per Unit"/>
+                                <sf:input type="number" step="any" class="form-control" id="edit-cost" path="cost" placeholder="Cost Per Unit"/>
                                 <sf:errors path="cost" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="add-quantity" class="col-md-4 control-label">Quantity:</label>
+                                <label for="edit-quantity" class="col-md-4 control-label">Quantity:</label>
                                 <div class="col-md-8">
-                                <sf:input type="number" class="form-control" id="add-quantity" path="count" placeholder="Quantity"/>
+                                <sf:input type="number" class="form-control" id="edit-quantity" path="count" placeholder="Quantity"/>
                                 <sf:errors path="count" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-8">
-                                    <button type="submit" id="add-button" class="btn btn-default">Add New Item</button>
+                                    <button type="submit" id="add-button" class="btn btn-default">Update Item</button>
+                                    <a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax">Cancel</a><br>
                                 </div>
                             </div>
                     </sf:form>
                 </div>
-                        
+
             </div> <!-- main row -->
         </div>
-                        
+
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     </body>
