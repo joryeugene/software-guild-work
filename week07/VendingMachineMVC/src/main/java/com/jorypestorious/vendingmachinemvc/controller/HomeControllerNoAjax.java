@@ -113,10 +113,10 @@ public class HomeControllerNoAjax {
             item.takeOne();
             money.removeAmount(item.getCost());
             
-            boolean previouslyBought = boughtItems.stream().anyMatch(i -> i.getName() == item.getName());
+            boolean previouslyBought = boughtItems.stream().anyMatch( i -> i.getName().equalsIgnoreCase(item.getName()) );
             
             if (previouslyBought) {
-                boughtItems.stream().filter(i -> i.getName() == item.getName()).forEach(i -> i.setCount(i.getCount()+1));
+                boughtItems.stream().filter( i -> i.getName().equalsIgnoreCase(item.getName()) ).forEach(i -> i.setCount(i.getCount()+1));
             } else {
                 Item newBoughtItem = new Item(item.getName(), item.getCost(), 1);
                 boughtItems.add(newBoughtItem);

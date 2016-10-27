@@ -51,12 +51,12 @@
                     <!-- list of bought items -->
                     <c:if test="${boughtList.size() > 0}">
                         <h3>Bought Items:</h3>
-                    </c:if>
-                    <div id="bought-items">
-                        <c:forEach var="bought" items="${boughtList}">
-                            <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
-                        </c:forEach>
-                    </div>
+                        <div id="bought-items">
+                            <c:forEach var="bought" items="${boughtList}">
+                                <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
+                                </c:forEach>
+                        </div>
+                     </c:if>
                 </div>
 
                 <div id="vending-machine" class="col-md-4">
