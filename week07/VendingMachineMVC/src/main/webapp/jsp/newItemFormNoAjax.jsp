@@ -8,13 +8,8 @@
     <head>
         <title>Vending Machine</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-        <style>
-            .error {
-                color: red;
-                font-weight: bold;
-            }
-        </style>
     </head>
     <body>
         <div class="container">
@@ -39,8 +34,8 @@
                   method="POST">
                 <div class="form-group">
                     <label for="add-name"
-                           class="col-md-4 control-label">Item Name:</label>
-                    <div class="col-md-8">
+                           class="col-md-2 control-label">Item Name:</label>
+                    <div class="col-md-3">
                         <sf:input type="text"
                                class="form-control"
                                id="add-name"
@@ -50,8 +45,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="add-cost" class="col-md-4 control-label">Cost Per Unit:</label>
-                    <div class="col-md-8">
+                    <label for="add-cost" class="col-md-2 control-label">Cost Per Unit:</label>
+                    <div class="col-md-3">
                         <sf:input type="number" step="any"
                                class="form-control"
                                id="add-cost"
@@ -63,8 +58,8 @@
 
                 <div class="form-group">
                     <label for="add-quantity"
-                           class="col-md-4 control-label">Quantity:</label>
-                    <div class="col-md-8">
+                           class="col-md-2 control-label">Quantity:</label>
+                    <div class="col-md-3">
                         <sf:input type="number"
                                class="form-control"
                                id="add-quantity"
@@ -74,7 +69,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-4 col-md-8">
+                    <div class="col-md-offset-2 col-md-3">
                         <button type="submit"
                                 id="add-button"
                                 class="btn btn-default">Add New Item</button>

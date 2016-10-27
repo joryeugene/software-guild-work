@@ -35,7 +35,8 @@ public class HomeControllerNoAjax {
         if (money == null) {
             money = new Money();
         }
-        
+        Item item = new Item();
+        model.addAttribute("item", item);        
         model.addAttribute("money", money);
         model.addAttribute("notEnoughMoney", notEnoughMoney);
         model.addAttribute("itemList", itemList);
@@ -44,6 +45,7 @@ public class HomeControllerNoAjax {
         return "displayVendingMachineNoAjax";
     }
 
+    // can delete
     @RequestMapping(value = "displayNewItemFormNoAjax", method = RequestMethod.GET)
     public String displayNewContactFormNoAjax(Model model) {
         Item item = new Item();
@@ -54,7 +56,7 @@ public class HomeControllerNoAjax {
     @RequestMapping(value = "/addNewItemNoAjax", method = RequestMethod.POST)
     public String addNewItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result) {
         if (result.hasErrors()) {
-            return "newItemFormNoAjax";
+            return "displayVendingMachineNoAjax";
         }
         
         dao.addItem(item);
@@ -73,7 +75,7 @@ public class HomeControllerNoAjax {
         int id = Integer.parseInt(req.getParameter("id"));
         Item item = dao.getItemById(id);
         
-        if (item.getCount() > 0 && item.getCost() < money.getAmount()) {
+        if (item.getCount() > 0 && item.getCost() <= money.getAmount()) {
             notEnoughMoney = false;
             dao.buyItem(id, money.getAmount());
             money.removeAmount(item.getCost());

@@ -8,13 +8,8 @@
     <head>
         <title>Vending Machine</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-        <style>
-            .error {
-                color: red;
-                font-weight: bold;
-            }
-        </style>
     </head>
     <body>
         <div class="container">
@@ -27,48 +22,111 @@
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax/">Vending Machine (No Ajax)</a></li>
                 </ul>    
             </div>
-            <h2>Items</h2>
-
-            <a href="${pageContext.request.contextPath}/displayNewItemFormNoAjax">Add an Item</a><br/>
-            <hr/>
-            <div id="money">
-                <b>Current Money: </b> <fmt:formatNumber value="${money.amount}" type="currency"/>
+                
+                
+            <div class="row">
+                
+                <h2>Admin & User Mode</h2>
+                    
+                <a href="${pageContext.request.contextPath}/displayNewItemFormNoAjax">Add an Item</a><br/>
+                <hr/>
+                
+                <div class="col-md-4 text-center">
+                    <div id="money">
+                        <c:if test="${notEnoughMoney}">
+                            <span class="error">NOT ENOUGH MONEY</span><br/>
+                        </c:if>
+                        <b>Current Money: </b> <fmt:formatNumber value="${money.amount}" type="currency"/>
+                    </div>
+                    <sf:form role="form" modelAttribute="money" action="${pageContext.request.contextPath}/addMoneyNoAjax" method="POST">
+                        <sf:input type="number" step="any" path="amount" value="1.00" placeholder="1.00"/>
+                        <sf:errors path="amount" class="error"></sf:errors><br>
+                            <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
+                    </sf:form>
+                        
+                    <hr/>
+                </div>
+                
+                <div class="col-md-4">
+                    <c:forEach var="item" items="${itemList}">
+                        
+                        <s:url value="/deleteItemNoAjax"
+                               var="deleteItem_url">
+                            <s:param name="id" value="${item.id}" />
+                        </s:url>
+                        <s:url value="/displayEditItemFormNoAjax"
+                               var="editItem_url">
+                            <s:param name="id" value="${item.id}" />
+                        </s:url>
+                        <s:url value="/buyItemNoAjax"
+                               var="buyItem_url">
+                            <s:param name="id" value="${item.id}" />
+                        </s:url>
+                        <c:if test="${item.count < 1}">
+                            <span class="error">OUT OF STOCK</span><br/>
+                        </c:if>
+                        <b>${item.name}</b> - <i><fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count} |
+                        <a href="${deleteItem_url}">Delete</a> |
+                        <a href="${editItem_url}">Edit</a>
+                        <a href="${buyItem_url}"><button style="float: right;">Buy</button></a><br/>
+                        <hr>
+                    </c:forEach>
+                </div>
+                    
+                <div class="col-md-4">
+                    <h3 class="text-center">Add an Item</h3>
+                    <sf:form class="form-horizontal"
+                             role="form"
+                             modelAttribute="item"
+                             action="${pageContext.request.contextPath}/addNewItemNoAjax"
+                             method="POST">
+                        <div class="form-group">
+                            <label for="add-name"
+                                   class="col-md-4 control-label">Item Name:</label>
+                            <div class="col-md-8">
+                                <sf:input type="text"
+                                          class="form-control"
+                                          id="add-name"
+                                          path="name"
+                                          placeholder="Item Name"/>
+                                <sf:errors path="name" class="error"></sf:errors>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-cost" class="col-md-4 control-label">Cost Per Unit:</label>
+                                <div class="col-md-8">
+                                <sf:input type="number" step="any"
+                                          class="form-control"
+                                          id="add-cost"
+                                          path="cost"
+                                          placeholder="Cost Per Unit"/>
+                                <sf:errors path="cost" class="error"></sf:errors>
+                                </div>
+                            </div>
+                                
+                            <div class="form-group">
+                                <label for="add-quantity"
+                                       class="col-md-4 control-label">Quantity:</label>
+                                <div class="col-md-8">
+                                <sf:input type="number"
+                                          class="form-control"
+                                          id="add-quantity"
+                                          path="count"
+                                          placeholder="Quantity"/>
+                                <sf:errors path="count" class="error"></sf:errors>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <button type="submit"
+                                            id="add-button"
+                                            class="btn btn-default">Add New Item</button>
+                                </div>
+                            </div>
+                    </sf:form>
+                </div>
+                    
             </div>
-            
-            <sf:form role="form" modelAttribute="money" action="${pageContext.request.contextPath}/addMoneyNoAjax" method="POST">
-                <c:if test="${notEnoughMoney}">
-                    <span class="error">NOT ENOUGH MONEY</span><br/>
-                </c:if>
-                <sf:input type="number" step="any" path="amount" value="1.00" placeholder="1.00"/>
-                <sf:errors path="amount" class="error"></sf:errors><br>
-                <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
-            </sf:form>
-                
-            <hr/>
-            
-            <c:forEach var="item" items="${itemList}">
-                
-                <s:url value="/deleteItemNoAjax"
-                       var="deleteItem_url">
-                    <s:param name="id" value="${item.id}" />
-                </s:url>
-                <s:url value="/displayEditItemFormNoAjax"
-                       var="editItem_url">
-                    <s:param name="id" value="${item.id}" />
-                </s:url>
-                <s:url value="/buyItemNoAjax"
-                       var="buyItem_url">
-                    <s:param name="id" value="${item.id}" />
-                </s:url>
-                <c:if test="${item.count < 1}">
-                    <span class="error">OUT OF STOCK</span><br/>
-                </c:if>
-                <b>${item.name}</b> - <i><fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count} |
-                <a href="${deleteItem_url}">Delete</a> |
-                <a href="${editItem_url}">Edit</a> |
-                <a href="${buyItem_url}"><button>Buy</button></a><br/>
-                <hr>
-            </c:forEach>
         </div>
 
 

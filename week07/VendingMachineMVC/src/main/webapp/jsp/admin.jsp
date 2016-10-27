@@ -7,8 +7,8 @@
     <head>
         <title>Vending Machine</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-        
     </head>
     <body>
         <div class="container">
