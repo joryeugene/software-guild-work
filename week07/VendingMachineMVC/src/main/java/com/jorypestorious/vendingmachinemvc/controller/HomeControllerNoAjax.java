@@ -3,6 +3,7 @@ package com.jorypestorious.vendingmachinemvc.controller;
 import com.jorypestorious.vendingmachinemvc.dto.Money;
 import com.jorypestorious.vendingmachinemvc.dao.VendingMachineDao;
 import com.jorypestorious.vendingmachinemvc.dto.Item;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class HomeControllerNoAjax {
     private final VendingMachineDao dao;
     private Money money = null;
     private boolean notEnoughMoney = false;
+    private List<Item> boughtItems = new ArrayList<>();
     
     @Inject
     public HomeControllerNoAjax(VendingMachineDao dao) {
@@ -43,16 +45,42 @@ public class HomeControllerNoAjax {
             populateVendingMachine();
         }
         
-        List<Item> itemList = dao.getAllItems();
-        
         Item item = new Item();
         model.addAttribute("item", item);
         model.addAttribute("money", money);
-        model.addAttribute("itemList", itemList);
+        model.addAttribute("itemList", dao.getAllItems());
+        model.addAttribute("boughtList", boughtItems);
         model.addAttribute("notEnoughMoney", notEnoughMoney);
         notEnoughMoney = false;
         
         return "displayVendingMachineNoAjax";
+    }
+    
+    @RequestMapping(value = "/displayEditItemFormNoAjax", method = RequestMethod.GET)
+    public String displayVendingMachineNoAjaxEditItem(HttpServletRequest req, Model model) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Item item = dao.getItemById(id);
+        
+        model.addAttribute("item", item);
+        model.addAttribute("money", money);
+        model.addAttribute("itemList", dao.getAllItems());
+        model.addAttribute("boughtList", boughtItems);
+        model.addAttribute("notEnoughMoney", notEnoughMoney);
+        
+        return "displayVendingMachineNoAjaxEditItem";
+    }
+    
+    @RequestMapping(value = "/editItemNoAjax", method = RequestMethod.POST)
+    public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("money", money);
+            model.addAttribute("itemList", dao.getAllItems());
+            model.addAttribute("boughtList", boughtItems);
+            return "displayVendingMachineNoAjaxEditItem";
+        }
+        
+        dao.updateItem(item);
+        return "redirect:displayVendingMachineNoAjax";
     }
     
     @RequestMapping(value = "/addNewItemNoAjax", method = RequestMethod.POST)
@@ -60,6 +88,7 @@ public class HomeControllerNoAjax {
         if (result.hasErrors()) {
             model.addAttribute("money", money);
             model.addAttribute("itemList", dao.getAllItems());
+            model.addAttribute("boughtList", boughtItems);
             return "displayVendingMachineNoAjax";
         }
         
@@ -81,11 +110,20 @@ public class HomeControllerNoAjax {
         
         if (item.getCount() > 0 && item.getCost() <= money.getAmount()) {
             notEnoughMoney = false;
-            dao.buyItem(id, money.getAmount());
+            item.takeOne();
             money.removeAmount(item.getCost());
-            // add item and quantity to list of bought things TODO
+            
+            boolean previouslyBought = boughtItems.stream().anyMatch(i -> i.getName() == item.getName());
+            
+            if (previouslyBought) {
+                boughtItems.stream().filter(i -> i.getName() == item.getName()).forEach(i -> i.setCount(i.getCount()+1));
+            } else {
+                Item newBoughtItem = new Item(item.getName(), item.getCost(), 1);
+                boughtItems.add(newBoughtItem);
+            }
+            
         } else {
-            notEnoughMoney = true;
+            if (item.getCount() > 0) notEnoughMoney = true;
         }
         
         return "redirect:displayVendingMachineNoAjax";
@@ -94,32 +132,6 @@ public class HomeControllerNoAjax {
     @RequestMapping(value = "/addMoneyNoAjax", method = RequestMethod.POST)
     public String addMoneyNoAjax(HttpServletRequest req) {
         money.addAmount(Double.parseDouble(req.getParameter("amount")));
-        return "redirect:displayVendingMachineNoAjax";
-    }
-    
-    @RequestMapping(value = "/displayEditItemFormNoAjax", method = RequestMethod.GET)
-    public String displayVendingMachineNoAjaxEditItem(HttpServletRequest req, Model model) {
-        List<Item> itemList = dao.getAllItems();
-        int id = Integer.parseInt(req.getParameter("id"));
-        Item item = dao.getItemById(id);
-        
-        model.addAttribute("item", item);
-        model.addAttribute("money", money);
-        model.addAttribute("itemList", itemList);
-        model.addAttribute("notEnoughMoney", notEnoughMoney);
-        
-        return "displayVendingMachineNoAjaxEditItem";
-    }
-    
-    @RequestMapping(value = "/editItemNoAjax", method = RequestMethod.POST)
-    public String editItemNoAjax(@Valid @ModelAttribute("item") Item item, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("money", money);
-            model.addAttribute("itemList", dao.getAllItems());
-            return "displayVendingMachineNoAjaxEditItem";
-        }
-        
-        dao.updateItem(item);
         return "redirect:displayVendingMachineNoAjax";
     }
     

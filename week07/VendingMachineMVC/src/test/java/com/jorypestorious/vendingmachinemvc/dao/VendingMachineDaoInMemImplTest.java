@@ -55,19 +55,19 @@ public class VendingMachineDaoInMemImplTest {
         assertEquals(2, dao.getAllItems().size());        
     }
 
-    @Test
-    public void testBuyItem() {
-        System.out.println("buyItem");
-        Item item1 = new Item("Item1", 1.5, 15);
-        dao.addItem(item1);
-        double returnMoney = dao.buyItem(item1.getId(), 2.0);
-        assertEquals(0.5, returnMoney);
-        assertEquals(14, item1.getCount());
-        
-        double returnMoney2 = dao.buyItem(item1.getId(), returnMoney);
-        assertEquals(0.5, returnMoney2);
-        assertEquals(14, item1.getCount());
-        
-    }
+//    @Test
+//    public void testBuyItem() {
+//        System.out.println("buyItem");
+//        Item item1 = new Item("Item1", 1.5, 15);
+//        dao.addItem(item1);
+//        double returnMoney = dao.buyItem(item1.getId(), 2.0);
+//        assertEquals(0.5, returnMoney);
+//        assertEquals(14, item1.getCount());
+//        
+//        double returnMoney2 = dao.buyItem(item1.getId(), returnMoney);
+//        assertEquals(0.5, returnMoney2);
+//        assertEquals(14, item1.getCount());
+//        
+//    }
 
 }

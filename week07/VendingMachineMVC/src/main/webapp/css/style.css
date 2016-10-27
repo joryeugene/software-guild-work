@@ -17,9 +17,17 @@
 }
 
 #vending-machine {
-    background-color: orange;
+    background-color: #ffaa00;
     border-radius: 10px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 6px 6px 6px #888888;
     color: white;
     padding-bottom: 20px;
+}
+
+#bought-items {
+    background-color: #ffffe0;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #888888;
+    margin: 0px 25px 0px 25px;
+    padding: 10px 0px 10px 0px;
 }

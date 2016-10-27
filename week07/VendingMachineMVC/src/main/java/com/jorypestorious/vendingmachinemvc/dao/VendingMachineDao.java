@@ -16,6 +16,4 @@ public interface VendingMachineDao {
 
     public Item getItemById(int id);
     
-    public double buyItem(int id, double money);
-    
 }
