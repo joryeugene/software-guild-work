@@ -24,17 +24,26 @@ public class HomeControllerNoAjax {
     @Inject
     public HomeControllerNoAjax(VendingMachineDao dao) {
         this.dao = dao;
-        dao.addItem(new Item("Item1", 1.5, 15));
-        dao.addItem(new Item("Item2", 2, 3));
+    }
+    
+    private void populateVendingMachine() {
+        dao.addItem(new Item("Twinkie", .5, 2));
+        dao.addItem(new Item("Wrigley's Winterfresh Gum", 1.25, 3));
+        dao.addItem(new Item("Hot Tamales", 1.75, 7));
+        dao.addItem(new Item("Sour Patch Kids", 1.25, 9));
+        dao.addItem(new Item("Rockstar Energy Drink", 2.25, 5));
+        dao.addItem(new Item("Old Man Pretzels", 1.25, 5));
+        dao.addItem(new Item("Sun Chips", 1.50, 7));
     }
     
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)
     public String displayVendingMachineNoAjax(Model model) {
-        List<Item> itemList = dao.getAllItems();
-        
         if (money == null) {
             money = new Money();
+            populateVendingMachine();
         }
+        
+        List<Item> itemList = dao.getAllItems();
         
         Item item = new Item();
         model.addAttribute("item", item);

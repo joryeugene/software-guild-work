@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-4 text-center">
                         <c:if test="${notEnoughMoney}">
-                            <p style="margin-top:20px; font-size: 1.4em" class="error">NOT ENOUGH MONEY</p>
+                            <p style="margin-top:20px; font-size: 1.4em" class="error">ADD MORE MONEY</p>
                         </c:if>
                     </div>
                 </div>
@@ -72,9 +72,8 @@
                                 <span class="error">OUT OF STOCK</span><br/>
                             </c:if>
                             <b>${item.name}</b> - <i>
-                                <fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count} |
-                            <a href="${deleteItem_url}">Delete</a> |
-                            <a href="${editItem_url}">Edit</a>
+                                <fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count}<br>
+                            <a href="${deleteItem_url}">Delete</a> | <a href="${editItem_url}">Edit</a>
                             <a href="${buyItem_url}"><button style="float: right;">Buy</button></a><br/>
                             <hr>
                         </c:forEach>
