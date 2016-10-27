@@ -1,3 +1,15 @@
+* {
+    color: #362600;
+}
+
+a {
+    color: #FFB000;
+}
+
+a > button {
+    color: #A87800;
+}
+
 .error {
     color: red;
     font-weight: bold;
@@ -17,17 +29,17 @@
 }
 
 #vending-machine {
-    background-color: #ffaa00;
+    background-color: #FFE29A;
     border-radius: 10px;
-    box-shadow: 6px 6px 6px #888888;
-    color: white;
+    box-shadow: 0px 0px 10px #888888;
+    color: #362600;
     padding-bottom: 20px;
 }
 
 #bought-items {
-    background-color: #ffffe0;
+    background-color: #FFFCF3;
     border-radius: 10px;
-    box-shadow: 1px 1px 5px #888888;
+    box-shadow: 0px 0px 10px #FFE09A;
     margin: 0px 25px 0px 25px;
     padding: 10px 0px 10px 0px;
 }
