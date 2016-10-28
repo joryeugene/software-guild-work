@@ -34,6 +34,7 @@ a > button {
 
 #items-div {
     background-color: white;
+    border: 1px solid #aaa;
     border-radius: 10px;
     color: black;
     height: 480px;
@@ -54,8 +55,12 @@ a > button {
     text-shadow: 2px 2px 2px #eee;
 }
 
+#bought-items-div {
+    position: relative;
+    top: 15px;
+}
+
 #bought-items {
-    background-color: #FFFCF3;
     margin:1em 10px 4em;
     min-height: 200px;
     width:90%;

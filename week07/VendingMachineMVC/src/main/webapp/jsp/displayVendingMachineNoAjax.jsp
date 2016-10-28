@@ -46,18 +46,21 @@
                         <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
                     </form>
 
-                    <hr/>
-                    <!-- list of bought items -->
-                    <c:if test="${boughtList.size() > 0}">
-                        <h3>Bought Items:</h3>
-                        <div id="bought-items" class="drop-shadow lifted rotated">
-                            <c:forEach var="bought" items="${boughtList}">
-                                <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
-                                </c:forEach>
-                        </div>
-                    </c:if>
+                    <hr>
+                    
+                    <div id="bought-items-div">
+                        <!-- list of bought items -->
+                        <c:if test="${boughtList.size() > 0}">
+                            <h3>Bought Items:</h3>
+                            <div id="bought-items" class="drop-shadow lifted rotated">
+                                <c:forEach var="bought" items="${boughtList}">
+                                    <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
+                                    </c:forEach>
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
-                        
+
                 <div class="col-md-4">
                     <div id="vending-machine" class="drop-shadow lifted">
                         <p class="text-center">ITEMS</p>
@@ -128,6 +131,17 @@
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script>
+            $('#items-div').scroll(function () {
+                sessionStorage.scrollTop = $(this).scrollTop();
+            });
+
+            $(document).ready(function () {
+                if (sessionStorage.scrollTop != "undefined") {
+                    $('#items-div').scrollTop(sessionStorage.scrollTop);
+                }
+            });
+        </script>
     </body>
 </html>
 

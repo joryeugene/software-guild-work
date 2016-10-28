@@ -49,7 +49,7 @@
                     <hr/>
                     <!-- list of bought items -->
                     <c:if test="${boughtList.size() > 0}">
-                        <h3>Bought Items:</h3>
+                        <h3 id="bought-items-heading">Bought Items:</h3>
                         <div id="bought-items" class="drop-shadow lifted rotated">
                             <c:forEach var="bought" items="${boughtList}">
                                 <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
@@ -129,6 +129,17 @@
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script>
+            $('#items-div').scroll(function () {
+                sessionStorage.scrollTop = $(this).scrollTop();
+            });
+
+            $(document).ready(function () {
+                if (sessionStorage.scrollTop != "undefined") {
+                    $('#items-div').scrollTop(sessionStorage.scrollTop);
+                }
+            });
+        </script>
     </body>
 </html>
 
