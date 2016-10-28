@@ -21,9 +21,11 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax/">Vending Machine (No Ajax)</a></li>
                 </ul>    
             </div>
+        </div>
+                
+        <div class="container">
             <h2>ADMIN</h2>
         </div>
-        
         
         
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>

@@ -36,8 +36,7 @@
                     </div>
                 </div>
 
-
-                <hr/>
+                <hr class="hr">
 
                 <div class="col-md-4 text-center">
                     <h2>Current Money: </h2> 
@@ -51,7 +50,7 @@
                     <!-- list of bought items -->
                     <c:if test="${boughtList.size() > 0}">
                         <h3>Bought Items:</h3>
-                        <div id="bought-items">
+                        <div id="bought-items" class="drop-shadow lifted rotated">
                             <c:forEach var="bought" items="${boughtList}">
                                 <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
                                 </c:forEach>
@@ -59,60 +58,64 @@
                      </c:if>
                 </div>
 
-                <div id="vending-machine" class="col-md-4">
-                    <h2 class="text-center">Items:</h2>
-                    <div id="items-div">
-                        <c:forEach var="item" items="${itemList}">
-                            <s:url value="/deleteItemNoAjax"
-                                   var="deleteItem_url">
-                                <s:param name="id" value="${item.id}" />
-                            </s:url>
-                            <s:url value="/displayEditItemFormNoAjax"
-                                   var="editItem_url">
-                                <s:param name="id" value="${item.id}" />
-                            </s:url>
-                            <s:url value="/buyItemNoAjax"
-                                   var="buyItem_url">
-                                <s:param name="id" value="${item.id}" />
-                            </s:url>
-                            <c:if test="${item.count < 1}">
-                                <span class="error">OUT OF STOCK</span><br/>
-                            </c:if>
-                            <b>${item.name}</b> - <i>
-                                <fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count}<br>
-                            <a href="${deleteItem_url}">Delete</a> | <a href="${editItem_url}">Edit</a>
-                            <a href="${buyItem_url}"><button style="float: right;">Buy</button></a><br/>
-                            <hr>
-                        </c:forEach>
+                <div class="col-md-4">
+                    <div id="vending-machine" class="drop-shadow lifted">
+                        <p class="text-center">ITEMS</p>
+                        <div id="items-div" class="bevel">
+                            <c:forEach var="item" items="${itemList}">
+                                <s:url value="/deleteItemNoAjax"
+                                       var="deleteItem_url">
+                                    <s:param name="id" value="${item.id}" />
+                                </s:url>
+                                <s:url value="/displayEditItemFormNoAjax"
+                                       var="editItem_url">
+                                    <s:param name="id" value="${item.id}" />
+                                </s:url>
+                                <s:url value="/buyItemNoAjax"
+                                       var="buyItem_url">
+                                    <s:param name="id" value="${item.id}" />
+                                </s:url>
+                                <c:if test="${item.count < 1}">
+                                    <span class="error">OUT OF STOCK</span><br/>
+                                </c:if>
+                                <b>${item.name}</b> - <i>
+                                    <fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count}<br>
+                                <a href="${deleteItem_url}">Delete</a> | <a href="${editItem_url}">Edit</a>
+                                <a href="${buyItem_url}"><button class="buy-btn">Buy</button></a><br/>
+                                <hr>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
+
+                <div class="clearfix visible-xs visible-sm"></div>
 
                 <div class="col-md-4">
                     <h2 class="text-center">Edit Item</h2>
                     <sf:form class="form-horizontal" role="form" modelAttribute="item" action="editItemNoAjax" method="POST">
                         <div class="form-group">
-                            <label for="edit-name" class="col-md-4 control-label">Item Name:</label>
-                            <div class="col-md-8">
+                            <label for="edit-name" class="col-sm-4 control-label">Item Name:</label>
+                            <div class="col-sm-8">
                                 <sf:input type="text" class="form-control" id="edit-name" path="name" placeholder="Item Name"/>
                                 <sf:errors path="name" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit-cost" class="col-md-4 control-label">Cost Per Unit:</label>
-                                <div class="col-md-8">
+                                <label for="edit-cost" class="col-sm-4 control-label">Cost Per Unit:</label>
+                                <div class="col-sm-8">
                                 <sf:input type="number" step="any" class="form-control" id="edit-cost" path="cost" placeholder="Cost Per Unit"/>
                                 <sf:errors path="cost" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit-quantity" class="col-md-4 control-label">Quantity:</label>
-                                <div class="col-md-8">
+                                <label for="edit-quantity" class="col-sm-4 control-label">Quantity:</label>
+                                <div class="col-sm-8">
                                 <sf:input type="number" class="form-control" id="edit-quantity" path="count" placeholder="Quantity"/>
                                 <sf:errors path="count" class="error"></sf:errors>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-offset-4 col-md-8">
+                                <div class="col-sm-offset-4 col-sm-8">
                                     <button type="submit" id="add-button" class="btn btn-default">Update Item</button>
                                     <a href="${pageContext.request.contextPath}/displayVendingMachineNoAjax">Cancel</a><br>
                                 </div>
