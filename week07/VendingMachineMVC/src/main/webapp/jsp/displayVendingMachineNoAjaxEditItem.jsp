@@ -112,6 +112,7 @@
                                 <div class="col-sm-8">
                                 <sf:input type="number" class="form-control" id="edit-quantity" path="count" placeholder="Quantity"/>
                                 <sf:errors path="count" class="error"></sf:errors>
+                                <sf:hidden path="id"/>
                                 </div>
                             </div>
                             <div class="form-group">
