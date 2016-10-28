@@ -28,10 +28,11 @@ public class HomeControllerNoAjax {
         dao.addDVD(new DVD("Spirited Away", "2001", "PG", "Hayao Miyazaki", "Studio Ghibli", "Girl does some dirty work at a bathhouse"));
         dao.addDVD(new DVD("Mr. Nobody", "2009", "R", "Jaco Van Dormael", "Pan Européenne", "Future guy with face tattoos interviews old crazy man"));
         dao.addDVD(new DVD("Inside Out", "2015", "PG", "Pete Docter", "Pixar", "Lunatics inside our heads and drive all our actions"));
-        dao.addDVD(new DVD("Howl's Moving Castle", "2004", "PG", "Hayao Miyazaki", "Studio Ghibli", "Crazy guy with cool mobile home"));
+        dao.addDVD(new DVD("10 Cloverfield Lane", "2016", "PG-13", "Dan Trachtenberg", "Paramount Pictures", "Aliens are real"));
         dao.addDVD(new DVD("My Neighbor Totoro", "1988", "G", "Hayao Miyazaki", "Studio Ghibli", "Scary monsters try to eat two kids"));
         dao.addDVD(new DVD("Spring, Summer, Fall, Winter... and Spring", "2003", "R", "Ki-duk Kim", "Korea Pictures", "Buddhist gets horny and goes to town"));
         dao.addDVD(new DVD("Princess Mononoke", "1997", "PG-13", "Hayao Miyazaki", "Studio Ghibli", "Cute little forest spirits get mad"));
+        dao.addDVD(new DVD("Howl's Moving Castle", "2004", "PG", "Hayao Miyazaki", "Studio Ghibli", "Crazy guy with cool mobile home"));
         dao.addDVD(new DVD("Amélie", "2001", "R", "Jean-Pierre Jeunet", "Claudie Ossard Productions", "Weird cute French girl does things around town"));
         dao.addDVD(new DVD("Kiki's Delivery Service", "1989", "G", "Hayao Miyazaki", "Studio Ghibli", "Young witch leads on nerd boy while starting a business"));
     }
