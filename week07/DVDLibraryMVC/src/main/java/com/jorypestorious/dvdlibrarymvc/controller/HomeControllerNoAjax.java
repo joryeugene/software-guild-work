@@ -2,7 +2,6 @@ package com.jorypestorious.dvdlibrarymvc.controller;
 
 import com.jorypestorious.dvdlibrarymvc.dao.DVDLibraryDao;
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
-import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -72,13 +71,15 @@ public class HomeControllerNoAjax {
         int id = Integer.parseInt(req.getParameter("id"));
         DVD dvd = dao.getDVDById(id);
         model.addAttribute("dvd", dvd);
-        return "editDVDFormNoAjax";
+        model.addAttribute("dvdList", dao.getAllDVDs());
+        return "displayDVDLibraryNoAjaxEditForm";
     }
 
     @RequestMapping(value = "/editDVDNoAjax", method = RequestMethod.POST)
-    public String editCDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result) {
+    public String editCDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "editDVDFormNoAjax";
+            model.addAttribute("dvdList", dao.getAllDVDs());
+            return "displayDVDLibraryNoAjaxEditForm";
         }
         
         dao.updateDVD(dvd);
