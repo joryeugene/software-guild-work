@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+
+#dvd-table {
+    border: 1px solid #aaa;
+    overflow-y: scroll;      
+    height: 500px;
+    position: absolute;
+    padding-right: 5px;
+}
+
+th {
+    text-align: center;
+    height: 10px;
+}
