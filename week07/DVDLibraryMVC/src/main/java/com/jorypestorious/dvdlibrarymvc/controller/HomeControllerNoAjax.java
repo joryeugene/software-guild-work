@@ -44,22 +44,16 @@ public class HomeControllerNoAjax {
             firstStart = false;
         }
         
-        List<DVD> dvdList = dao.getAllDVDs();
-        model.addAttribute("dvdList", dvdList);
+        model.addAttribute("dvd", new DVD());
+        model.addAttribute("dvdList", dao.getAllDVDs());
         return "displayDVDLibraryNoAjax";
     }
-
-    @RequestMapping(value = "/displayNewDVDFormNoAjax", method = RequestMethod.GET)
-    public String displayNewDVDFormNoAjax(Model model) {
-        DVD dvd = new DVD("", "", "", "", "", "");
-        model.addAttribute("dvd", dvd);
-        return "newDVDFormNoAjax";
-    }
-
+    
     @RequestMapping(value = "/addNewDVDNoAjax", method = RequestMethod.POST)
-    public String addNewDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result) {
+    public String addNewDVDNoAjax(@Valid @ModelAttribute("dvd") DVD dvd, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "newDVDFormNoAjax";
+            model.addAttribute("dvdList", dao.getAllDVDs());
+            return "displayDVDLibraryNoAjax";
         }
         
         dao.addDVD(dvd);
