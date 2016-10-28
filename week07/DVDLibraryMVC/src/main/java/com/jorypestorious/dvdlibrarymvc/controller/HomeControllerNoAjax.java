@@ -27,7 +27,7 @@ public class HomeControllerNoAjax {
         dao.addDVD(new DVD("Finding Nemo", "2003", "G", "Andrew Stanton", "Pixar", "Stupid fish swims around aimlessly"));
         dao.addDVD(new DVD("Spirited Away", "2001", "PG", "Hayao Miyazaki", "Studio Ghibli", "Girl does some dirty work at a bathhouse"));
         dao.addDVD(new DVD("Mr. Nobody", "2009", "R", "Jaco Van Dormael", "Pan Européenne", "Future guy with face tattoos interviews old crazy man"));
-        dao.addDVD(new DVD("Inside Out", "2015", "PG", "Pete Docter", "Pixar", "Lunatics inside our heads and drive all our actions"));
+        dao.addDVD(new DVD("Inside Out", "2015", "PG", "Pete Docter", "Pixar", "Lunatics inside our heads drive all our actions"));
         dao.addDVD(new DVD("10 Cloverfield Lane", "2016", "PG-13", "Dan Trachtenberg", "Paramount Pictures", "Aliens are real"));
         dao.addDVD(new DVD("My Neighbor Totoro", "1988", "G", "Hayao Miyazaki", "Studio Ghibli", "Scary monsters try to eat two kids"));
         dao.addDVD(new DVD("Spring, Summer, Fall, Winter... and Spring", "2003", "R", "Ki-duk Kim", "Korea Pictures", "Buddhist gets horny and goes to town"));

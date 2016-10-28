@@ -120,7 +120,7 @@
                         <div class="form-group">
                             <label for="edit-note" class="col-md-4 control-label">Note:</label>
                             <div class="col-md-8">
-                                <sf:input type="text" class="form-control" id="edit-note"
+                                <sf:textarea type="text" class="form-control" id="edit-note"
                                           path="note" placeholder="Note"/>
                                 <sf:errors path="note" class="error"></sf:errors>
                                 <sf:hidden path="id"/>
