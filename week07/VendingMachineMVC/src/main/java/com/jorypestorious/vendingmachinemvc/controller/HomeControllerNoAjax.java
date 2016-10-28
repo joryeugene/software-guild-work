@@ -30,12 +30,13 @@ public class HomeControllerNoAjax {
     
     private void populateVendingMachine() {
         dao.addItem(new Item("Twinkie", .5, 1));
-        dao.addItem(new Item("Wrigley's Winterfresh Gum", 1.25, 3));
+        dao.addItem(new Item("Winterfresh Gum", 1.25, 3));
         dao.addItem(new Item("Hot Tamales", 1.75, 7));
         dao.addItem(new Item("Sour Patch Kids", 1.25, 9));
         dao.addItem(new Item("Rockstar Energy Drink", 2.25, 5));
         dao.addItem(new Item("Old Man Pretzels", 1.25, 5));
         dao.addItem(new Item("Sun Chips", 1.50, 7));
+        dao.addItem(new Item("Bubblegum", 1.0, 5));
     }
     
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)
