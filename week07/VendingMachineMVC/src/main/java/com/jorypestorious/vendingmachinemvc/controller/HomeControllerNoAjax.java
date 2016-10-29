@@ -37,6 +37,9 @@ public class HomeControllerNoAjax {
         dao.addItem(new Item("Old Man Pretzels", 1.25, 5));
         dao.addItem(new Item("Sun Chips", 1.50, 7));
         dao.addItem(new Item("Bubblegum", 1.0, 5));
+        dao.addItem(new Item("Doritos", 1.55, 4));
+        dao.addItem(new Item("Lifesavers", 1.25, 13));
+        dao.addItem(new Item("Snickers", 1.50, 7));
     }
     
     @RequestMapping(value = "/displayVendingMachineNoAjax", method = RequestMethod.GET)

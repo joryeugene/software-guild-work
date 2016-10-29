@@ -15,8 +15,9 @@ a > button {
     margin: 0px;
 }
 
-.buy-btn {
+.float-right {
     float: right;
+    display: inline-block;
 }
 
 .error {
@@ -29,7 +30,7 @@ a > button {
 }
 
 .money-amount {
-    font-size: 1.4em;
+    font-size: 1.6em;
 }
 
 #items-div {
@@ -38,7 +39,7 @@ a > button {
     border-radius: 10px;
     color: black;
     height: 480px;
-    padding: 20px 12px 0px;
+    padding: 20px 15px 0px;
     overflow: scroll;
 }
 
