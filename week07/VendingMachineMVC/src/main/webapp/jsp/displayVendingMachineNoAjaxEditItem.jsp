@@ -46,16 +46,19 @@
                         <button type="submit" id="add-button" class="btn btn-default">Add Money</button>
                     </form>
 
-                    <hr/>
-                    <!-- list of bought items -->
-                    <c:if test="${boughtList.size() > 0}">
-                        <h3 id="bought-items-heading">Bought Items:</h3>
-                        <div id="bought-items" class="drop-shadow lifted rotated">
-                            <c:forEach var="bought" items="${boughtList}">
-                                <b>${bought.name}</b> - <u>Quantity:</u> ${bought.count}<br>
-                                </c:forEach>
-                        </div>
-                     </c:if>
+                    <hr>
+                    
+                    <div id="bought-items-div">
+                        <!-- list of bought items -->
+                        <c:if test="${boughtList.size() > 0}">
+                            <h3>Bought Items:</h3>
+                            <div id="bought-items" class="drop-shadow lifted rotated">
+                                <c:forEach var="bought" items="${boughtList}">
+                                    <b>${bought.name}</b> - Quantity: ${bought.count}<br>
+                                    </c:forEach>
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
 
                 <div class="col-md-4">
@@ -78,17 +81,15 @@
                                 <c:if test="${item.count < 1}">
                                     <span class="error">OUT OF STOCK</span><br/>
                                 </c:if>
-                                <b>${item.name}</b> - <i>
-                                    <fmt:formatNumber value="${item.cost}" type="currency"/></i> - <u>Quantity:</u> ${item.count}<br>
+                                <b>${item.name}</b> - Quantity: ${item.count}
+                                <span class="float-right"><fmt:formatNumber value="${item.cost}" type="currency"/>&nbsp;</span><br>
                                 <a href="${deleteItem_url}">Delete</a> | <a href="${editItem_url}">Edit</a>
-                                <a href="${buyItem_url}"><button class="buy-btn">Buy</button></a><br/>
+                                <a href="${buyItem_url}"><button class="float-right">Buy</button></a><br/>
                                 <hr>
                             </c:forEach>
                         </div>
                     </div>
                 </div>
-
-                <div class="clearfix visible-xs visible-sm"></div>
 
                 <div class="col-md-4">
                     <h2 class="text-center">Edit Item</h2>
