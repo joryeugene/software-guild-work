@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2 class="text-center">DVDs</h2>
-                    <%@include file="contactSummaryTableFragment.jsp"%>
+                    <%@include file="dvdSummaryTableFragment.jsp"%>
                 </div>
 
                 <div class="col-md-4">
