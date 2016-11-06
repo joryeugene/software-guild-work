@@ -32,49 +32,80 @@ $(document).ready(function () {
 });
 
 function loadDVDs() {
-    clearTable();
-    var dvdTable = $('#content-rows');
-
     $.ajax({
         type: 'GET',
         url: "/DVDLibrary/dvds"
     }).success(function (data, status) {
-        $.each(data, function (index, dvd) {
-            dvdTable.append($('<tr>')
-                    .append($('<td>')
-                            .append($('<a>')
-                                    .attr({
-                                        'data-dvd-id': dvd.id,
-                                        'data-toggle': 'modal',
-                                        'data-target': '#details-modal'
-                                    })
-                                    .text(dvd.title)
-                                    ) // ends the <a> tag
-                            ) // ends the <td> tag
-                    .append($('<td>').text(dvd.year))
-                    .append($('<td>').text(dvd.mpaa))
-                    .append($('<td>')
-                            .append($('<a>')
-                                    .attr({
-                                        'data-dvd-id': dvd.id,
-                                        'data-toggle': 'modal',
-                                        'data-target': '#edit-modal'
-                                    })
-                                    .text('Edit')
-                                    ) // ends the <a> tag
-                            ) // ends the <td> tag for Edit
-                    .append($('<td>')
-                            .append($('<a>')
-                                    .attr({
-                                        'onClick': 'deleteDVD(' + dvd.id + ')'
-                                    })
-                                    .text('Delete')
-                                    ) // ends the <a> tag
-                            ) // ends the <td> tag for Delete
-                    ); // ends the <tr> 
-        }); // ends the 'each' function
+        fillDVDTable(data, status);
     });
 }
+
+function fillDVDTable(data, status) {
+    clearTable();
+    var dvdTable = $('#content-rows');
+
+    $.each(data, function (index, dvd) {
+        dvdTable.append($('<tr>')
+                .append($('<td>')
+                        .append($('<a>')
+                                .attr({
+                                    'data-dvd-id': dvd.id,
+                                    'data-toggle': 'modal',
+                                    'data-target': '#details-modal'
+                                })
+                                .text(dvd.title)
+                                ) // ends the <a> tag
+                        ) // ends the <td> tag
+                .append($('<td>').text(dvd.year))
+                .append($('<td>').text(dvd.mpaa))
+                .append($('<td>')
+                        .append($('<a>')
+                                .attr({
+                                    'data-dvd-id': dvd.id,
+                                    'data-toggle': 'modal',
+                                    'data-target': '#edit-modal'
+                                })
+                                .text('Edit')
+                                ) // ends the <a> tag
+                        ) // ends the <td> tag for Edit
+                .append($('<td>')
+                        .append($('<a>')
+                                .attr({
+                                    'onClick': 'deleteDVD(' + dvd.id + ')'
+                                })
+                                .text('Delete')
+                                ) // ends the <a> tag
+                        ) // ends the <td> tag for Delete
+                ); // ends the <tr> 
+    }); // ends the 'each' function
+}
+
+$('#search-button').click(function (event) {
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '/DVDLibrary/search/dvds',
+        data: JSON.stringify({
+            title: $('#search-title').val(),
+            year: $('#search-year').val(),
+            mpaa: $('#search-mpaa').val(),
+            studio: $('#search-studio').val(),
+            director: $('#search-director').val()
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function (data, status) {
+        $('#search-title').val('');
+        $('#search-year').val('');
+        $('#search-mpaa').val('');
+        $('#search-studio').val('');
+        $('#search-director').val('');
+        fillDVDTable(data, status);
+    });
+});
 
 $('#details-modal').on('show.bs.modal', function (event) {
     var element = $(event.relatedTarget);

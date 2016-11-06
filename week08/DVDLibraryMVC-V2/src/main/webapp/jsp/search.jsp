@@ -86,17 +86,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="search-note" class="col-md-3 control-label">Note:</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="search-note" placeholder="Note"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit"
                                         id="search-button"
                                         class="btn btn-default">
-                                    Add
+                                    Search
                                 </button>
                             </div>
                         </div>
