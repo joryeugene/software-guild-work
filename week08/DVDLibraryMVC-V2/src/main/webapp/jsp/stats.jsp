@@ -8,7 +8,7 @@
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-        
+
     </head>
     <body>
         <div class="container">
@@ -22,13 +22,23 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDVDLibraryNoAjax/">DVD Library (No Ajax)</a></li>
                 </ul>    
             </div>
-            <h2>Stats</h2>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Statistics</h2>
+                    <div id="chart_div"></div>
+                </div> 
+            </div>
+
         </div>
-        
-        
-        
+
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script>
+            google.load('visualization', '1.0', {'packages': ['corechart']});
+        </script> 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/stats.js"></script> 
     </body>
 </html>
 
