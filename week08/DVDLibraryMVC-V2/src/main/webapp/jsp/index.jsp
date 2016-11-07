@@ -7,8 +7,9 @@
     <head>
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/styleAjax.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
-
+        
     </head>
     <body>
         <div class="container">
@@ -22,13 +23,13 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDVDLibraryNoAjax/">DVD Library (No Ajax)</a></li>
                 </ul>    
             </div>
-
+            
             <div class="row">
                 <div class="col-md-8">
                     <h2 class="text-center">DVDs</h2>
                     <%@include file="dvdSummaryTableFragment.jsp"%>
                 </div>
-
+                
                 <div class="col-md-4">
                     <h2 class="text-center">Add New DVD</h2>
                     <form class="form-horizontal" role="form">
@@ -41,6 +42,7 @@
                                        class="form-control"
                                        id="add-title"
                                        placeholder="Title"/>
+                                <div id="error-title" class="validationErrors"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,6 +56,7 @@
                                        class="form-control"
                                        id="add-year"
                                        placeholder="Year"/>
+                                <div id="error-year" class="validationErrors"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -65,6 +68,7 @@
                                        class="form-control"
                                        id="add-mpaa"
                                        placeholder="MPAA"/>
+                                <div id="error-mpaa" class="validationErrors"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,6 +78,7 @@
                                        class="form-control"
                                        id="add-director"
                                        placeholder="Director"/>
+                                <div id="error-director" class="validationErrors"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -83,6 +88,7 @@
                                        class="form-control"
                                        id="add-studio"
                                        placeholder="Studio"/>
+                                <div id="error-studio" class="validationErrors"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -104,9 +110,9 @@
                 </div> <!-- End col div -->
             </div> <!-- End row div --> 
         </div>
-                
+        
         <%@include file="detailsEditModalFragment.jsp"%>
-
+        
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/dvdLibrary.js"></script>

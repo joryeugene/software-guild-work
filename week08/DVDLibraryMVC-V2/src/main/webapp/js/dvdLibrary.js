@@ -1,34 +1,5 @@
 $(document).ready(function () {
     loadDVDs();
-
-    $('#add-button').click(function (event) {
-        event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/DVDLibrary/dvd',
-            data: JSON.stringify({
-                title: $('#add-title').val(),
-                year: $('#add-year').val(),
-                mpaa: $('#add-mpaa').val(),
-                director: $('#add-director').val(),
-                studio: $('#add-studio').val(),
-                note: $('#add-note').val()
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json'
-        }).success(function (data, status) {
-            $('#add-title').val('');
-            $('#add-year').val('');
-            $('#add-mpaa').val('');
-            $('#add-director').val('');
-            $('#add-studio').val('');
-            $('#add-note').val('');
-            loadDVDs();
-        });
-    });
 });
 
 function loadDVDs() {
@@ -79,6 +50,49 @@ function fillDVDTable(data, status) {
                 ); // ends the <tr> 
     }); // ends the 'each' function
 }
+
+$('#add-button').click(function (event) {
+    event.preventDefault();
+    $('.validationErrors').empty();
+
+    $.ajax({
+        type: 'POST',
+        url: '/DVDLibrary/dvd',
+        data: JSON.stringify({
+            title: $('#add-title').val(),
+            year: $('#add-year').val(),
+            mpaa: $('#add-mpaa').val(),
+            director: $('#add-director').val(),
+            studio: $('#add-studio').val(),
+            note: $('#add-note').val()
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function (data, status) {
+        $('#add-title').val('');
+        $('#add-year').val('');
+        $('#add-mpaa').val('');
+        $('#add-director').val('');
+        $('#add-studio').val('');
+        $('#add-note').val('');
+        $('#validationErrors').empty();
+        loadDVDs();
+    }).error(function (data, status) {
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            var errorDiv = '#error-' + validationError.fieldName;
+            console.log(errorDiv);
+            $(errorDiv)
+                    .append(validationError.message)
+                    .append($('<br>'));
+//            console.log(validationError);
+//            var errorDiv = $('#validationErrors');
+//            errorDiv.append(validationError.message).append($('<br>'));
+        });
+    });
+});
 
 $('#search-button').click(function (event) {
     event.preventDefault();

@@ -3,21 +3,22 @@ package com.jorypestorious.dvdlibrarymvc.dto;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 public class DVD {
     
     private int id;
-    @NotEmpty(message="You must supply a value for Title.")
+    @NotEmpty(message="Enter a value for title.")
     @Length(max=50, message="Title must be no more than 50 characters in length.")
     private String title;
     @Pattern(regexp="^(19|20)\\d{2}$", message="Enter a valid year.")
     private String year;
-    @Pattern(regexp="[GMNPRUX][ACGR]?(?:-\\d{2})?", message="Enter a valid MPAA Rating.")
+    @Pattern(regexp="G|PG|PG-13|R|NC-17|X|U|NR|M|MA|g|pg|pg-13|r|nc-17|x|u|nr|m|ma", message="Enter a valid MPAA rating.")
     private String mpaa; // G|PG|PG-13|R|NC-17|X|U|NR|M|MA
-    @NotEmpty(message="You must supply a value for Director.")
+    @NotEmpty(message="Enter a value for director.")
     @Length(max=50, message="Director must be no more than 50 characters in length.")
     private String director;
-    @NotEmpty(message="You must supply a value for Studio.")
+    @NotEmpty(message="Enter a value for studio.")
     @Length(max=50, message="Studio must be no more than 50 characters in length.")
     private String studio;
     private String note; // user rating or note
@@ -27,7 +28,7 @@ public class DVD {
     public DVD(String title, String year, String mpaa, String director, String studio, String note) {
         this.title = title;
         this.year = year;
-        this.mpaa = mpaa;
+        this.mpaa = mpaa.toUpperCase();
         this.director = director;
         this.studio = studio;
         this.note = note;
