@@ -112,11 +112,8 @@ $('#edit-button').click(function (event) {
         },
         'dataType': 'json'
     }).success(function () {
-        var editBtn = $('#edit-button');
-        editBtn.attr('data-dismiss', 'modal');
-        editBtn.click();
-        editBtn.removeAttr('data-dismiss');
-        loadDVDs();        
+        $('#edit-modal').modal('toggle');
+        loadDVDs();
     }).error(function (data, status) {
         $('.validationErrors').empty();
         $.each(data.responseJSON.fieldErrors, function (index, validationError) {
