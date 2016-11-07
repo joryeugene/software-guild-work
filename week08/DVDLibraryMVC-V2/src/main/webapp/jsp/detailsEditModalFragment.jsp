@@ -125,7 +125,7 @@
                                     <button type="submit" id="edit-button" class="btn btn-default">
                                         Update DVD
                                     </button>
-                                    <button type="button" class="btn btn-default"
+                                    <button type="button" id="edit-button-cancel" class="btn btn-default"
                                             data-dismiss="modal">
                                         Cancel
                                     </button>

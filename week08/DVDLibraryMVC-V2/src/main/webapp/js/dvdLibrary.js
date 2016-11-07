@@ -78,17 +78,58 @@ $('#add-button').click(function (event) {
         $('#add-director').val('');
         $('#add-studio').val('');
         $('#add-note').val('');
-        $('#validationErrors').empty();
         loadDVDs();
     }).error(function (data, status) {
+        $('.validationErrors').empty();
         $.each(data.responseJSON.fieldErrors, function (index, validationError) {
             var errorDiv = '#error-' + validationError.fieldName;
-            console.log(errorDiv);
             $(errorDiv)
                     .append(validationError.message)
                     .append($('<br>'));
         });
     });
+});
+
+$('#edit-button').click(function (event) {
+    event.preventDefault();
+    $('.validationErrors').empty();
+    
+    $.ajax({
+        type: 'PUT',
+        url: '/DVDLibrary/dvd/' + $('#edit-id').val(),
+        data: JSON.stringify({
+            id: $('#edit-id').val(),
+            title: $('#edit-title').val(),
+            year: $('#edit-year').val(),
+            mpaa: $('#edit-mpaa').val(),
+            director: $('#edit-director').val(),
+            studio: $('#edit-studio').val(),
+            note: $('#edit-note').val()
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function () {
+        var editBtn = $('#edit-button');
+        editBtn.attr('data-dismiss', 'modal');
+        editBtn.click();
+        editBtn.removeAttr('data-dismiss');
+        loadDVDs();        
+    }).error(function (data, status) {
+        $('.validationErrors').empty();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            var errorDiv = '#error-modal-' + validationError.fieldName;
+            $(errorDiv)
+                    .append(validationError.message)
+                    .append($('<br>'));
+        });
+    });
+});
+
+$('#edit-button-cancel').click(function () {
+    $('.validationErrors').empty();
 });
 
 $('#search-button').click(function (event) {
@@ -152,42 +193,6 @@ $('#edit-modal').on('show.bs.modal', function (event) {
         modal.find('#edit-director').val(dvd.director);
         modal.find('#edit-studio').val(dvd.studio);
         modal.find('#edit-note').val(dvd.note);
-    });
-});
-
-$('#edit-button').click(function (event) {
-    event.preventDefault();
-    
-    $.ajax({
-        type: 'PUT',
-        url: '/DVDLibrary/dvd/' + $('#edit-id').val(),
-        data: JSON.stringify({
-            id: $('#edit-id').val(),
-            title: $('#edit-title').val(),
-            year: $('#edit-year').val(),
-            mpaa: $('#edit-mpaa').val(),
-            director: $('#edit-director').val(),
-            studio: $('#edit-studio').val(),
-            note: $('#edit-note').val()
-        }),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'dataType': 'json'
-    }).success(function () {
-        var editBtn = $('#edit-button');
-        loadDVDs();
-        editBtn.attr('data-dismiss', 'modal');
-        editBtn.click();
-        editBtn.removeAttr('data-dismiss');
-    }).error(function (data, status) {
-        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-            var errorDiv = '#error-modal-' + validationError.fieldName;
-            $(errorDiv)
-                    .append(validationError.message)
-                    .append($('<br>'));
-        });
     });
 });
 
