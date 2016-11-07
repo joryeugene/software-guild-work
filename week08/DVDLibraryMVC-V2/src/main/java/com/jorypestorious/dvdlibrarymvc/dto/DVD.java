@@ -59,7 +59,7 @@ public class DVD {
     }
     
     public String getMpaa() {
-        return mpaa;
+        return mpaa.toUpperCase();
     }
     
     public void setMpaa(String mpaa) {

@@ -14,39 +14,39 @@ function loadDVDs() {
 function fillDVDTable(data, status) {
     clearTable();
     var dvdTable = $('#content-rows');
-
+    
     $.each(data, function (index, dvd) {
         dvdTable.append($('<tr>')
                 .append($('<td>')
-                        .append($('<a>')
-                                .attr({
-                                    'data-dvd-id': dvd.id,
-                                    'data-toggle': 'modal',
-                                    'data-target': '#details-modal'
-                                })
-                                .text(dvd.title)
-                                ) // ends the <a> tag
-                        ) // ends the <td> tag
+                .append($('<a>')
+                .attr({
+                    'data-dvd-id': dvd.id,
+            'data-toggle': 'modal',
+            'data-target': '#details-modal'
+        })
+                .text(dvd.title)
+                ) // ends the <a> tag
+                ) // ends the <td> tag
                 .append($('<td>').text(dvd.year))
                 .append($('<td>').text(dvd.mpaa))
                 .append($('<td>')
-                        .append($('<a>')
-                                .attr({
-                                    'data-dvd-id': dvd.id,
-                                    'data-toggle': 'modal',
-                                    'data-target': '#edit-modal'
-                                })
-                                .text('Edit')
-                                ) // ends the <a> tag
-                        ) // ends the <td> tag for Edit
+                .append($('<a>')
+                .attr({
+                    'data-dvd-id': dvd.id,
+            'data-toggle': 'modal',
+            'data-target': '#edit-modal'
+        })
+                .text('Edit')
+                ) // ends the <a> tag
+                ) // ends the <td> tag for Edit
                 .append($('<td>')
-                        .append($('<a>')
-                                .attr({
-                                    'onClick': 'deleteDVD(' + dvd.id + ')'
-                                })
-                                .text('Delete')
-                                ) // ends the <a> tag
-                        ) // ends the <td> tag for Delete
+                .append($('<a>')
+                .attr({
+                    'onClick': 'deleteDVD(' + dvd.id + ')'
+        })
+                .text('Delete')
+                ) // ends the <a> tag
+                ) // ends the <td> tag for Delete
                 ); // ends the <tr> 
     }); // ends the 'each' function
 }
@@ -54,7 +54,7 @@ function fillDVDTable(data, status) {
 $('#add-button').click(function (event) {
     event.preventDefault();
     $('.validationErrors').empty();
-
+    
     $.ajax({
         type: 'POST',
         url: '/DVDLibrary/dvd',
@@ -87,9 +87,6 @@ $('#add-button').click(function (event) {
             $(errorDiv)
                     .append(validationError.message)
                     .append($('<br>'));
-//            console.log(validationError);
-//            var errorDiv = $('#validationErrors');
-//            errorDiv.append(validationError.message).append($('<br>'));
         });
     });
 });
@@ -125,7 +122,7 @@ $('#details-modal').on('show.bs.modal', function (event) {
     var element = $(event.relatedTarget);
     var id = element.data('dvd-id');
     var modal = $(this);
-
+    
     $.ajax({
         type: 'GET',
         url: '/DVDLibrary/dvd/' + id
@@ -143,7 +140,7 @@ $('#edit-modal').on('show.bs.modal', function (event) {
     var element = $(event.relatedTarget);
     var id = element.data('dvd-id');
     var modal = $(this);
-
+    
     $.ajax({
         type: 'GET',
         url: '/DVDLibrary/dvd/' + id
@@ -160,7 +157,7 @@ $('#edit-modal').on('show.bs.modal', function (event) {
 
 $('#edit-button').click(function (event) {
     event.preventDefault();
-
+    
     $.ajax({
         type: 'PUT',
         url: '/DVDLibrary/dvd/' + $('#edit-id').val(),
@@ -179,7 +176,18 @@ $('#edit-button').click(function (event) {
         },
         'dataType': 'json'
     }).success(function () {
+        var editBtn = $('#edit-button');
         loadDVDs();
+        editBtn.attr('data-dismiss', 'modal');
+        editBtn.click();
+        editBtn.removeAttr('data-dismiss');
+    }).error(function (data, status) {
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            var errorDiv = '#error-modal-' + validationError.fieldName;
+            $(errorDiv)
+                    .append(validationError.message)
+                    .append($('<br>'));
+        });
     });
 });
 

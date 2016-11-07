@@ -67,6 +67,7 @@
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="edit-title"
                                            placeholder="Title">
+                                    <div id="error-modal-title" class="validationErrors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -76,6 +77,7 @@
                                 <div class="col-md-8">
                                     <input type="number" min="1878" max="2100" class="form-control" id="edit-year"
                                            placeholder="Year">
+                                    <div id="error-modal-year" class="validationErrors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -85,6 +87,7 @@
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="edit-mpaa"
                                            placeholder="MPAA Rating">
+                                    <div id="error-modal-mpaa" class="validationErrors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,6 +97,7 @@
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="edit-director"
                                            placeholder="Director">
+                                    <div id="error-modal-director" class="validationErrors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -103,6 +107,7 @@
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="edit-studio"
                                            placeholder="Producer">
+                                    <div id="error-modal-studio" class="validationErrors"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,8 +122,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-8">
-                                    <button type="submit" id="edit-button" class="btn btn-default"
-                                            data-dismiss="modal">
+                                    <button type="submit" id="edit-button" class="btn btn-default">
                                         Update DVD
                                     </button>
                                     <button type="button" class="btn btn-default"
