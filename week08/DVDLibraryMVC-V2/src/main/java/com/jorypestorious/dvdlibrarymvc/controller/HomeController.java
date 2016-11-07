@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class HomeController {
 
     private final DVDLibraryDao dao;
-    private boolean firstStart = true;
 
     @Inject
     public HomeController(DVDLibraryDao dao) {
@@ -27,7 +26,7 @@ public class HomeController {
     }
 
     private void populateLibrary() {
-        if (dao.getAllDVDs().size() < 1 && firstStart) {
+        if (dao.getAllDVDs().size() < 1) {
             dao.addDVD(new DVD("Finding Nemo", "2003", "G", "Andrew Stanton", "Pixar", "Stupid fish swims around aimlessly"));
             dao.addDVD(new DVD("Spirited Away", "2001", "PG", "Hayao Miyazaki", "Studio Ghibli", "Girl does some dirty work at a bathhouse"));
             dao.addDVD(new DVD("Mr. Nobody", "2009", "R", "Jaco Van Dormael", "Pan Européenne", "Future guy with face tattoos interviews old crazy man"));
@@ -39,7 +38,6 @@ public class HomeController {
             dao.addDVD(new DVD("Howl's Moving Castle", "2004", "PG", "Hayao Miyazaki", "Studio Ghibli", "Crazy guy with cool mobile home"));
             dao.addDVD(new DVD("Amélie", "2001", "R", "Jean-Pierre Jeunet", "Claudie Ossard Productions", "Weird cute French girl does things around town"));
             dao.addDVD(new DVD("Kiki's Delivery Service", "1989", "G", "Hayao Miyazaki", "Studio Ghibli", "Young witch leads on nerd boy while starting a business"));
-            firstStart = false;
         }
     }
 
