@@ -1,0 +1,131 @@
+* {
+    color: #362600;
+}
+
+a {
+    color: #FFB000;
+}
+
+a > button {
+    color: #A87800;
+}
+
+.no-padding {
+    padding: 0px;
+    margin: 0px;
+}
+
+.float-right {
+    float: right;
+    display: inline-block;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.hr {
+    margin: 5px 0px 20px;
+}
+
+.money-amount {
+    font-size: 1.6em;
+}
+
+#items-div {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    color: black;
+    height: 480px;
+    padding: 20px 15px 0px;
+    overflow: scroll;
+}
+
+#vending-machine {
+    background-color: #FFE29A;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#vending-machine > p {
+    font-family: monospace;
+    font-size: 1.4em;
+    letter-spacing: 20px;
+    text-shadow: 2px 2px 2px #eee;
+}
+
+#bought-items-div {
+    position: relative;
+    top: 15px;
+}
+
+#bought-items {
+    margin:1em 10px 4em;
+    min-height: 200px;
+    width:90%;
+}
+
+.bevel {
+    box-shadow: 0px 0px 2px #aaa inset, 0 0 5px #222 inset;
+}
+
+.drop-shadow {
+    position: relative;
+    float: left;
+    padding: 1em;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+}
+
+.drop-shadow p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.lifted {
+    border-radius: 4px;
+}
+
+.lifted:before,
+.lifted:after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    max-width: 300px;
+    max-height: 100px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+}
+
+.lifted:after {
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+.rotated {
+    box-shadow: none;
+    transform: rotate(-3deg);
+}
+
+.rotated > :first-child:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
