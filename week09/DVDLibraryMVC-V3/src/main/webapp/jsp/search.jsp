@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2 class="text-center">Search Results</h2>
-                    <%@include file="dvdSummaryTableFragment.jsp"%>
+                    <section id="dvd-table" class="row text-center"></section>
                 </div>
 
                 <div class="col-md-4">

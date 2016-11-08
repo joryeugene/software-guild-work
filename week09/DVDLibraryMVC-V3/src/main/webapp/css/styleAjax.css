@@ -6,3 +6,12 @@
 .dvd-outer-tile {
     padding: 20px;
 }
+
+#dvd-table {
+    max-height: calc(100vh - 300px);
+    overflow: scroll;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-weight: bold;
+}
+

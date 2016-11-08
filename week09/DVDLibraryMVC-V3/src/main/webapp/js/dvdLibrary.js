@@ -14,10 +14,8 @@ function loadDVDs() {
 function fillDVDTable(data, status) {
     clearTable();
     var dvdTable = $('#dvd-table');
-    
-    $.each(data, function (index, dvd) {
-        console.log(index);
 
+    $.each(data, function (index, dvd) {
         var imgDiv = 'dvd-img-' + index;
 
         dvdTable.append($('<div>')
@@ -49,33 +47,11 @@ function fillDVDTable(data, status) {
                         ) // ends the <a> tag
                 ); // ends the <div> 
 
-        if (dvd.image.length < 1) {
+        if (dvd.image.length < 1 || dvd.image === '/DVDLibrary/img/dvd-placeholder.jpg') {
             imgDiv = '#' + imgDiv;
-            var imageURL = getPoster(dvd.title, imgDiv);
-            
-            if (imageURL != '/DVDLibrary/img/dvd-placeholder.jpg') {
-                $.ajax({
-                    type: 'PUT',
-                    url: '/DVDLibrary/dvd/' + dvd.id,
-                    data: JSON.stringify({
-                        id: dvd.id,
-                        title: dvd.title,
-                        year: dvd.year,
-                        mpaa: dvd.mpaa,
-                        director: dvd.director,
-                        studio: dvd.studio,
-                        note: dvd.note,
-                        image: imageURL
-                    }),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    'dataType': 'json'
-                })
-            }
+            getExtras(dvd, imgDiv);            
         }
-        
+
         if ((index + 1) % 4 === 0) {
             dvdTable.append($('<div class="clearfix visible-md-block visible-lg-block"></div>'));
         }
@@ -86,8 +62,6 @@ function fillDVDTable(data, status) {
             dvdTable.append($('<div class="clearfix visible-xs-block"></div>'));
         }
     }); // ends the 'each' function
-
-
 }
 
 $('#add-button').click(function (event) {
@@ -209,8 +183,10 @@ $('#details-modal').on('show.bs.modal', function (event) {
         modal.find('#dvd-mpaa').text(dvd.mpaa);
         modal.find('#dvd-director').text(dvd.director);
         modal.find('#dvd-studio').text(dvd.studio);
+        modal.find('#dvd-overview').text(dvd.overview);
         modal.find('#dvd-note').text(dvd.note);
-        console.log(dvd.image);
+//        modal.find('#dvd-image').html('<img class="img-responsive" src="' + dvd.image + '">');
+        modal.find('#dvd-image').attr('src', dvd.image);
     });
 });
 
@@ -256,17 +232,34 @@ function clearTable() {
 
 
 
-var getPoster = function (film, imgDiv) {
-    $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film + "&callback=?", function (json) {
+var getExtras = function (dvd, imgDiv) {
+    $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + dvd.title + "&callback=?", function (json) {
         if (json != "Nothing found.") {
 
             console.log(json); // can delete
             var imageLink = 'http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path;
             $(imgDiv).attr('src', imageLink);
-            return imageLink;
-        } else {
-            $(imgDiv).attr('src', '/DVDLibrary/img/dvd-placeholder.jpg');
-            return '/DVDLibrary/img/dvd-placeholder.jpg';
+            
+            $.ajax({
+                    type: 'PUT',
+                    url: '/DVDLibrary/dvd/' + dvd.id,
+                    data: JSON.stringify({
+                        id: dvd.id,
+                        title: dvd.title,
+                        year: dvd.year,
+                        mpaa: dvd.mpaa,
+                        director: dvd.director,
+                        studio: dvd.studio,
+                        note: dvd.note,
+                        image: imageLink,
+                        overview: json.results[0].overview                        
+                    }),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    'dataType': 'json'
+                })
         }
     });
 };

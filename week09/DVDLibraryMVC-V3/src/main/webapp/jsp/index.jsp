@@ -25,22 +25,8 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <h2 class="text-center">DVDs</h2>
-                    <!--%@include file="dvdSummaryTableFragment.jsp"%-->
-                    
-                    <section id="dvd-table" class="row">
-                       <!-- <div class="col-md-3 col-sm-4 col-xs-6">
-                            <a class="dvd-link" href="#">
-                                <div class="dvd-tile">
-                                    <img class="dvd-image img-responsive" src="/DVDLibrary/img/dvd-placeholder.jpg">
-                                </div>
-                                <p class="dvd-title">Title</p>
-                            </a>
-                        </div>
-                     
-                       -->
-                        
-                    </section>
+                    <h2 class="text-center">DVDs</h2>                    
+                    <section id="dvd-table" class="row text-center"></section>
                 </div>
 
                 <div class="col-md-4">

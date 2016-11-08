@@ -21,7 +21,8 @@ public class DVD {
     @Length(max=50, message="Studio must be no more than 50 characters in length.")
     private String studio;
     private String note; // user rating or note
-    private String image = "";
+    private String image = "/DVDLibrary/img/dvd-placeholder.jpg"; // populated by web api
+    private String overview = ""; // populated by web api
     
     public DVD() {}
     
@@ -96,6 +97,14 @@ public class DVD {
     
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
     
 }
