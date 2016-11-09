@@ -1,6 +1,7 @@
 package com.jorypestorious.dvdlibrarymvc.dao;
 
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
+import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
 import java.util.List;
 import java.util.Map;
 
@@ -17,5 +18,7 @@ public interface DVDLibraryDao {
     public DVD getDVDById(int id);
 
     public List<DVD> searchDVDs(Map<SearchTerm, String> criteria);
+    
+    public List<MpaaDVDCount> getMpaaDVDCounts();
     
 }

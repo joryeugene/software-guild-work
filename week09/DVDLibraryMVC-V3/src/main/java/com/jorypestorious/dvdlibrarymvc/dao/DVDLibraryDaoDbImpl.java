@@ -1,6 +1,7 @@
 package com.jorypestorious.dvdlibrarymvc.dao;
 
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
+import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +28,10 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
             = "select * from Dvds";
     private static final String SQL_SELECT_DVDS_WITH_MPAA
             = "SELECT * FROM Dvds WHERE Mpaa = ? AND Title LIKE ? AND Year LIKE ? AND Director LIKE ? AND Studio LIKE ?";
-//            = "select * from Dvds where Title = ?";
     private static final String SQL_SELECT_DVDS_NO_MPAA
             = "SELECT * FROM Dvds WHERE Title LIKE ? AND Year LIKE ? AND Director LIKE ? AND Studio LIKE ?";
-//            = "select * from Dvds where Mpaa = ?";
+    private static final String SQL_SELECT_MPAA_DVD_COUNTS
+            = "SELECT Mpaa, count(*) as NumDvds FROM Dvds group by mpaa;";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -98,20 +100,26 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
 
         if (mpaaCriteria.length() > 0) {
             return jdbcTemplate.query(SQL_SELECT_DVDS_WITH_MPAA,
-                new DVDMapper(),
-                mpaaCriteria,
-                titleCriteria,
-                yearCriteria,
-                directorCriteria,
-                studioCriteria);
+                    new DVDMapper(),
+                    mpaaCriteria,
+                    titleCriteria,
+                    yearCriteria,
+                    directorCriteria,
+                    studioCriteria);
         } else {
             return jdbcTemplate.query(SQL_SELECT_DVDS_NO_MPAA,
-                new DVDMapper(),
-                titleCriteria,
-                yearCriteria,
-                directorCriteria,
-                studioCriteria);
+                    new DVDMapper(),
+                    titleCriteria,
+                    yearCriteria,
+                    directorCriteria,
+                    studioCriteria);
         }
+    }
+
+    @Override
+    public List<MpaaDVDCount> getMpaaDVDCounts() {
+        return jdbcTemplate.query(SQL_SELECT_MPAA_DVD_COUNTS,
+                new MpaaDVDCountMapper());
     }
 
     private static final class DVDMapper implements RowMapper<DVD> {
@@ -131,4 +139,15 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
         }
     }
 
+    private static final class MpaaDVDCountMapper implements ParameterizedRowMapper<MpaaDVDCount> {
+
+        @Override 
+        public MpaaDVDCount mapRow(ResultSet rs, int i) throws SQLException {
+            MpaaDVDCount count = new MpaaDVDCount();
+            count.setMpaa(rs.getString("Mpaa"));
+            count.setNumDVDs(rs.getInt("NumDvds"));
+            return count;
+        }
+
+    }
 }

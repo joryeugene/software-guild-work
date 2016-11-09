@@ -1,6 +1,7 @@
 package com.jorypestorious.dvdlibrarymvc.dao;
 
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
+import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,27 +47,20 @@ public class DVDLibraryDaoInMemImpl implements DVDLibraryDao {
 
     @Override
     public List<DVD> searchDVDs(Map<SearchTerm, String> criteria) {
-        // TITLE, YEAR, MPAA, DIRECTOR, STUDIO;
         String titleCriteria = criteria.get(SearchTerm.TITLE);
         String yearCriteria = criteria.get(SearchTerm.YEAR);
         String mpaaCriteria = criteria.get(SearchTerm.MPAA);
         String directorCriteria = criteria.get(SearchTerm.DIRECTOR);
         String studioCriteria = criteria.get(SearchTerm.STUDIO);
         
-        // Declare all the predicate conditions
         Predicate<DVD> titleMatches;
         Predicate<DVD> yearMatches;
         Predicate<DVD> mpaaMatches;
         Predicate<DVD> directorMatches;
         Predicate<DVD> studioMatches;
         
-        // Placeholder predicate - always returns true. Used for search terms
-        // that are empty
         Predicate<DVD> truePredicate = (c) -> {return true;};
         
-        // Assign values to predicates. If a given search term is empty, just
-        // assign the default truePredicate, otherwise assign the predicate that
-        // properly filters for the given term.
         titleMatches = (titleCriteria == null || titleCriteria.isEmpty())
                 ? truePredicate
                 : (c) -> c.getTitle().equalsIgnoreCase(titleCriteria);
@@ -87,8 +81,6 @@ public class DVDLibraryDaoInMemImpl implements DVDLibraryDao {
                 ? truePredicate
                 : (c) -> c.getStudio().equalsIgnoreCase(studioCriteria);
         
-        // Return the list of Contacts that match the given criteria. To do this we
-        // just AND all the predicates together in a filter operation.
         return dvdMap.values().stream()
                 .filter(titleMatches
                         .and(yearMatches)
@@ -96,5 +88,10 @@ public class DVDLibraryDaoInMemImpl implements DVDLibraryDao {
                         .and(directorMatches)
                         .and(studioMatches))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MpaaDVDCount> getMpaaDVDCounts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
