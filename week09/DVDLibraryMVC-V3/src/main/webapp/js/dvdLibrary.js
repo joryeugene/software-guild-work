@@ -18,11 +18,25 @@ function fillDVDTable(data, status) {
     $.each(data, function (index, dvd) {
         var imgDiv = 'dvd-img-' + index;
 
-        dvdTable.append($('<div>')
+        dvdTable.append($('<div style="position:relative;">')
                 .attr({
                     'class': 'col-md-3 col-sm-4 col-xs-6 dvd-outer-tile'
                 })
-                .append($('<a>')
+                .append($('<p style="position:absolute;left:4px;">')
+                        .append($('<a>').attr({
+                            'onClick': 'deleteDVD(' + dvd.id + ')'
+                        })
+                                .append('<span class="glyphicon glyphicon-remove" style="size:10px;color:red;cursor:pointer;" aria-hidden="true"></span><br>')
+                                ) // end <a>
+                        .append($('<a>').attr({
+                            'data-dvd-id': dvd.id,
+                            'data-toggle': 'modal',
+                            'data-target': '#edit-modal'
+                        })
+                                .append('<span class="glyphicon glyphicon-cog" style="size:10px;color:black;cursor:pointer;" aria-hidden="true"></span>')
+                                ) // end <a>
+                        ) // end <p>
+                .append($('<a style="cursor:pointer;">')
                         .attr({
                             'data-dvd-id': dvd.id,
                             'data-toggle': 'modal',
@@ -30,26 +44,26 @@ function fillDVDTable(data, status) {
                         }).append($('<div>')
                         .attr({
                             'class': 'dvd-inner-tile'
-                        }).append($('<img>')
-                        .attr({
-                            'class': 'dvd-image img-responsive',
-                            'id': imgDiv,
-                            'src': dvd.image
                         })
-                        ) // ends the <img>
+                        .append($('<img>')
+                                .attr({
+                                    'class': 'dvd-image img-responsive',
+                                    'id': imgDiv,
+                                    'src': dvd.image
+                                })
+                                ) // ends the <img>
                         )// ends the <div> 
                         .append($('<p>').attr({
                             'class': 'dvd-title'
                         })
                                 .text(dvd.title)
-
                                 ) // ends <p>
                         ) // ends the <a> tag
                 ); // ends the <div> 
 
         if (dvd.image.length < 1 || dvd.image === '/DVDLibrary/img/dvd-placeholder.jpg') {
             imgDiv = '#' + imgDiv;
-            getExtras(dvd, imgDiv);            
+            getExtras(dvd, imgDiv);
         }
 
         if ((index + 1) % 4 === 0) {
@@ -185,7 +199,6 @@ $('#details-modal').on('show.bs.modal', function (event) {
         modal.find('#dvd-studio').text(dvd.studio);
         modal.find('#dvd-overview').text(dvd.overview);
         modal.find('#dvd-note').text(dvd.note);
-//        modal.find('#dvd-image').html('<img class="img-responsive" src="' + dvd.image + '">');
         modal.find('#dvd-image').attr('src', dvd.image);
     });
 });
@@ -225,41 +238,34 @@ function clearTable() {
     $('#dvd-table').empty();
 }
 
-
-//console.log($.getJSON("https://api.themoviedb.org/3/discover/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb"));
-//$('#poster').html('<img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
-//var film = $('#term').val();
-
-
-
 var getExtras = function (dvd, imgDiv) {
     $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + dvd.title + "&callback=?", function (json) {
         if (json != "Nothing found.") {
-
-            console.log(json); // can delete
             var imageLink = 'http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path;
             $(imgDiv).attr('src', imageLink);
-            
+
             $.ajax({
-                    type: 'PUT',
-                    url: '/DVDLibrary/dvd/' + dvd.id,
-                    data: JSON.stringify({
-                        id: dvd.id,
-                        title: dvd.title,
-                        year: dvd.year,
-                        mpaa: dvd.mpaa,
-                        director: dvd.director,
-                        studio: dvd.studio,
-                        note: dvd.note,
-                        image: imageLink,
-                        overview: json.results[0].overview                        
-                    }),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    'dataType': 'json'
-                })
+                type: 'PUT',
+                url: '/DVDLibrary/dvd/' + dvd.id,
+                data: JSON.stringify({
+                    id: dvd.id,
+                    title: dvd.title,
+                    year: dvd.year,
+                    mpaa: dvd.mpaa,
+                    director: dvd.director,
+                    studio: dvd.studio,
+                    note: dvd.note,
+                    image: imageLink,
+                    overview: json.results[0].overview
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'dataType': 'json'
+            })
+        } else {
+            $(imgDiv).attr('src', '/DVDLibrary/img/dvd-placeholder.jpg');
         }
     });
 };

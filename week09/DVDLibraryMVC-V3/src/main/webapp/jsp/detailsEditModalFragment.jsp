@@ -2,8 +2,6 @@
     #details-modal th {
         width: 20%;
     }
-
-
 </style>
 
 <!-- Details Modal -->
@@ -54,9 +52,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
