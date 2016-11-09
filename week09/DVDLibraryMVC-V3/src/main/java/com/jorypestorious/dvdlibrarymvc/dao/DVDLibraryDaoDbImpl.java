@@ -24,10 +24,12 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
             = "update Dvds set Title = ?, Year = ?, Mpaa = ?, Director = ?, Studio = ?, Note = ?, Overview = ?, Image = ? where DvdID = ?";
     private static final String SQL_SELECT_ALL_DVDS
             = "select * from Dvds";
-    private static final String SQL_SELECT_DVDS_BY_TITLE
-            = "select * from Dvds where Title = ?";
-    private static final String SQL_SELECT_DVDS_BY_MPAA
-            = "select * from Dvds where Mpaa = ?";
+    private static final String SQL_SELECT_DVDS_WITH_MPAA
+            = "SELECT * FROM Dvds WHERE Mpaa = ? AND Title LIKE ? AND Year LIKE ? AND Director LIKE ? AND Studio LIKE ?";
+//            = "select * from Dvds where Title = ?";
+    private static final String SQL_SELECT_DVDS_NO_MPAA
+            = "SELECT * FROM Dvds WHERE Title LIKE ? AND Year LIKE ? AND Director LIKE ? AND Studio LIKE ?";
+//            = "select * from Dvds where Mpaa = ?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -86,17 +88,31 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
         }
     }
 
-    public List<DVD> searchDVDsByTitle(String title) {
-        return jdbcTemplate.query(SQL_SELECT_DVDS_BY_TITLE, new DVDMapper());
-    }
-
-    public List<DVD> searchDVDsByMpaa(String mpaa) {
-        return jdbcTemplate.query(SQL_SELECT_DVDS_BY_MPAA, new DVDMapper());
-    }
-
     @Override
     public List<DVD> searchDVDs(Map<SearchTerm, String> criteria) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String titleCriteria = "%" + criteria.get(SearchTerm.TITLE) + "%";
+        String yearCriteria = "%" + criteria.get(SearchTerm.YEAR) + "%";
+        String mpaaCriteria = criteria.get(SearchTerm.MPAA);
+        String directorCriteria = "%" + criteria.get(SearchTerm.DIRECTOR) + "%";
+        String studioCriteria = "%" + criteria.get(SearchTerm.STUDIO) + "%";
+
+        if (mpaaCriteria.length() > 0) {
+            return jdbcTemplate.query(SQL_SELECT_DVDS_WITH_MPAA,
+                new DVDMapper(),
+                mpaaCriteria,
+                titleCriteria,
+                yearCriteria,
+                directorCriteria,
+                studioCriteria);
+        } else {
+            return jdbcTemplate.query(SQL_SELECT_DVDS_NO_MPAA,
+                new DVDMapper(),
+                titleCriteria,
+                yearCriteria,
+                directorCriteria,
+                studioCriteria);
+        }
     }
 
     private static final class DVDMapper implements RowMapper<DVD> {

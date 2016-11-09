@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SearchController {
-    
+
     private final DVDLibraryDao dao;
 
     @Inject
@@ -34,26 +34,66 @@ public class SearchController {
         Map<SearchTerm, String> criteriaMap = new HashMap<>();
 
         String currentTerm = searchMap.get("title");
-        if (!currentTerm.isEmpty()) {
-            criteriaMap.put(SearchTerm.TITLE, currentTerm);
+        if (currentTerm.isEmpty() || currentTerm == null) {
+            currentTerm = "";
         }
+        criteriaMap.put(SearchTerm.TITLE, currentTerm);
+
         currentTerm = searchMap.get("year");
-        if (!currentTerm.isEmpty()) {
-            criteriaMap.put(SearchTerm.YEAR, currentTerm);
+        if (currentTerm.isEmpty() || currentTerm == null) {
+            currentTerm = "";
         }
+        criteriaMap.put(SearchTerm.YEAR, currentTerm);
+
         currentTerm = searchMap.get("mpaa");
-        if (!currentTerm.isEmpty()) {
-            criteriaMap.put(SearchTerm.MPAA, currentTerm);
+
+        if (currentTerm.isEmpty() || currentTerm == null) {
+            currentTerm = "";
+
         }
+        criteriaMap.put(SearchTerm.MPAA, currentTerm);
+
         currentTerm = searchMap.get("studio");
-        if (!currentTerm.isEmpty()) {
-            criteriaMap.put(SearchTerm.STUDIO, currentTerm);
+        if (currentTerm.isEmpty() || currentTerm == null) {
+            currentTerm = "";
         }
+        criteriaMap.put(SearchTerm.STUDIO, currentTerm);
+
         currentTerm = searchMap.get("director");
-        if (!currentTerm.isEmpty()) {
-            criteriaMap.put(SearchTerm.DIRECTOR, currentTerm);
+        if (currentTerm.isEmpty() || currentTerm == null) {
+            currentTerm = "";
         }
+        criteriaMap.put(SearchTerm.DIRECTOR, currentTerm);
 
         return dao.searchDVDs(criteriaMap);
     }
+
+    //    @RequestMapping(value = "search/dvds", method = RequestMethod.POST)
+//    @ResponseBody
+//    public List<DVD> searchDVDs(@RequestBody Map<String, String> searchMap) {
+//        Map<SearchTerm, String> criteriaMap = new HashMap<>();
+//
+//        String currentTerm = searchMap.get("title");
+//        if (!currentTerm.isEmpty()) {
+//            criteriaMap.put(SearchTerm.TITLE, currentTerm);
+//        }
+//        currentTerm = searchMap.get("year");
+//        if (!currentTerm.isEmpty()) {
+//            criteriaMap.put(SearchTerm.YEAR, currentTerm);
+//        }
+//        currentTerm = searchMap.get("mpaa");
+//        if (!currentTerm.isEmpty()) {
+//            criteriaMap.put(SearchTerm.MPAA, currentTerm);
+//        }
+//        currentTerm = searchMap.get("studio");
+//        if (!currentTerm.isEmpty()) {
+//            criteriaMap.put(SearchTerm.STUDIO, currentTerm);
+//        }
+//        currentTerm = searchMap.get("director");
+//        if (!currentTerm.isEmpty()) {
+//            criteriaMap.put(SearchTerm.DIRECTOR, currentTerm);
+//        }
+//
+//        return dao.searchDVDs(criteriaMap);
+//    }
 }

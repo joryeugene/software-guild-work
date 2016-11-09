@@ -11,6 +11,7 @@ function loadDVDs() {
     });
 }
 
+// TODO
 function sortDVDsByTitle() {
     $.ajax({
         type: 'GET',
@@ -198,72 +199,36 @@ $('#edit-button').click(function (event) {
     });
 });
 
-//$('#edit-button').click(function (event) {
-//    event.preventDefault();
-//    $('.validationErrors').empty();
-//
-//    $.ajax({
-//        type: 'PUT',
-//        url: '/DVDLibrary/dvd/' + $('#edit-id').val(),
-//        data: JSON.stringify({
-//            id: $('#edit-id').val(),
-//            title: $('#edit-title').val(),
-//            year: $('#edit-year').val(),
-//            mpaa: $('#edit-mpaa').val(),
-//            director: $('#edit-director').val(),
-//            studio: $('#edit-studio').val(),
-//            overview: $('#edit-overview').val(),
-//            image: $('#edit-image').val(),
-//            note: $('#edit-note').val()
-//        }),
-//        headers: {
-//            'Accept': 'application/json',
-//            'Content-Type': 'application/json'
-//        },
-//        'dataType': 'json'
-//    }).success(function () {
-//        $('#edit-modal').modal('toggle');
-//        loadDVDs();
-//    }).error(function (data, status) {
-//        $('.validationErrors').empty();
-//        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-//            var errorDiv = '#error-modal-' + validationError.fieldName;
-//            $(errorDiv)
-//                    .append(validationError.message)
-//                    .append($('<br>'));
-//        });
-//    });
-//});
 
 $('#edit-button-cancel').click(function () {
     $('.validationErrors').empty();
 });
 
 $('#search-button').click(function (event) {
-    //    event.preventDefault();
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: '/DVDLibrary/search/dvds',
-    //        data: JSON.stringify({
-    //            title: $('#search-title').val(),
-    //            year: $('#search-year').val(),
-    //            mpaa: $('#search-mpaa').val(),
-    //            studio: $('#search-studio').val(),
-    //            director: $('#search-director').val()
-    //        }),
-    //        headers: {
-    //            'Accept': 'application/json',
-    //            'Content-Type': 'application/json'
-    //        },
-    //        'dataType': 'json'
-    //    }).success(function (data, status) {
-    //        $('#search-title').val('');
-    //        $('#search-year').val('');
-    //        $('#search-mpaa').val('');
-    //        $('#search-studio').val('');
-    //        $('#search-director').val('');
-    //        fillDVDTable(data, status);
-    //    });
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/DVDLibrary/search/dvds',
+            data: JSON.stringify({
+                title: $('#search-title').val(),
+                year: $('#search-year').val(),
+                mpaa: $('#search-mpaa').val(),
+                studio: $('#search-studio').val(),
+                director: $('#search-director').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json'
+        }).success(function (data, status) {
+            $('#search-title').val('');
+            $('#search-year').val('');
+            $('#search-mpaa').val('');
+            $('#search-studio').val('');
+            $('#search-director').val('');
+            fillDVDTable(data, status);
+        });
 });
 
 $('#details-modal').on('show.bs.modal', function (event) {
