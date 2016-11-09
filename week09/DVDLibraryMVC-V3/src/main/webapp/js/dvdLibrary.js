@@ -22,18 +22,18 @@ function fillDVDTable(data, status) {
                 .attr({
                     'class': 'col-md-3 col-sm-4 col-xs-6 dvd-outer-tile'
                 })
-                .append($('<p style="position:absolute;left:4px;">')
+                .append($('<p id="edit-delete-container">')
                         .append($('<a>').attr({
                             'onClick': 'deleteDVD(' + dvd.id + ')'
                         })
-                                .append('<span class="glyphicon glyphicon-remove" style="size:10px;color:red;cursor:pointer;" aria-hidden="true"></span><br>')
+                                .append('<span class="glyphicon glyphicon-remove" id="delete-btn" aria-hidden="true"></span><br>')
                                 ) // end <a>
                         .append($('<a>').attr({
                             'data-dvd-id': dvd.id,
                             'data-toggle': 'modal',
                             'data-target': '#edit-modal'
                         })
-                                .append('<span class="glyphicon glyphicon-cog" style="size:10px;color:black;cursor:pointer;" aria-hidden="true"></span>')
+                                .append('<span class="glyphicon glyphicon-cog" id="edit-btn" aria-hidden="true"></span>')
                                 ) // end <a>
                         ) // end <p>
                 .append($('<a style="cursor:pointer;">')
