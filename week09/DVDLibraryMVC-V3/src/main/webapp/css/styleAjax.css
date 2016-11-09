@@ -8,7 +8,7 @@
 }
 
 #dvd-table {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 310px);
     overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -37,4 +37,9 @@
 
 #edit-btn {
     color: black;
+}
+
+.dvd-image {
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
