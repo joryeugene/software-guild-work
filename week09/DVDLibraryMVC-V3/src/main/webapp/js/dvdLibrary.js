@@ -11,6 +11,22 @@ function loadDVDs() {
     });
 }
 
+function sortDVDsByTitle() {
+    $.ajax({
+        type: 'GET',
+        url: "/DVDLibrary/dvds"
+    }).success(function (data, status) {
+        data.sort(function (a, b) {
+            if (a.title < b.title)
+                return -1;
+            if (a.title > b.title)
+                return 1;
+            return 0;
+        });
+        fillDVDTable(data, status);
+    });
+}
+
 function fillDVDTable(data, status) {
     clearTable();
     var dvdTable = $('#dvd-table');
@@ -21,44 +37,44 @@ function fillDVDTable(data, status) {
         dvdTable.append($('<div style="position:relative;">')
                 .attr({
                     'class': 'col-md-3 col-sm-4 col-xs-6 dvd-outer-tile'
-        })
+                })
                 .append($('<p id="edit-delete-container">')
-                .append($('<a>').attr({
-                    'onClick': 'deleteDVD(' + dvd.id + ')'
-        })
-                .append('<span class="glyphicon glyphicon-remove" id="delete-btn" aria-hidden="true"></span><br>')
-                ) // end <a>
-                .append($('<a>').attr({
-                    'data-dvd-id': dvd.id,
-            'data-toggle': 'modal',
-            'data-target': '#edit-modal'
-        })
-                .append('<span class="glyphicon glyphicon-cog" id="edit-btn" aria-hidden="true"></span>')
-                ) // end <a>
-                ) // end <p>
+                        .append($('<a>').attr({
+                            'onClick': 'deleteDVD(' + dvd.id + ')'
+                        })
+                                .append('<span class="glyphicon glyphicon-remove" id="delete-btn" aria-hidden="true"></span><br>')
+                                ) // end <a>
+                        .append($('<a>').attr({
+                            'data-dvd-id': dvd.id,
+                            'data-toggle': 'modal',
+                            'data-target': '#edit-modal'
+                        })
+                                .append('<span class="glyphicon glyphicon-cog" id="edit-btn" aria-hidden="true"></span>')
+                                ) // end <a>
+                        ) // end <p>
                 .append($('<a style="cursor:pointer;">')
-                .attr({
-                    'data-dvd-id': dvd.id,
-            'data-toggle': 'modal',
-            'data-target': '#details-modal'
-        }).append($('<div>')
-                .attr({
-                    'class': 'dvd-inner-tile'
-        })
-                .append($('<img>')
-                .attr({
-                    'class': 'dvd-image img-responsive',
-            'id': imgDiv,
-            'src': dvd.image
-        })
-                ) // ends the <img>
-                )// ends the <div> 
-                .append($('<p>').attr({
-                    'class': 'dvd-title'
-        })
-                .text(dvd.title)
-                ) // ends <p>
-                ) // ends the <a> tag
+                        .attr({
+                            'data-dvd-id': dvd.id,
+                            'data-toggle': 'modal',
+                            'data-target': '#details-modal'
+                        }).append($('<div>')
+                        .attr({
+                            'class': 'dvd-inner-tile'
+                        })
+                        .append($('<img>')
+                                .attr({
+                                    'class': 'dvd-image img-responsive',
+                                    'id': imgDiv,
+                                    'src': dvd.image
+                                })
+                                ) // ends the <img>
+                        )// ends the <div> 
+                        .append($('<p>').attr({
+                            'class': 'dvd-title'
+                        })
+                                .text(dvd.title)
+                                ) // ends <p>
+                        ) // ends the <a> tag
                 ); // ends the <div> 
 
         if (dvd.image.length < 1 || dvd.image === '/DVDLibrary/img/dvd-placeholder.jpg' || dvd.overview.length < 1) {
@@ -127,14 +143,14 @@ $('#edit-button').click(function (event) {
     var imageVal;
     var overviewVal;
     var titleVal = $('#edit-title').val();
-    
+
     // this is for validation if input is null
     if (titleVal.length < 1) {
         titleVal = "jaiwejf3jfi3jfiaj23fjkdjf3f";
     }
 
     $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + titleVal + "&callback=?", function (json) {
-        
+
         if (json.result !== undefined) {
             overviewVal = json.results[0].overview;
             imageVal = 'http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path;
@@ -142,7 +158,7 @@ $('#edit-button').click(function (event) {
             overviewVal = "";
             imageVal = '/DVDLibrary/img/dvd-placeholder.jpg';
         }
-        
+
         // this is for validation if input is null
         if (titleVal === "jaiwejf3jfi3jfiaj23fjkdjf3f") {
             titleVal = "";
