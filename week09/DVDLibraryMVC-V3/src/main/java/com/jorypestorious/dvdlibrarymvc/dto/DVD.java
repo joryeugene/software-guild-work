@@ -20,6 +20,7 @@ public class DVD {
     @NotEmpty(message="Enter a value for studio.")
     @Length(max=50, message="Studio must be no more than 50 characters in length.")
     private String studio;
+    @Length(max=250, message="Note must be no more than 250 characters in length.")
     private String note; // user rating or note
     private String image = "/DVDLibrary/img/dvd-placeholder.jpg"; // populated by web api
     private String overview = ""; // populated by web api
