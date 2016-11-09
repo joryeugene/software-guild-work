@@ -25,7 +25,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>Statistics</h2>
-                    <div id="chart_div"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-6" id="mpaa-chart"></div> 
+                        <div class="col-md-6" id="year-chart"></div> 
+                    </div>
+                    
                 </div> 
             </div>
 

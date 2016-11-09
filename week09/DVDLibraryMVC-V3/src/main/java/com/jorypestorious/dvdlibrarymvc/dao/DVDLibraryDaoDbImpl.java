@@ -2,6 +2,7 @@ package com.jorypestorious.dvdlibrarymvc.dao;
 
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
 import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
+import com.jorypestorious.dvdlibrarymvc.dto.YearDVDCount;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,7 +33,9 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
             = "SELECT * FROM Dvds WHERE Title LIKE ? AND Year LIKE ? AND Director LIKE ? AND Studio LIKE ?";
     private static final String SQL_SELECT_MPAA_DVD_COUNTS
             = "SELECT Mpaa, count(*) as NumDvds FROM Dvds group by mpaa;";
-
+    private static final String SQL_SELECT_YEAR_DVD_COUNTS
+            = "SELECT Year, count(*) as NumDvds FROM Dvds group by year;";
+    
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -121,6 +124,11 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
         return jdbcTemplate.query(SQL_SELECT_MPAA_DVD_COUNTS,
                 new MpaaDVDCountMapper());
     }
+    @Override
+    public List<YearDVDCount> getYearDVDCounts() {
+        return jdbcTemplate.query(SQL_SELECT_YEAR_DVD_COUNTS,
+                new YearDVDCountMapper());
+    }
 
     private static final class DVDMapper implements RowMapper<DVD> {
 
@@ -140,7 +148,6 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
     }
 
     private static final class MpaaDVDCountMapper implements ParameterizedRowMapper<MpaaDVDCount> {
-
         @Override 
         public MpaaDVDCount mapRow(ResultSet rs, int i) throws SQLException {
             MpaaDVDCount count = new MpaaDVDCount();
@@ -148,6 +155,15 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
             count.setNumDVDs(rs.getInt("NumDvds"));
             return count;
         }
-
+    }
+    
+    private static final class YearDVDCountMapper implements ParameterizedRowMapper<YearDVDCount> {
+        @Override 
+        public YearDVDCount mapRow(ResultSet rs, int i) throws SQLException {
+            YearDVDCount count = new YearDVDCount();
+            count.setYear(rs.getString("Year"));
+            count.setNumDVDs(rs.getInt("NumDvds"));
+            return count;
+        }
     }
 }
