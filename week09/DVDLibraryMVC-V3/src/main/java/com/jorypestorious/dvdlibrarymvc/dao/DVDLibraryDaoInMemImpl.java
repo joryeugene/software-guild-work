@@ -2,6 +2,7 @@ package com.jorypestorious.dvdlibrarymvc.dao;
 
 import com.jorypestorious.dvdlibrarymvc.dto.DVD;
 import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
+import com.jorypestorious.dvdlibrarymvc.dto.YearDVDCount;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -92,6 +93,11 @@ public class DVDLibraryDaoInMemImpl implements DVDLibraryDao {
 
     @Override
     public List<MpaaDVDCount> getMpaaDVDCounts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<YearDVDCount> getYearDVDCounts() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

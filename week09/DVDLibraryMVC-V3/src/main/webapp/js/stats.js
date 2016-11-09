@@ -20,7 +20,7 @@ function drawMpaaChart() {
 }
 
 function drawYearChart() {
-    $.get('/DVDLibrary/stats/yearchart').success(function (data) {
+    $.get('/DVDLibrary/stats/yearchart').success(function (data) {        
         var dataTable = new google.visualization.DataTable(data);
         var options = {
             title: 'DVDs By Year',
