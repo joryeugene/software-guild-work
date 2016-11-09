@@ -11,7 +11,7 @@ function loadDVDs() {
     });
 }
 
-// TODO
+// TODO SORTING
 function sortDVDsByTitle() {
     $.ajax({
         type: 'GET',
@@ -133,10 +133,6 @@ $('#add-button').click(function (event) {
         });
     });
 });
-
-
-
-
 
 $('#edit-button').click(function (event) {
     event.preventDefault();
