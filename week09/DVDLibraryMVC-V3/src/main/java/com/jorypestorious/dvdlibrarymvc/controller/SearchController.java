@@ -32,68 +32,18 @@ public class SearchController {
     @ResponseBody
     public List<DVD> searchDVDs(@RequestBody Map<String, String> searchMap) {
         Map<SearchTerm, String> criteriaMap = new HashMap<>();
+        criteriaMap.put(SearchTerm.TITLE, searchMap.get("title"));
+        criteriaMap.put(SearchTerm.YEAR, searchMap.get("year"));
+        criteriaMap.put(SearchTerm.MPAA, searchMap.get("mpaa"));
+        criteriaMap.put(SearchTerm.STUDIO, searchMap.get("studio"));
+        criteriaMap.put(SearchTerm.DIRECTOR, searchMap.get("director"));
 
-        String currentTerm = searchMap.get("title");
-        if (currentTerm.isEmpty() || currentTerm == null) {
-            currentTerm = "";
+        for (String currentTerm : criteriaMap.values()) {
+            if (currentTerm.isEmpty() || currentTerm == null) {
+                currentTerm = "";
+            }
         }
-        criteriaMap.put(SearchTerm.TITLE, currentTerm);
-
-        currentTerm = searchMap.get("year");
-        if (currentTerm.isEmpty() || currentTerm == null) {
-            currentTerm = "";
-        }
-        criteriaMap.put(SearchTerm.YEAR, currentTerm);
-
-        currentTerm = searchMap.get("mpaa");
-
-        if (currentTerm.isEmpty() || currentTerm == null) {
-            currentTerm = "";
-
-        }
-        criteriaMap.put(SearchTerm.MPAA, currentTerm);
-
-        currentTerm = searchMap.get("studio");
-        if (currentTerm.isEmpty() || currentTerm == null) {
-            currentTerm = "";
-        }
-        criteriaMap.put(SearchTerm.STUDIO, currentTerm);
-
-        currentTerm = searchMap.get("director");
-        if (currentTerm.isEmpty() || currentTerm == null) {
-            currentTerm = "";
-        }
-        criteriaMap.put(SearchTerm.DIRECTOR, currentTerm);
 
         return dao.searchDVDs(criteriaMap);
     }
-
-    //    @RequestMapping(value = "search/dvds", method = RequestMethod.POST)
-//    @ResponseBody
-//    public List<DVD> searchDVDs(@RequestBody Map<String, String> searchMap) {
-//        Map<SearchTerm, String> criteriaMap = new HashMap<>();
-//
-//        String currentTerm = searchMap.get("title");
-//        if (!currentTerm.isEmpty()) {
-//            criteriaMap.put(SearchTerm.TITLE, currentTerm);
-//        }
-//        currentTerm = searchMap.get("year");
-//        if (!currentTerm.isEmpty()) {
-//            criteriaMap.put(SearchTerm.YEAR, currentTerm);
-//        }
-//        currentTerm = searchMap.get("mpaa");
-//        if (!currentTerm.isEmpty()) {
-//            criteriaMap.put(SearchTerm.MPAA, currentTerm);
-//        }
-//        currentTerm = searchMap.get("studio");
-//        if (!currentTerm.isEmpty()) {
-//            criteriaMap.put(SearchTerm.STUDIO, currentTerm);
-//        }
-//        currentTerm = searchMap.get("director");
-//        if (!currentTerm.isEmpty()) {
-//            criteriaMap.put(SearchTerm.DIRECTOR, currentTerm);
-//        }
-//
-//        return dao.searchDVDs(criteriaMap);
-//    }
 }
