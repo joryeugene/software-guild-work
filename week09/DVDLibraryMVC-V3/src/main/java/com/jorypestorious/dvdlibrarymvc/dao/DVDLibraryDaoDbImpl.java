@@ -90,7 +90,6 @@ public class DVDLibraryDaoDbImpl implements DVDLibraryDao {
 
     @Override
     public List<DVD> searchDVDs(Map<SearchTerm, String> criteria) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String titleCriteria = "%" + criteria.get(SearchTerm.TITLE) + "%";
         String yearCriteria = "%" + criteria.get(SearchTerm.YEAR) + "%";
         String mpaaCriteria = criteria.get(SearchTerm.MPAA);

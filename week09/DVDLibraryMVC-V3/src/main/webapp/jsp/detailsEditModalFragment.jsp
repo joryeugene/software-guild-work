@@ -1,9 +1,3 @@
-<style>
-    #details-modal th {
-        width: 20%;
-    }
-</style>
-
 <!-- Details Modal -->
 <div class="modal fade" id="details-modal" tabindex="-1" role="dialog"
      aria-labelledby="detailsModalLabel" aria-hidden="true">
