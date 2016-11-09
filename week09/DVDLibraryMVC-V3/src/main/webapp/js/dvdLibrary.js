@@ -200,6 +200,15 @@ $('#edit-button-cancel').click(function () {
     $('.validationErrors').empty();
 });
 
+$('#search-form-toggle').click(function () {
+    $('#search-form').removeClass('hidden');
+    $('#add-form').addClass('hidden');
+});
+$('#add-form-toggle').click(function () {
+    $('#add-form').removeClass('hidden');
+    $('#search-form').addClass('hidden');
+});
+
 $('#search-button').click(function (event) {
         event.preventDefault();
         $.ajax({

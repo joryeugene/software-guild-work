@@ -18,7 +18,6 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/search/">Search</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
                 </ul>    
             </div>
@@ -30,8 +29,9 @@
                 </div>
 
                 <div class="col-md-4">
-                    <h2 class="text-center">Add New DVD</h2>
-                    <form class="form-horizontal" role="form">
+                    <h2 class="text-center col-md-offset-3 col-md-9"><a id="add-form-toggle" href="#">Add</a> | <a id="search-form-toggle" href="#">Search</a></h2>
+                    
+                    <form id="add-form" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="add-title" class="col-md-3 control-label">
                                 Title:
@@ -106,6 +106,73 @@
                             </div>
                         </div>
                     </form>
+                    
+                    <form id="search-form" class="hidden form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="search-title" class="col-md-3 control-label">
+                                Title:
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text"
+                                       class="form-control"
+                                       id="search-title"
+                                       placeholder="Title"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-year" class="col-md-3 control-label">
+                                Year:
+                            </label>
+                            <div class="col-md-9">
+                                <input type="number"
+                                       min="1878"
+                                       max="2100"
+                                       class="form-control"
+                                       id="search-year"
+                                       placeholder="Year"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-mpaa" class="col-md-3 control-label">
+                                MPAA Rating:
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text"
+                                       class="form-control"
+                                       id="search-mpaa"
+                                       placeholder="MPAA"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-director" class="col-md-3 control-label">Director:</label>
+                            <div class="col-md-9">
+                                <input type="text"
+                                       class="form-control"
+                                       id="search-director"
+                                       placeholder="Director"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-studio" class="col-md-3 control-label">Studio:</label>
+                            <div class="col-md-9">
+                                <input type="text"
+                                       class="form-control"
+                                       id="search-studio"
+                                       placeholder="Studio"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit"
+                                        id="search-button"
+                                        class="btn btn-default">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    
                 </div> <!-- End col div -->
             </div> <!-- End row div --> 
         </div>
