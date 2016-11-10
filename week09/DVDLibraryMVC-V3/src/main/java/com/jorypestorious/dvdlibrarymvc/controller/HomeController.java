@@ -22,7 +22,6 @@ public class HomeController {
     @Inject
     public HomeController(DVDLibraryDao dao) {
         this.dao = dao;
-//        populateLibrary();
     }
 
 //    private void populateLibrary() {
@@ -40,10 +39,15 @@ public class HomeController {
 //            dao.addDVD(new DVD("Kiki's Delivery Service", "1989", "G", "Hayao Miyazaki", "Studio Ghibli", "Young witch leads on nerd boy while starting a business"));
 //        }
 //    }
-
+    
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String displayHomePage() {
         return "index";
+    }
+
+    @RequestMapping(value = {"/library"}, method = RequestMethod.GET)
+    public String displayMainAjaxPage() {
+        return "library";
     }
 
     @RequestMapping(value = "/dvd/{id}", method = RequestMethod.GET)

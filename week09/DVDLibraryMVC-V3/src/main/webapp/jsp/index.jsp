@@ -18,170 +18,30 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/library">Library</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
+
+                    <li role="presentation">
+                        <a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a>
+                    </li> 
                 </ul>    
             </div>
 
             <div class="row">
-                <div class="col-md-8">
-                    <h2 class="text-center">DVDs</h2>                    
-                    <section id="dvd-table" class="row text-center"></section>
+                <div class="col-md-6">
+                    <h2 class="text-center">^__^</h2>
                 </div>
 
-                <div class="col-md-4">
-                    <h2 class="text-center col-md-offset-3 col-md-9"><a id="add-form-toggle" href="#">Add</a> | <a id="search-form-toggle" href="#">Search</a></h2>
-                    
-                    <form id="add-form" class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="add-title" class="col-md-3 control-label">
-                                Title:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="add-title"
-                                       placeholder="Title"/>
-                                <div id="error-title" class="validationErrors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-year" class="col-md-3 control-label">
-                                Year:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="number"
-                                       min="1878"
-                                       max="2100"
-                                       class="form-control"
-                                       id="add-year"
-                                       placeholder="Year"/>
-                                <div id="error-year" class="validationErrors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-mpaa" class="col-md-3 control-label">
-                                MPAA Rating:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="add-mpaa"
-                                       placeholder="MPAA"/>
-                                <div id="error-mpaa" class="validationErrors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-director" class="col-md-3 control-label">Director:</label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="add-director"
-                                       placeholder="Director"/>
-                                <div id="error-director" class="validationErrors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-studio" class="col-md-3 control-label">Studio:</label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="add-studio"
-                                       placeholder="Studio"/>
-                                <div id="error-studio" class="validationErrors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-note" class="col-md-3 control-label">Note:</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="add-note" placeholder="Note"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button type="submit"
-                                        id="add-button"
-                                        class="btn btn-default">
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                    <form id="search-form" class="hidden form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="search-title" class="col-md-3 control-label">
-                                Title:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="search-title"
-                                       placeholder="Title"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="search-year" class="col-md-3 control-label">
-                                Year:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="number"
-                                       min="1878"
-                                       max="2100"
-                                       class="form-control"
-                                       id="search-year"
-                                       placeholder="Year"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="search-mpaa" class="col-md-3 control-label">
-                                MPAA Rating:
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="search-mpaa"
-                                       placeholder="MPAA"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="search-director" class="col-md-3 control-label">Director:</label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="search-director"
-                                       placeholder="Director"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="search-studio" class="col-md-3 control-label">Studio:</label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                       class="form-control"
-                                       id="search-studio"
-                                       placeholder="Studio"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button type="submit"
-                                        id="search-button"
-                                        class="btn btn-default">
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                    
+                <div class="col-md-6">
+                    <h2 class="text-center">Log In</h2>
+                    <%@include file="login.jsp"%>
                 </div> <!-- End col div -->
             </div> <!-- End row div --> 
-        </div>
 
-        <%@include file="detailsEditModalFragment.jsp"%>
+        </div>
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/dvdLibrary.js"></script>
     </body>
 </html>
 
