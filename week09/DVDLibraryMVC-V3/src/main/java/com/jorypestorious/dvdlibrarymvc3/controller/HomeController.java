@@ -50,7 +50,7 @@ public class HomeController {
         return "library";
     }
 
-    @RequestMapping(value = "/dvd/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getdvd/{id}", method = RequestMethod.GET)
     @ResponseBody
     public DVD getContact(@PathVariable("id") int id) {
         return dao.getDVDById(id);

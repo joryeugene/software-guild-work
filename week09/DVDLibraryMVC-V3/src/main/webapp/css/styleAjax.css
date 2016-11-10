@@ -20,7 +20,7 @@ body {
     border-width: 5px;
     box-shadow:0 1px 0 #cfcfcf;
     max-width: 250px;
-    margin: 0 auto;
+    margin: 3vh auto 0px;
 }
 
 #sign-in-header { 

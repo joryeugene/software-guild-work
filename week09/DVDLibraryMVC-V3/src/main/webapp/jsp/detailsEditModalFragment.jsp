@@ -127,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-8">
-                            <button type="submit" id="edit-button" class="btn btn-default">
+                            <button type="submit" id="edit-button" class="btn btn-primary">
                                 Update DVD
                             </button>
                             <button type="button" id="edit-button-cancel" class="btn btn-default"

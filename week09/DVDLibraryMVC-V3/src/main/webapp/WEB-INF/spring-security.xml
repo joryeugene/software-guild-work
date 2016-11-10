@@ -36,6 +36,8 @@
         <intercept-url pattern="/jsp/index.jsp" access= "permitAll"/>
         
         <intercept-url pattern="/dvds" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
+        <intercept-url pattern="/getdvd" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
+        <intercept-url pattern="/getdvd/**" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
         <intercept-url pattern="/library" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
         <intercept-url pattern="/search" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
         <intercept-url pattern="/search/**" access="hasAnyRole('ROLE_USER, ROLE_ADMIN')" />
