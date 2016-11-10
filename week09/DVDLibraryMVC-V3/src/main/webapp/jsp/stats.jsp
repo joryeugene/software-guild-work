@@ -13,18 +13,23 @@
     </head>
     <body>
         <div class="container">
-            
+
             <p id="log-out" style="float:right;">
                 <sec:authentication property="principal.username" /> | 
                 <a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a>
             </p>
-            
+
             <h1>DVD Library</h1>
             <hr>
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
+                        <sec:authorize access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"> 
+                        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
+                        </sec:authorize>
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
+                        <li role="presentation"><a href="${pageContext.request.contextPath}/displayUserList/">Admin</a></li>
+                        </sec:authorize>
                 </ul>    
             </div>
 

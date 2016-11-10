@@ -29,6 +29,9 @@
         <!-- #3e - Access to these endpoints require admin role -->        
         <intercept-url pattern="/dvd" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/dvd/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/displayUserList" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/addUser" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/deleteUser" access="hasRole('ROLE_ADMIN')" />
         
         <intercept-url pattern="/home*" access= "permitAll"/>
         <intercept-url pattern="/" access= "permitAll" />

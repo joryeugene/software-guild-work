@@ -29,6 +29,9 @@
                         <sec:authorize access="hasAnyRole('ROLE_USER, ROLE_ADMIN')"> 
                         <li role="presentation"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
                         </sec:authorize>
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
+                        <li role="presentation"><a href="${pageContext.request.contextPath}/displayUserList/">Admin</a></li>
+                        </sec:authorize>
                 </ul> 
             </div>
 
