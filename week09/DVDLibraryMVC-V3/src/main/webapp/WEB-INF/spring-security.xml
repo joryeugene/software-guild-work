@@ -22,7 +22,7 @@
         <form-login login-processing-url="/j_spring_security_check"
                     login-page="/home"
                     default-target-url="/home"
-                    authentication-failure-url="/login?login_error=1"/>
+                    authentication-failure-url="/home?login_error=1"/>
         <!-- #3d - Go back to home page when user logs out -->
         <logout logout-success-url="/home" />
         
