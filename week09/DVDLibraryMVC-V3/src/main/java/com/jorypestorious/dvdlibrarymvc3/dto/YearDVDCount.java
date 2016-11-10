@@ -1,4 +1,4 @@
-package com.jorypestorious.dvdlibrarymvc.dto;
+package com.jorypestorious.dvdlibrarymvc3.dto;
 
 public class YearDVDCount {
     

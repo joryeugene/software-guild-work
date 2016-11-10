@@ -4,7 +4,7 @@ $(document).ready(function () {
 });
 
 function drawMpaaChart() {
-    $.get('/DVDLibrary/stats/mpaachart').success(function (data) {
+    $.get('/Library/stats/mpaachart').success(function (data) {
         var dataTable = new google.visualization.DataTable(data);
         var options = {
             title: 'DVDs By MPAA Rating',
@@ -20,7 +20,7 @@ function drawMpaaChart() {
 }
 
 function drawYearChart() {
-    $.get('/DVDLibrary/stats/yearchart').success(function (data) {
+    $.get('/Library/stats/yearchart').success(function (data) {
         var dataTable = new google.visualization.DataTable(data);
         var options = {
             title: 'DVDs By Year',

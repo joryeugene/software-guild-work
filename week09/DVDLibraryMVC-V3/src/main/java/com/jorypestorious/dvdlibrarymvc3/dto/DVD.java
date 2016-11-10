@@ -1,4 +1,4 @@
-package com.jorypestorious.dvdlibrarymvc.dto;
+package com.jorypestorious.dvdlibrarymvc3.dto;
 
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;

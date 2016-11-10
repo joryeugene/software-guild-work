@@ -1,13 +1,13 @@
-package com.jorypestorious.dvdlibrarymvc.controller;
+package com.jorypestorious.dvdlibrarymvc3.controller;
 
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.DataTable;
 import com.google.visualization.datasource.datatable.value.ValueType;
 import com.google.visualization.datasource.datatable.TableRow;
 import com.google.visualization.datasource.render.JsonRenderer;
-import com.jorypestorious.dvdlibrarymvc.dao.DVDLibraryDao;
-import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
-import com.jorypestorious.dvdlibrarymvc.dto.YearDVDCount;
+import com.jorypestorious.dvdlibrarymvc3.dao.DVDLibraryDao;
+import com.jorypestorious.dvdlibrarymvc3.dto.MpaaDVDCount;
+import com.jorypestorious.dvdlibrarymvc3.dto.YearDVDCount;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;

@@ -77,9 +77,9 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            <!--            /WEB-INF/spring-dispatcher-servlet.xml-->
             /WEB-INF/spring-security.xml 
             classpath:spring-persistence.xml
+            <!--            /WEB-INF/spring-dispatcher-servlet.xml-->
         </param-value>
     </context-param>
     <listener>

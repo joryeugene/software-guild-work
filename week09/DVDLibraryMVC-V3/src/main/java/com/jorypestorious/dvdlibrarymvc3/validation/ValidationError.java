@@ -1,4 +1,4 @@
-package com.jorypestorious.dvdlibrarymvc.validation;
+package com.jorypestorious.dvdlibrarymvc3.validation;
 
 public class ValidationError {
 

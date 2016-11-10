@@ -1,4 +1,4 @@
-package com.jorypestorious.dvdlibrarymvc.controller;
+package com.jorypestorious.dvdlibrarymvc3.controller;
 
 import java.text.MessageFormat;
 import javax.servlet.http.HttpServletRequest;

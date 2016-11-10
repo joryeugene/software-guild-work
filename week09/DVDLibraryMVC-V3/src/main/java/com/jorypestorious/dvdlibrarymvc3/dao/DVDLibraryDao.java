@@ -1,8 +1,8 @@
-package com.jorypestorious.dvdlibrarymvc.dao;
+package com.jorypestorious.dvdlibrarymvc3.dao;
 
-import com.jorypestorious.dvdlibrarymvc.dto.DVD;
-import com.jorypestorious.dvdlibrarymvc.dto.MpaaDVDCount;
-import com.jorypestorious.dvdlibrarymvc.dto.YearDVDCount;
+import com.jorypestorious.dvdlibrarymvc3.dto.DVD;
+import com.jorypestorious.dvdlibrarymvc3.dto.MpaaDVDCount;
+import com.jorypestorious.dvdlibrarymvc3.dto.YearDVDCount;
 import java.util.List;
 import java.util.Map;
 

@@ -15,7 +15,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
 
     <!-- <bean id="dvdLibraryDao"
-          class="com.jorypestorious.dvdlibrarymvc.dao.DVDLibraryDaoInMemImpl">
+          class="com.jorypestorious.dvdlibrarymvc3.dao.DVDLibraryDaoInMemImpl">
     </bean> -->
     
     <tx:annotation-driven />
@@ -24,7 +24,6 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
             value="jdbc:mysql://localhost:8889/DvdLibrary" />
-        <!-- value="jdbc:mysql://localhost:8889/DvdLibraryTest" /> -->
         <property name="username" value="root" />
         <property name="password" value="root" />
         <!-- <property name="initialSize" value="5" />
@@ -42,7 +41,7 @@
     </bean>
 
     <bean id="dvdLibraryDao"
-        class="com.jorypestorious.dvdlibrarymvc.dao.DVDLibraryDaoDbImpl">
+        class="com.jorypestorious.dvdlibrarymvc3.dao.DVDLibraryDaoDbImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean> 
     

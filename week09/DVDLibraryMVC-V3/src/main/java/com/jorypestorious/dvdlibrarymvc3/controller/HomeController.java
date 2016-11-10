@@ -1,7 +1,7 @@
-package com.jorypestorious.dvdlibrarymvc.controller;
+package com.jorypestorious.dvdlibrarymvc3.controller;
 
-import com.jorypestorious.dvdlibrarymvc.dao.DVDLibraryDao;
-import com.jorypestorious.dvdlibrarymvc.dto.DVD;
+import com.jorypestorious.dvdlibrarymvc3.dao.DVDLibraryDao;
+import com.jorypestorious.dvdlibrarymvc3.dto.DVD;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;

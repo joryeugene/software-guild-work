@@ -5,7 +5,7 @@ $(document).ready(function () {
 function loadDVDs() {
     $.ajax({
         type: 'GET',
-        url: "/DVDLibrary/dvds"
+        url: "/Library/dvds"
     }).success(function (data, status) {
         fillDVDTable(data, status);
     });
@@ -15,7 +15,7 @@ function loadDVDs() {
 function sortDVDsByTitle() {
     $.ajax({
         type: 'GET',
-        url: "/DVDLibrary/dvds"
+        url: "/Library/dvds"
     }).success(function (data, status) {
         data.sort(function (a, b) {
             if (a.title < b.title)
@@ -78,7 +78,7 @@ function fillDVDTable(data, status) {
                         ) // ends the <a> tag
                 ); // ends the <div> 
 
-        if (dvd.image.length < 1 || dvd.image === '/DVDLibrary/img/dvd-placeholder.jpg' || dvd.overview.length < 1) {
+        if (dvd.image.length < 1 || dvd.image === '/Library/img/dvd-placeholder.jpg' || dvd.overview.length < 1) {
             imgDiv = '#' + imgDiv;
             getExtras(dvd, imgDiv);
         }
@@ -101,7 +101,7 @@ $('#add-button').click(function (event) {
 
     $.ajax({
         type: 'POST',
-        url: '/DVDLibrary/dvd',
+        url: '/Library/dvd',
         data: JSON.stringify({
             title: $('#add-title').val(),
             year: $('#add-year').val(),
@@ -153,7 +153,7 @@ $('#edit-button').click(function (event) {
             imageVal = 'http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path;
         } else {
             overviewVal = "";
-            imageVal = '/DVDLibrary/img/dvd-placeholder.jpg';
+            imageVal = '/Library/img/dvd-placeholder.jpg';
         }
 
         // this is for validation if input is null
@@ -163,7 +163,7 @@ $('#edit-button').click(function (event) {
 
         $.ajax({
             type: 'PUT',
-            url: '/DVDLibrary/dvd/' + $('#edit-id').val(),
+            url: '/Library/dvd/' + $('#edit-id').val(),
             data: JSON.stringify({
                 id: $('#edit-id').val(),
                 title: titleVal,
@@ -213,7 +213,7 @@ $('#search-button').click(function (event) {
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '/DVDLibrary/search/dvds',
+            url: '/Library/search/dvds',
             data: JSON.stringify({
                 title: $('#search-title').val(),
                 year: $('#search-year').val(),
@@ -243,7 +243,7 @@ $('#details-modal').on('show.bs.modal', function (event) {
 
     $.ajax({
         type: 'GET',
-        url: '/DVDLibrary/dvd/' + id
+        url: '/Library/dvd/' + id
     }).success(function (dvd) {
         modal.find('#dvd-title').text(dvd.title);
         modal.find('#dvd-year').text(dvd.year);
@@ -263,7 +263,7 @@ $('#edit-modal').on('show.bs.modal', function (event) {
 
     $.ajax({
         type: 'GET',
-        url: '/DVDLibrary/dvd/' + id
+        url: '/Library/dvd/' + id
     }).success(function (dvd) {
         modal.find('#edit-id').val(dvd.id);
         modal.find('#edit-title').val(dvd.title);
@@ -282,7 +282,7 @@ function deleteDVD(id) {
     if (answer === true) {
         $.ajax({
             type: 'DELETE',
-            url: '/DVDLibrary/dvd/' + id
+            url: '/Library/dvd/' + id
         }).success(function () {
             loadDVDs();
         });
@@ -302,7 +302,7 @@ var getExtras = function (dvd, imgDiv) {
 
             $.ajax({
                 type: 'PUT',
-                url: '/DVDLibrary/dvd/' + dvd.id,
+                url: '/Library/dvd/' + dvd.id,
                 data: JSON.stringify({
                     id: dvd.id,
                     title: dvd.title,
@@ -321,7 +321,7 @@ var getExtras = function (dvd, imgDiv) {
                 'dataType': 'json'
             })
         } else {
-            $(imgDiv).attr('src', '/DVDLibrary/img/dvd-placeholder.jpg');
+            $(imgDiv).attr('src', '/Library/img/dvd-placeholder.jpg');
         }
     });
 };

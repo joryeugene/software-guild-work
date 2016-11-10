@@ -5,19 +5,23 @@
  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
  http://www.springframework.org/schema/security
  http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+    <beans:bean id="webexpressionHandler"
+                class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
 
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
     <http pattern="/img/**" security="none" />
     
     <!-- #3 - Authentication/login form and protected endpoint configuration -->
-    <http auto-config="true" use-expressions="false">
+    <http auto-config="true" use-expressions="true">
         <!-- #3a - Login via html form, use Spring to do the security check -->
         <!-- #3b - Use the login page at this endpoint -->
         <!-- #3c - Redirect here if login fails -->
+        
         <form-login login-processing-url="/j_spring_security_check"
-                    login-page="/"
                     login-page="/home"
+                    default-target-url="/home"
                     authentication-failure-url="/login?login_error=1"/>
         <!-- #3d - Go back to home page when user logs out -->
         <logout logout-success-url="/home" />
@@ -51,9 +55,9 @@
             <jdbc-user-service id="userService"
                                data-source-ref="dataSource"
                                users-by-username-query=
- "select username, password, enabled from users where username=?"
+ "SELECT Username, Password, Enabled FROM Users WHERE Username=?"
                                authorities-by-username-query=
- "select username, authority from authorities where username=?" />
+ "SELECT Username, Authority FROM Authorities WHERE Username=?" />
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
