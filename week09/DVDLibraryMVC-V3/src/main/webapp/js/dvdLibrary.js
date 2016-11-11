@@ -1,3 +1,5 @@
+var currentData;
+
 $(document).ready(function () {
     $('#search-form').removeClass('hidden');
     loadDVDs();
@@ -8,11 +10,12 @@ function loadDVDs() {
         type: 'GET',
         url: "/Library/dvds"
     }).success(function (data, status) {
-        fillDVDTable(data, status);
+        currentData = data;
+        fillDVDTable(currentData);
     });
 }
 
-function fillDVDTable(data, status) {
+function fillDVDTable(data) {
     clearTable();
     var dvdTable = $('#dvd-table');
 
@@ -57,7 +60,7 @@ function fillDVDTable(data, status) {
         if ((index + 1) % 2 === 0) {
             dvdTable.append($('<div class="clearfix visible-xs-block"></div>'));
         }
-    }); // ends the 'each' function
+    });
 }
 
 $('#a-z').click(function() {
@@ -69,19 +72,15 @@ $('#z-a').click(function() {
 });
 
 function sortByTitle(num1, num2) {
-    $.ajax({
-        type: 'GET',
-        url: "/Library/dvds"
-    }).success(function (data, status) {
-        data.sort(function (a, b) {
-            if (a.title < b.title)
-                return num1;
-            if (a.title > b.title)
-                return num2;
-            return 0;
-        });
-        fillDVDTable(data, status);
+    currentData.sort(function (a, b) {
+        if (a.title < b.title)
+            return num1;
+        if (a.title > b.title)
+            return num2;
+        return 0;
     });
+    
+    fillDVDTable(currentData);
 }
 
 $('#search-button').click(function (event) {
@@ -107,7 +106,8 @@ $('#search-button').click(function (event) {
         $('#search-mpaa').val('');
         $('#search-studio').val('');
         $('#search-director').val('');
-        fillDVDTable(data, status);
+        currentData = data;
+        fillDVDTable(currentData);
     });
 });
 

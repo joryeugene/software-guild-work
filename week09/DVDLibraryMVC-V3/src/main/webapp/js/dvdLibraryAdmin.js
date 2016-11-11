@@ -1,3 +1,5 @@
+var currentData;
+
 $(document).ready(function () {
     loadDVDs();
 });
@@ -7,11 +9,12 @@ function loadDVDs() {
         type: 'GET',
         url: "/Library/dvds"
     }).success(function (data, status) {
-        fillDVDTable(data, status);
+        currentData = data;
+        fillDVDTable(currentData);
     });
 }
 
-function fillDVDTable(data, status) {
+function fillDVDTable(data) {
     clearTable();
     var dvdTable = $('#dvd-table');
 
@@ -75,7 +78,7 @@ function fillDVDTable(data, status) {
         if ((index + 1) % 2 === 0) {
             dvdTable.append($('<div class="clearfix visible-xs-block"></div>'));
         }
-    }); // ends the 'each' function
+    });
 }
 
 $('#add-button').click(function (event) {
@@ -194,54 +197,51 @@ $('#add-form-toggle').click(function () {
 });
 
 $('#search-button').click(function (event) {
-        event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/Library/search/dvds',
-            data: JSON.stringify({
-                title: $('#search-title').val(),
-                year: $('#search-year').val(),
-                mpaa: $('#search-mpaa').val(),
-                studio: $('#search-studio').val(),
-                director: $('#search-director').val()
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json'
-        }).success(function (data, status) {
-            $('#search-title').val('');
-            $('#search-year').val('');
-            $('#search-mpaa').val('');
-            $('#search-studio').val('');
-            $('#search-director').val('');
-            fillDVDTable(data, status);
-        });
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '/Library/search/dvds',
+        data: JSON.stringify({
+            title: $('#search-title').val(),
+            year: $('#search-year').val(),
+            mpaa: $('#search-mpaa').val(),
+            studio: $('#search-studio').val(),
+            director: $('#search-director').val()
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function (data, status) {
+        $('#search-title').val('');
+        $('#search-year').val('');
+        $('#search-mpaa').val('');
+        $('#search-studio').val('');
+        $('#search-director').val('');
+        currentData = data;
+        fillDVDTable(currentData);
+    });
 });
 
-$('#a-z').click(function() {
+$('#a-z').click(function () {
     sortByTitle(-1, 1);
 });
 
-$('#z-a').click(function() {
+$('#z-a').click(function () {
     sortByTitle(1, -1);
 });
 
 function sortByTitle(num1, num2) {
-    $.ajax({
-        type: 'GET',
-        url: "/Library/dvds"
-    }).success(function (data, status) {
-        data.sort(function (a, b) {
-            if (a.title < b.title)
-                return num1;
-            if (a.title > b.title)
-                return num2;
-            return 0;
-        });
-        fillDVDTable(data, status);
+    currentData.sort(function (a, b) {
+        if (a.title < b.title)
+            return num1;
+        if (a.title > b.title)
+            return num2;
+        return 0;
     });
+    
+    fillDVDTable(currentData);
 }
 
 $('#details-modal').on('show.bs.modal', function (event) {
