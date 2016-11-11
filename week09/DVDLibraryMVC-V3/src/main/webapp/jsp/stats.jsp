@@ -35,7 +35,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Statistics</h2>
+                    <h2>Library Statistics (of <b>${numOfDvds}</b> DVDs)</h2>
 
                     <div class="row">
                         <div class="col-md-6" id="mpaa-chart"></div> 
