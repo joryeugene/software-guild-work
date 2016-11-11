@@ -23,7 +23,7 @@ public class StatsController {
 
     @Inject
     public StatsController(DVDLibraryDao dao) {
-        this.dao = dao;;
+        this.dao = dao;
     }
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)

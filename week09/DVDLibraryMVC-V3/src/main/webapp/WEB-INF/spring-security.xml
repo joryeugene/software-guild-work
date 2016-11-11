@@ -8,6 +8,9 @@
     
     <beans:bean id="webexpressionHandler"
                 class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
+    
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 
 
     <http pattern="/css/**" security="none" />
     <http pattern="/js/**" security="none" />
@@ -52,6 +55,7 @@
     <authentication-manager>
         <!-- #4a - Authentication Provider - we’re using the JDBC service -->
         <authentication-provider>
+            <password-encoder ref="encoder"/>
             <!-- #4b - Tells Spring Security where to look for user information -->
             <!-- We use the dataSource defined in spring-persistence.xml -->
             <!-- and we give Spring Security the query to use to lookup -->
