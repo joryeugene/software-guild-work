@@ -62,7 +62,16 @@
             <sec:authorize access="hasAnyRole('ROLE_USER, ROLE_ADMIN')">     
                 <div class="row">
                     <div class="col-md-8">
-                        <h2 class="text-center">DVDs</h2>                    
+                        
+                        <div class="row">
+                            <div class="col-sm-offset-4 col-sm-4">
+                                <h2 class="text-center">DVDs</h2>
+                            </div>
+                            <div class="col-sm-4">
+                                <p id="sort-btns" class="text-right">Sort: <a href="#" id="a-z">A~Z</a> | <a href="#" id="z-a">Z~A</a></p>
+                            </div>
+                        </div>
+
                         <section id="dvd-table" class="row text-center"></section>
                     </div>
 

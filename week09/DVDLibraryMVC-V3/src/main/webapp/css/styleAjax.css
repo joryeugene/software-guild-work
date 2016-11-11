@@ -80,6 +80,11 @@ body {
     color: black;
 }
 
+#sort-btns {
+    padding: 40px 0 0;
+    margin: 0px;
+}
+
 .dvd-image {
     border: 1px solid #ccc;
     border-radius: 8px;

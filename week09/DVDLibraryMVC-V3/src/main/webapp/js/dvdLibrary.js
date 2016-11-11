@@ -12,23 +12,6 @@ function loadDVDs() {
     });
 }
 
-// TODO SORTING
-function sortDVDsByTitle() {
-    $.ajax({
-        type: 'GET',
-        url: "/Library/dvds"
-    }).success(function (data, status) {
-        data.sort(function (a, b) {
-            if (a.title < b.title)
-                return -1;
-            if (a.title > b.title)
-                return 1;
-            return 0;
-        });
-        fillDVDTable(data, status);
-    });
-}
-
 function fillDVDTable(data, status) {
     clearTable();
     var dvdTable = $('#dvd-table');
@@ -75,6 +58,30 @@ function fillDVDTable(data, status) {
             dvdTable.append($('<div class="clearfix visible-xs-block"></div>'));
         }
     }); // ends the 'each' function
+}
+
+$('#a-z').click(function() {
+    sortByTitle(-1, 1);
+});
+
+$('#z-a').click(function() {
+    sortByTitle(1, -1);
+});
+
+function sortByTitle(num1, num2) {
+    $.ajax({
+        type: 'GET',
+        url: "/Library/dvds"
+    }).success(function (data, status) {
+        data.sort(function (a, b) {
+            if (a.title < b.title)
+                return num1;
+            if (a.title > b.title)
+                return num2;
+            return 0;
+        });
+        fillDVDTable(data, status);
+    });
 }
 
 $('#search-button').click(function (event) {
