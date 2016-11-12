@@ -23,39 +23,11 @@ public class UserController {
     public UserController(UserDao dao, PasswordEncoder encoder) {
         this.dao = dao;
         this.encoder = encoder;
-        
-        populate();
-    }
-    
-    private void populate() {
-        List users = dao.getAllUsers();
-        
-        if (users.size() < 1) {
-            User user = new User();
-            List<String> authorities = new ArrayList<>();
-            authorities.add("ROLE_ADMIN");
-            user.setAuthorities(authorities);
-            String hashPw = encoder.encode("password");
-            user.setPassword(hashPw);
-            user.setUsername("admin");
-            dao.addUser(user);
-        }
     }
 
     @RequestMapping(value = "/displayUserList", method = RequestMethod.GET)
     public String displayUserList(Map<String, Object> model) {
         List users = dao.getAllUsers();
-        
-        if (users.size() < 1) {
-            User user = new User();
-            List<String> authorities = new ArrayList<>();
-            authorities.add("ROLE_ADMIN");
-            user.setAuthorities(authorities);
-            String hashPw = encoder.encode("password");
-            user.setPassword(hashPw);
-            user.setUsername("admin");
-            dao.addUser(user);
-        }
         model.put("users", users);
         return "displayUserList";
     }

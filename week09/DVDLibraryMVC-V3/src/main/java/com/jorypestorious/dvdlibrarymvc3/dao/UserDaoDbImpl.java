@@ -11,17 +11,17 @@ import org.springframework.jdbc.core.RowMapper;
 public class UserDaoDbImpl implements UserDao {
 
     private static final String SQL_INSERT_USER
-            = "insert into users (username, password, enabled) values (?, ?, 1)";
+            = "INSERT INTO Users (Username, Password, Enabled) VALUES (?, ?, 1)";
     private static final String SQL_INSERT_AUTHORITY
-            = "insert into authorities (username, authority) values (?, ?)";
+            = "INSERT INTO Authorities (Username, Authority) VALUES (?, ?)";
     private static final String SQL_DELETE_USER
-            = "delete from users where username = ?";
+            = "DELETE FROM Users WHERE Username = ?";
     private static final String SQL_DELETE_AUTHORITIES
-            = "delete from authorities where username = ?";
+            = "DELETE FROM Authorities WHERE Username = ?";
     private static final String SQL_GET_ALL_USERS
-            = "select username, password from users";
+            = "SELECT Username, Password FROM Users";
     private static final String SQL_GET_AUTHORITIES
-            = "select authority from authorities where username = ?";
+            = "SELECT Authority FROM Authorities WHERE Username = ?";
 
     private JdbcTemplate jdbcTemplate;
 
