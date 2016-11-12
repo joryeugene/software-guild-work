@@ -11,6 +11,7 @@ function loadDVDs() {
     }).success(function (data, status) {
         currentData = data;
         fillDVDTable(currentData);
+        setNumOfDvds();
     });
 }
 
@@ -221,6 +222,7 @@ $('#search-button').click(function (event) {
         $('#search-director').val('');
         currentData = data;
         fillDVDTable(currentData);
+        setNumOfDvds();
     });
 });
 
@@ -299,6 +301,10 @@ function deleteDVD(id) {
 
 function clearTable() {
     $('#dvd-table').empty();
+}
+
+function setNumOfDvds() {
+    $('#num-of-dvds').text(currentData.length);
 }
 
 var getExtras = function (dvd, imgDiv) {

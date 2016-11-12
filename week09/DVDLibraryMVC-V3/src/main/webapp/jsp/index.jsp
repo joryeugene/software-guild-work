@@ -65,7 +65,7 @@
                         
                         <div class="row">
                             <div class="col-sm-offset-4 col-sm-4">
-                                <h2 class="text-center">DVDs</h2>
+                                <h2 class="text-center">DVDs (<span id="num-of-dvds"></span>)</h2>
                             </div>
                             <div class="col-sm-4">
                                 <p id="sort-btns" class="text-right">Sort: <a href="#" id="a-z">A~Z</a> | <a href="#" id="z-a">Z~A</a></p>
