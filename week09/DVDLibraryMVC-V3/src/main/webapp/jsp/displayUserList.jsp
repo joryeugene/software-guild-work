@@ -51,7 +51,7 @@
                                 <tr>
                                     <td><c:out value="${user.username}"/></td>
                                     <td><c:out value="${user.authorities[0]}"/></td>
-                                    <td><a href="deleteUser?username=${user.username}">Delete</a></td>
+                                    <td><a href="${pageContext.request.contextPath}/deleteUser?username=${user.username}">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
