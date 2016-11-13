@@ -2,8 +2,6 @@
 This repo is for my work done while in **The Software Guild**.  
 ![Software Guild Logo](swg.jpg)
 
-
-
 ## [Check it out: pestorious.com/Library](http://pestorious.com/Library/home)
 For basic functionality log in with **user1** - _password_
 
