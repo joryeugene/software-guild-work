@@ -49,7 +49,8 @@ body {
 }
 
 #dvd-table {
-    max-height: calc(100vh - 310px);
+    min-height: 400px;
+    max-height: calc(100vh - 300px);
     overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -97,4 +98,9 @@ body {
 #users-table {
     margin: 0 auto;
     width: 400px;
+}
+
+#mpaa-chart, #year-chart {
+    margin: 0 auto;
+    max-width: 500px;
 }

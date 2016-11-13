@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icon.png">
@@ -21,7 +24,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                     <h1 style="text-decoration:underline;">An error has occurred...</h1>
                     <h3 style="color:red;">${errorMessage}</h3>
                 </div>

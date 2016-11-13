@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styleAjax.css" rel="stylesheet">
@@ -28,18 +31,22 @@
                         <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
                         </sec:authorize>
                         <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
-                        <li role="presentation"><a href="${pageContext.request.contextPath}/displayUserList/">Admin</a></li>
+                        <li role="presentation"><a href="${pageContext.request.contextPath}/admin/">Admin</a></li>
                         </sec:authorize>
                 </ul>    
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-xs-12">
                     <h2>Library Statistics (of <b>${numOfDvds}</b> DVDs)</h2>
 
                     <div class="row">
-                        <div class="col-md-6" id="mpaa-chart"></div> 
-                        <div class="col-md-6" id="year-chart"></div> 
+                        <div class="col-sm-6">
+                            <div id="mpaa-chart"></div>
+                        </div> 
+                        <div class="col-sm-6">
+                            <div id="year-chart"></div>
+                        </div> 
                     </div>
 
                 </div> 

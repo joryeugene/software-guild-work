@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styleAjax.css" rel="stylesheet">
@@ -30,14 +33,14 @@
                         <li role="presentation"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
                         </sec:authorize>
                         <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
-                        <li role="presentation"><a href="${pageContext.request.contextPath}/displayUserList/">Admin</a></li>
+                        <li role="presentation"><a href="${pageContext.request.contextPath}/admin/">Admin</a></li>
                         </sec:authorize>
                 </ul> 
             </div>
 
             <sec:authorize access="isAnonymous()">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="form-login">
                             <form method="post" class="signin" action="j_spring_security_check">
                                 <h3 id="sign-in-header">Sign In</h3>
@@ -61,21 +64,21 @@
 
             <sec:authorize access="hasAnyRole('ROLE_USER, ROLE_ADMIN')">     
                 <div class="row">
-                    <div class="col-md-8">
-                        
+                    <div class="col-sm-8">
+
                         <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
+                            <div class="col-xs-offset-3 col-xs-6">
                                 <h2 class="text-center">DVDs (<span id="num-of-dvds"></span>)</h2>
                             </div>
-                            <div class="col-sm-4">
-                                <p id="sort-btns" class="text-right">Sort: <a href="#" id="a-z">A~Z</a> | <a href="#" id="z-a">Z~A</a></p>
+                            <div class="col-xs-3">
+                                <p id="sort-btns" class="text-right">Sort: <a href="#" id="a-z">A~Z</a>&nbsp;|&nbsp;<a href="#" id="z-a">Z~A</a></p>
                             </div>
                         </div>
 
                         <section id="dvd-table" class="row text-center"></section>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-sm-4">
                         <h2 class="text-center col-md-offset-3 col-md-9">
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <a id="add-form-toggle" href="#">Add</a> | <a id="search-form-toggle" href="#">
@@ -88,10 +91,10 @@
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <form id="add-form" class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <label for="add-title" class="col-md-3 control-label">
+                                    <label for="add-title" class="col-xs-3 control-label">
                                         Title:
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="col-xs-9">
                                         <input type="text"
                                                class="form-control"
                                                id="add-title"
@@ -100,10 +103,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-year" class="col-md-3 control-label">
+                                    <label for="add-year" class="col-xs-3 control-label">
                                         Year:
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="col-xs-9">
                                         <input type="number"
                                                min="1878"
                                                max="2100"
@@ -114,10 +117,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-mpaa" class="col-md-3 control-label">
+                                    <label for="add-mpaa" class="col-xs-3 control-label">
                                         MPAA Rating:
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="col-xs-9">
                                         <input type="text"
                                                class="form-control"
                                                id="add-mpaa"
@@ -126,8 +129,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-director" class="col-md-3 control-label">Director:</label>
-                                    <div class="col-md-9">
+                                    <label for="add-director" class="col-xs-3 control-label">Director:</label>
+                                    <div class="col-xs-9">
                                         <input type="text"
                                                class="form-control"
                                                id="add-director"
@@ -136,8 +139,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-studio" class="col-md-3 control-label">Studio:</label>
-                                    <div class="col-md-9">
+                                    <label for="add-studio" class="col-xs-3 control-label">Studio:</label>
+                                    <div class="col-xs-9">
                                         <input type="text"
                                                class="form-control"
                                                id="add-studio"
@@ -146,13 +149,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="add-note" class="col-md-3 control-label">Note:</label>
-                                    <div class="col-md-9">
+                                    <label for="add-note" class="col-xs-3 control-label">Note:</label>
+                                    <div class="col-xs-9">
                                         <textarea class="form-control" id="add-note" placeholder="Note"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-offset-3 col-md-9">
+                                    <div class="col-xs-offset-3 col-xs-9">
                                         <button type="submit"
                                                 id="add-button"
                                                 class="btn btn-primary">
@@ -165,10 +168,10 @@
 
                         <form id="search-form" class="hidden form-horizontal" role="form">
                             <div class="form-group">
-                                <label for="search-title" class="col-md-3 control-label">
+                                <label for="search-title" class="col-xs-3 control-label">
                                     Title:
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-xs-9">
                                     <input type="text"
                                            class="form-control"
                                            id="search-title"
@@ -176,10 +179,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="search-year" class="col-md-3 control-label">
+                                <label for="search-year" class="col-xs-3 control-label">
                                     Year:
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-xs-9">
                                     <input type="number"
                                            min="1878"
                                            max="2100"
@@ -189,10 +192,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="search-mpaa" class="col-md-3 control-label">
+                                <label for="search-mpaa" class="col-xs-3 control-label">
                                     MPAA Rating:
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-xs-9">
                                     <input type="text"
                                            class="form-control"
                                            id="search-mpaa"
@@ -200,8 +203,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="search-director" class="col-md-3 control-label">Director:</label>
-                                <div class="col-md-9">
+                                <label for="search-director" class="col-xs-3 control-label">Director:</label>
+                                <div class="col-xs-9">
                                     <input type="text"
                                            class="form-control"
                                            id="search-director"
@@ -209,8 +212,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="search-studio" class="col-md-3 control-label">Studio:</label>
-                                <div class="col-md-9">
+                                <label for="search-studio" class="col-xs-3 control-label">Studio:</label>
+                                <div class="col-xs-9">
                                     <input type="text"
                                            class="form-control"
                                            id="search-studio"
@@ -218,7 +221,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-offset-3 col-md-9">
+                                <div class="col-xs-offset-3 col-xs-9">
                                     <button type="submit"
                                             id="search-button"
                                             class="btn btn-primary">

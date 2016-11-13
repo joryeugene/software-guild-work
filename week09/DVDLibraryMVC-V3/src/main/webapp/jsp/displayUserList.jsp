@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>DVD Library</title>
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styleAjax.css" rel="stylesheet">
@@ -30,7 +33,7 @@
                         <li role="presentation"><a href="${pageContext.request.contextPath}/stats/">Stats</a></li>
                         </sec:authorize>
                         <sec:authorize access="hasAnyRole('ROLE_ADMIN')"> 
-                        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayUserList/">Admin</a></li>
+                        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/admin/">Admin</a></li>
                         </sec:authorize>
                 </ul> 
             </div>
@@ -39,7 +42,7 @@
                 <div class="col-sm-7">
                     <h2 class="text-center">Users</h2>
 
-                    <table id="users-table" class="table table-hover">
+                    <table id="users-table" class="table table-hover table-responsive">
                         <tr>
                             <th>Username</th>
                             <th>Role</th>
@@ -63,42 +66,42 @@
                 <div class="col-sm-4">
                     <h2 class="text-center">Add User</h2>
 
-                    <form id="user-form" class="form-horizontal" role="form" method="POST" action="/Library/addUser">
+                    <form id="user-form" class="form-horizontal" role="form" method="POST" action="${pageContext.request.contextPath}/addUser">
                         <div class="form-group">
-                            <label for="user-form-username" class="col-md-3 control-label">
+                            <label for="user-form-username" class="col-xs-4 control-label text-right">
                                 Username:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-xs-8">
                                 <input type="text"
                                        class="form-control"
                                        id="user-form-username"
                                        placeholder="Username"
-                                       name="username"/>
+                                       name="username"
+                                       style="max-width:300px;"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="user-form-password" class="col-md-3 control-label">
+                            <label for="user-form-password" class="col-xs-4 control-label text-right">
                                 Password:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-xs-8">
                                 <input type="password"
                                        class="form-control"
                                        id="user-form-password"
                                        placeholder="Password"
-                                       name="password"/>
+                                       name="password"
+                                       style="max-width:300px;"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-3 col-md-9">
+                            <div class="col-xs-offset-3 col-xs-5  text-right">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="isAdmin" value="yes"> Admin User
                                     </label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-9">
+                            <div class="col-xs-4  text-center">
                                 <button type="submit" class="btn btn-primary">
                                     Add
                                 </button>

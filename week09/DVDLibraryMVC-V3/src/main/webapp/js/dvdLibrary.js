@@ -25,7 +25,7 @@ function fillDVDTable(data) {
 
         dvdTable.append($('<div style="position:relative;">')
                 .attr({
-                    'class': 'col-md-3 col-sm-4 col-xs-6 dvd-outer-tile'
+                    'class': 'col-md-3 col-xs-4 dvd-outer-tile'
                 })
                 .append($('<a style="cursor:pointer;">')
                         .attr({
@@ -58,7 +58,7 @@ function fillDVDTable(data) {
         if ((index + 1) % 3 === 0) {
             dvdTable.append($('<div class="clearfix visible-sm-block"></div>'));
         }
-        if ((index + 1) % 2 === 0) {
+        if ((index + 1) % 3 === 0) {
             dvdTable.append($('<div class="clearfix visible-xs-block"></div>'));
         }
     });
