@@ -78,6 +78,12 @@
                                        placeholder="Username"
                                        name="username"
                                        style="max-width:300px;"/>
+                                <c:if test="${unError}">
+                                    <p class="validationErrors">Invalid Username</p>
+                                </c:if>
+                                <c:if test="${unAlreadyUsed}">
+                                    <p class="validationErrors">Username Taken</p>
+                                </c:if>
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,6 +97,9 @@
                                        placeholder="Password"
                                        name="password"
                                        style="max-width:300px;"/>
+                                <c:if test="${pwError}">
+                                    <p class="validationErrors">Invalid Password</p>
+                                </c:if>
                             </div>
                         </div>
                         <div class="form-group">
